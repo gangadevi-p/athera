@@ -1,0 +1,179 @@
+[
+  {
+    "id": "001",
+    "name": "Wabi Lounge Chair",
+    "slug": "wabi-lounge-chair",
+    "category": "chairs",
+    "collections": ["japandi"],
+    "price": 42000,
+    "currency": "INR",
+    "description": "A meditative seat that balances structure with softness. Solid ash wood frame meets cloud-like boucle, inviting you to slow down and stay awhile. Each chair is hand-finished, making every piece subtly one of a kind.",
+    "materials": ["Solid Ash Wood", "Boucle Fabric", "Brass Hardware"],
+    "dimensions": { "w": 80, "d": 85, "h": 78, "unit": "cm" },
+    "variants": [
+      { "label": "Sand", "hex": "#C9B99A" },
+      { "label": "Ivory", "hex": "#EDE8DF" },
+      { "label": "Charcoal", "hex": "#4A4A4A" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80"
+    ],
+    "featured": true,
+    "createdAt": "2026-05-01"
+  },
+  {
+    "id": "002",
+    "name": "Hinoki Side Table",
+    "slug": "hinoki-side-table",
+    "category": "tables",
+    "collections": ["japandi"],
+    "price": 18500,
+    "currency": "INR",
+    "description": "Inspired by Japanese bathhouses, this side table is turned from a single piece of hinoki cypress. Its natural oils give it a gentle warmth and a faint cedar-like scent that fades softly over time.",
+    "materials": ["Hinoki Cypress", "Natural Oil Finish"],
+    "dimensions": { "w": 38, "d": 38, "h": 55, "unit": "cm" },
+    "variants": [
+      { "label": "Natural", "hex": "#D4B896" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1549187774-b4e9b0445b41?w=800&q=80",
+      "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=800&q=80"
+    ],
+    "featured": true,
+    "createdAt": "2026-05-03"
+  },
+  {
+    "id": "003",
+    "name": "Volta Floor Lamp",
+    "slug": "volta-floor-lamp",
+    "category": "lighting",
+    "collections": ["industrial-loft"],
+    "price": 28000,
+    "currency": "INR",
+    "description": "An arc of blackened steel meets a hand-spun linen shade. Volta casts a warm, directional glow that makes any corner feel considered. The weighted concrete base keeps it steady without feeling heavy-handed.",
+    "materials": ["Blackened Steel", "Handspun Linen", "Concrete Base"],
+    "dimensions": { "w": 35, "d": 35, "h": 160, "unit": "cm" },
+    "variants": [
+      { "label": "Black / Linen", "hex": "#2A2A2A" },
+      { "label": "Brass / Linen", "hex": "#B8975A" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800&q=80",
+      "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=800&q=80"
+    ],
+    "featured": true,
+    "createdAt": "2026-04-15"
+  },
+  {
+    "id": "004",
+    "name": "Kora Ceramic Vase Set",
+    "slug": "kora-ceramic-vase-set",
+    "category": "accessories",
+    "collections": ["japandi"],
+    "price": 8400,
+    "currency": "INR",
+    "description": "Three vessels, each thrown by hand and glazed with iron-rich slip that gives them their characteristic speckled finish. Group them together or scatter them across a shelf — either way they'll find each other.",
+    "materials": ["Stoneware Clay", "Iron Slip Glaze"],
+    "dimensions": { "w": 12, "d": 12, "h": 22, "unit": "cm" },
+    "variants": [
+      { "label": "Oat", "hex": "#D9CEBF" },
+      { "label": "Dusk", "hex": "#8B7B8B" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=800&q=80",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&q=80"
+    ],
+    "featured": true,
+    "createdAt": "2026-05-10"
+  },
+  {
+    "id": "005",
+    "name": "Slab Dining Table",
+    "slug": "slab-dining-table",
+    "category": "tables",
+    "collections": ["industrial-loft"],
+    "price": 95000,
+    "currency": "INR",
+    "description": "A live-edge walnut slab mounted on a minimal blackened steel base. No two tables are alike — the grain, the edge, the slight undulation are all nature's decisions. Seats six comfortably.",
+    "materials": ["Live-Edge Walnut", "Blackened Steel"],
+    "dimensions": { "w": 220, "d": 90, "h": 76, "unit": "cm" },
+    "variants": [
+      { "label": "Walnut / Black", "hex": "#5C3D2E" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1530018352490-c6eef07fd7d0?w=800&q=80",
+      "https://images.unsplash.com/photo-1604578762246-41134e37f9cc?w=800&q=80"
+    ],
+    "featured": false,
+    "createdAt": "2026-04-20"
+  },
+  {
+    "id": "006",
+    "name": "Neri Sofa",
+    "slug": "neri-sofa",
+    "category": "sofas",
+    "collections": ["japandi"],
+    "price": 128000,
+    "currency": "INR",
+    "description": "Low, wide, and unhurried. The Neri sofa sits close to the ground with loose cushions and a solid oak frame that ages beautifully. Upholstered in Belgian linen that softens with every wash.",
+    "materials": ["Solid Oak", "Belgian Linen", "High-Density Foam"],
+    "dimensions": { "w": 240, "d": 95, "h": 72, "unit": "cm" },
+    "variants": [
+      { "label": "Dune", "hex": "#D4C4A8" },
+      { "label": "Sage", "hex": "#7A9E7E" },
+      { "label": "Clay", "hex": "#C16A44" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+      "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?w=800&q=80"
+    ],
+    "featured": false,
+    "createdAt": "2026-03-01"
+  },
+  {
+    "id": "007",
+    "name": "Forge Bookshelf",
+    "slug": "forge-bookshelf",
+    "category": "accessories",
+    "collections": ["industrial-loft"],
+    "price": 54000,
+    "currency": "INR",
+    "description": "Reclaimed pine boards on a hand-welded iron frame. Forge stores your books and objects without apology — raw, honest, and built to outlast trends.",
+    "materials": ["Reclaimed Pine", "Hand-Welded Iron"],
+    "dimensions": { "w": 120, "d": 35, "h": 180, "unit": "cm" },
+    "variants": [
+      { "label": "Pine / Iron", "hex": "#8B6914" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1600585152220-90363fe7e115?w=800&q=80",
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+    ],
+    "featured": false,
+    "createdAt": "2026-04-05"
+  },
+  {
+    "id": "008",
+    "name": "Mura Accent Chair",
+    "slug": "mura-accent-chair",
+    "category": "chairs",
+    "collections": ["japandi"],
+    "price": 36000,
+    "currency": "INR",
+    "description": "A study in quiet geometry. The Mura chair's curved back cradles you without fuss, and its tapered legs recall mid-century craft. Available in naturally dyed wool that improves with age.",
+    "materials": ["Solid Beech", "Naturally Dyed Wool"],
+    "dimensions": { "w": 65, "d": 70, "h": 80, "unit": "cm" },
+    "variants": [
+      { "label": "Terracotta", "hex": "#C16A44" },
+      { "label": "Forest", "hex": "#4A6741" },
+      { "label": "Stone", "hex": "#A89F94" }
+    ],
+    "images": [
+      "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80",
+      "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80"
+    ],
+    "featured": false,
+    "createdAt": "2026-05-15"
+  }
+]

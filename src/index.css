@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-warm-sand: #F5F0E8;
+  --color-walnut: #5C3D2E;
+  --color-terracotta: #C16A44;
+  --color-sage: #7A9E7E;
+  --color-stone: #A89F94;
+  --color-cream: #FBF8F3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-warm-sand);
+  color: var(--color-walnut);
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: #C16A4430;
+  color: var(--color-walnut);
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block bg-terracotta text-cream px-8 py-3 font-body font-medium tracking-wide transition-all duration-200 hover:bg-walnut;
+  }
+
+  .btn-outline {
+    @apply inline-block border border-walnut text-walnut px-8 py-3 font-body font-medium tracking-wide transition-all duration-200 hover:bg-walnut hover:text-cream;
+  }
+
+  .section-tag {
+    @apply text-xs font-body font-medium tracking-widest uppercase text-stone;
+  }
+
+  .card-hover {
+    @apply transition-transform duration-300 hover:scale-[1.02];
+  }
+}
