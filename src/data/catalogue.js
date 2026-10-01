@@ -156,6 +156,7 @@ export const PRODUCTS = [
     ],
     lead: '10–12 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.7],
     images: [
       { id: 'photo-1672345158827-7f4aa9467b49', view: 'Front' },
       { id: 'photo-1528458909336-e7a0adfed0a5', view: 'Detail' },
@@ -187,6 +188,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.65, 0.67],
     images: [
       { id: 'photo-1786564026112-25e9ecdcf363', view: 'Three-quarter' },
       { id: 'photo-1758486561455-ebd0d3ba7423', view: 'Front' },
@@ -219,6 +221,7 @@ export const PRODUCTS = [
     ],
     lead: '6–8 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.52],
     images: [
       { id: 'photo-1684165610413-2401399e0e59', view: 'Front' },
       { id: 'photo-1789655468281-c4a264d1410c', view: 'Detail' },
@@ -245,6 +248,7 @@ export const PRODUCTS = [
     finishes: [{ label: 'Waxed natural', hex: '#B99A76', colour: 'oak' }],
     lead: 'In stock',
     stock: 'In stock',
+    focus: [0.52, 0.62],
     images: [
       { id: 'photo-1781388466821-609b24f7e12c', view: 'Front' },
       { id: 'photo-1786325492229-b6d7103ffa67', view: 'Three-quarter' },
@@ -277,6 +281,7 @@ export const PRODUCTS = [
     ],
     lead: '7–9 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.58],
     images: [
       { id: 'photo-1777513538143-8525eb3943f6', view: 'Front' },
       { id: 'photo-1583418007992-a8e33a92e7ad', view: 'Detail' },
@@ -305,6 +310,7 @@ export const PRODUCTS = [
     finishes: [{ label: 'Honed travertine', hex: '#D8CDBB', colour: 'stone' }],
     lead: '4–5 weeks',
     stock: 'Made to order',
+    focus: [0.72, 0.76],
     images: [
       { id: 'photo-1769736436858-65a86b395ef7', view: 'Front' },
       { id: 'photo-1765766638341-0beb9eb9926c', view: 'Three-quarter' },
@@ -335,6 +341,7 @@ export const PRODUCTS = [
     ],
     lead: '8–10 weeks',
     stock: 'Made to order',
+    focus: [0.55, 0.8],
     images: [
       { id: 'photo-1572297259518-0974576b6738', view: 'Front' },
       { id: 'photo-1643999440226-7290747ef45f', view: 'Three-quarter' },
@@ -365,6 +372,7 @@ export const PRODUCTS = [
     ],
     lead: '5–6 weeks',
     stock: 'In stock',
+    focus: [0.55, 0.74],
     images: [
       { id: 'photo-1540760029765-138c8f6d2eac', view: 'Front' },
       { id: 'photo-1690489965043-ec15758cce71', view: 'Three-quarter' },
@@ -395,6 +403,7 @@ export const PRODUCTS = [
     ],
     lead: '6–8 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.6],
     images: [
       { id: 'photo-1776482128008-2c9cf5bc0edc', view: 'Front' },
       { id: 'photo-1783437581569-d10b23df85f5', view: 'Three-quarter' },
@@ -428,6 +437,7 @@ export const PRODUCTS = [
     ],
     lead: '9–11 weeks',
     stock: 'Made to order',
+    focus: [0.45, 0.68],
     images: [
       { id: 'photo-1631048501851-4aa85ffc3be8', view: 'Front' },
       { id: 'photo-1552558636-f6a8f071c2b3', view: 'Three-quarter' },
@@ -459,6 +469,7 @@ export const PRODUCTS = [
     ],
     lead: '5–6 weeks',
     stock: 'In stock',
+    focus: [0.72, 0.72],
     images: [
       { id: 'photo-1611486212557-88be5ff6f941', view: 'Three-quarter' },
       { id: 'photo-1766431066492-9bec8410a57b', view: 'Front' },
@@ -488,6 +499,7 @@ export const PRODUCTS = [
     ],
     lead: '6–8 weeks',
     stock: 'Made to order',
+    focus: [0.4, 0.4],
     images: [
       { id: 'photo-1787539386387-77e2f679f2da', view: 'Front' },
       { id: 'photo-1594272807878-93df1f68c357', view: 'Three-quarter' },
@@ -517,6 +529,7 @@ export const PRODUCTS = [
     ],
     lead: '8–10 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.72],
     images: [
       { id: 'photo-1769690399048-acdcfa33cdc8', view: 'Front' },
       { id: 'photo-1707980716909-61b696e2b84d', view: 'Three-quarter' },
@@ -545,6 +558,7 @@ export const PRODUCTS = [
     finishes: [{ label: 'Natural washi', hex: '#EFE8D9', colour: 'chalk' }],
     lead: '3–4 weeks',
     stock: 'In stock',
+    focus: [0.15, 0.4],
     images: [
       { id: 'photo-1778731525385-c52ad855677c', view: 'Front' },
       { id: 'photo-1778731525372-0ec34ead8d08', view: 'Three-quarter' },
@@ -573,6 +587,7 @@ export const PRODUCTS = [
     ],
     lead: '3–4 weeks',
     stock: 'In stock',
+    focus: [0.68, 0.3],
     images: [
       { id: 'photo-1759264244741-7175af0b7e75', view: 'Front' },
       { id: 'photo-1789472785227-38c0043ddccb', view: 'Three-quarter' },
@@ -604,6 +619,7 @@ export const PRODUCTS = [
     ],
     lead: '4–6 weeks',
     stock: 'In stock',
+    focus: [0.5, 0.5],
     images: [
       { id: 'photo-1616980540826-5542d5aad277', view: 'Front' },
       { id: 'photo-1572427734891-5592aae758b2', view: 'Three-quarter' },
@@ -634,6 +650,7 @@ export const PRODUCTS = [
     ],
     lead: 'In stock',
     stock: 'In stock',
+    focus: [0.5, 0.42],
     images: [
       { id: 'photo-1611489704164-6f73c62bd810', view: 'Front' },
       { id: 'photo-1611490135455-3a02bb9eb653', view: 'Three-quarter' },
@@ -693,6 +710,7 @@ export const PRODUCTS = [
     ],
     lead: '6–8 weeks',
     stock: 'Made to order',
+    focus: [0.34, 0.5],
     images: [
       { id: 'photo-1579146510179-6d8a87d24d54', view: 'Front' },
       { id: 'photo-1591718720020-f9191c3b8d86', view: 'Three-quarter' },
@@ -720,6 +738,7 @@ export const PRODUCTS = [
     ],
     lead: '8 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.62],
     images: [
       { id: 'photo-1579656381229-15bdb188da49', view: 'Front' },
       { id: 'photo-1572297794908-f2ee5a2930d6', view: 'Three-quarter' },
@@ -747,6 +766,7 @@ export const PRODUCTS = [
     ],
     lead: '12–14 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.6],
     images: [
       { id: 'photo-1759722665610-e13e59aa117b', view: 'Front' },
       { id: 'photo-1759722665614-265fdf133b37', view: 'Three-quarter' },
@@ -774,6 +794,7 @@ export const PRODUCTS = [
     ],
     lead: '8 weeks',
     stock: 'Made to order',
+    focus: [0.42, 0.55],
     images: [
       { id: 'photo-1634148737510-727f137375e0', view: 'Front' },
       { id: 'photo-1634148739177-775032f3feb1', view: 'Three-quarter' },
@@ -801,6 +822,7 @@ export const PRODUCTS = [
     ],
     lead: '10 weeks',
     stock: 'Made to order',
+    focus: [0.78, 0.75],
     images: [
       { id: 'photo-1694721025063-08eff99ba558', view: 'Front' },
     ],
@@ -827,6 +849,7 @@ export const PRODUCTS = [
     ],
     lead: '10–12 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.6],
     images: [
       { id: 'photo-1633515091011-d1aa4c127590', view: 'Front' },
       { id: 'photo-1659962607331-b9ebdcd35d80', view: 'Three-quarter' },
@@ -854,6 +877,7 @@ export const PRODUCTS = [
     ],
     lead: '4–6 weeks',
     stock: 'Made to order',
+    focus: [0.27, 0.62],
     images: [
       { id: 'photo-1590938272761-c11f74452660', view: 'Front' },
     ],
@@ -880,6 +904,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.5],
     images: [
       { id: 'photo-1611486212355-d276af4581c0', view: 'Front' },
       { id: 'photo-1683965274732-664bc41cf49d', view: 'Three-quarter' },
@@ -907,6 +932,7 @@ export const PRODUCTS = [
     ],
     lead: '8–10 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.62],
     images: [
       { id: 'photo-1714926340157-dd3a67e7b2c4', view: 'Front' },
     ],
@@ -933,6 +959,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.6],
     images: [
       { id: 'photo-1629908787565-db80d8234b43', view: 'Front' },
     ],
@@ -958,6 +985,7 @@ export const PRODUCTS = [
     ],
     lead: '8 weeks',
     stock: 'Made to order',
+    focus: [0.45, 0.55],
     images: [
       { id: 'photo-1643558544531-bff73bbffc28', view: 'Front' },
     ],
@@ -1010,6 +1038,7 @@ export const PRODUCTS = [
     ],
     lead: '10 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.62],
     images: [
       { id: 'photo-1620812067822-899be8a6a9a7', view: 'Front' },
     ],
@@ -1035,6 +1064,7 @@ export const PRODUCTS = [
     ],
     lead: '6–8 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.72],
     images: [
       { id: 'photo-1718049719548-f5cea9f78592', view: 'Front' },
     ],
@@ -1061,6 +1091,7 @@ export const PRODUCTS = [
     ],
     lead: '10–12 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.72],
     images: [
       { id: 'photo-1749476101600-90b2eb7efa89', view: 'Front' },
     ],
@@ -1113,6 +1144,7 @@ export const PRODUCTS = [
     ],
     lead: '10 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.65],
     images: [
       { id: 'photo-1605635544350-5796fb1622d1', view: 'Front' },
     ],
@@ -1139,6 +1171,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.48, 0.7],
     images: [
       { id: 'photo-1585128903994-9788298932a6', view: 'Front' },
     ],
@@ -1165,6 +1198,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.65, 0.68],
     images: [
       { id: 'photo-1758486561455-ebd0d3ba7423', view: 'Front' },
       { id: 'photo-1643474664086-6e2d12ee66f8', view: 'Three-quarter' },
@@ -1192,6 +1226,7 @@ export const PRODUCTS = [
     ],
     lead: '8 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.5],
     images: [
       { id: 'photo-1598300056393-4aac492f4344', view: 'Front' },
     ],
@@ -1218,6 +1253,7 @@ export const PRODUCTS = [
     ],
     lead: '6–8 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.5],
     images: [
       { id: 'photo-1598300042247-d088f8ab3a91', view: 'Front' },
     ],
@@ -1244,6 +1280,7 @@ export const PRODUCTS = [
     ],
     lead: '10 weeks',
     stock: 'Made to order',
+    focus: [0.45, 0.55],
     images: [
       { id: 'photo-1688383454669-9f5cc5991778', view: 'Front' },
     ],
@@ -1295,6 +1332,7 @@ export const PRODUCTS = [
     ],
     lead: '12 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.6],
     images: [
       { id: 'photo-1560185128-e173042f79dd', view: 'Front' },
       { id: 'photo-1741308478100-85c440e1b4bf', view: 'Three-quarter' },
@@ -1322,6 +1360,7 @@ export const PRODUCTS = [
     ],
     lead: '10–12 weeks',
     stock: 'Made to order',
+    focus: [0.55, 0.62],
     images: [
       { id: 'photo-1787336971325-41c2cb86e410', view: 'Front' },
       { id: 'photo-1676883343977-5f8ecc36856c', view: 'Three-quarter' },
@@ -1349,6 +1388,7 @@ export const PRODUCTS = [
     ],
     lead: '4–6 weeks',
     stock: 'Made to order',
+    focus: [0.42, 0.62],
     images: [
       { id: 'photo-1532372320572-cda25653a26d', view: 'Front' },
     ],
@@ -1374,6 +1414,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.18, 0.62],
     images: [
       { id: 'photo-1766431014990-39bb54f64f50', view: 'Front' },
     ],
@@ -1400,6 +1441,7 @@ export const PRODUCTS = [
     ],
     lead: '4 weeks',
     stock: 'Made to order',
+    focus: [0.78, 0.65],
     images: [
       { id: 'photo-1766431066492-9bec8410a57b', view: 'Front' },
     ],
@@ -1426,6 +1468,7 @@ export const PRODUCTS = [
     ],
     lead: '8 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.78],
     images: [
       { id: 'photo-1579283111541-081efe96f922', view: 'Front' },
     ],
@@ -1451,6 +1494,7 @@ export const PRODUCTS = [
     ],
     lead: '10–12 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.5],
     images: [
       { id: 'photo-1593430980369-68efc5a5eb34', view: 'Front' },
     ],
@@ -1477,6 +1521,7 @@ export const PRODUCTS = [
     ],
     lead: '8–10 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.58],
     images: [
       { id: 'photo-1659398652648-b3b8b7c1beab', view: 'Front' },
     ],
@@ -1503,6 +1548,7 @@ export const PRODUCTS = [
     ],
     lead: '10–12 weeks',
     stock: 'Made to order',
+    focus: [0.45, 0.62],
     images: [
       { id: 'photo-1696774276977-131fc18de2a0', view: 'Front' },
     ],
@@ -1529,6 +1575,7 @@ export const PRODUCTS = [
     ],
     lead: '8–10 weeks',
     stock: 'Made to order',
+    focus: [0.35, 0.45],
     images: [
       { id: 'photo-1771039753521-fad683e5e091', view: 'Front' },
       { id: 'photo-1771039753623-3ae33a6bfbcb', view: 'Three-quarter' },
@@ -1556,6 +1603,7 @@ export const PRODUCTS = [
     ],
     lead: '10 weeks',
     stock: 'Made to order',
+    focus: [0.74, 0.68],
     images: [
       { id: 'photo-1730131434819-084da0348b25', view: 'Front' },
     ],
@@ -1582,6 +1630,7 @@ export const PRODUCTS = [
     ],
     lead: '3–4 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.6],
     images: [
       { id: 'photo-1576069353653-21a2b29e3bc7', view: 'Front' },
     ],
@@ -1608,6 +1657,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.32, 0.62],
     images: [
       { id: 'photo-1651307016791-220f229087b1', view: 'Front' },
     ],
@@ -1633,6 +1683,7 @@ export const PRODUCTS = [
     ],
     lead: '12 weeks',
     stock: 'Made to order',
+    focus: [0.4, 0.55],
     images: [
       { id: 'photo-1692451438819-24d1ac92c3eb', view: 'Front' },
     ],
@@ -1659,6 +1710,7 @@ export const PRODUCTS = [
     ],
     lead: '4–6 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.55],
     images: [
       { id: 'photo-1580130281320-0ef0754f2bf7', view: 'Front' },
       { id: 'photo-1667312939978-64cf31718a6e', view: 'Three-quarter' },
@@ -1685,6 +1737,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.3, 0.5],
     images: [
       { id: 'photo-1578678809569-1a8ead9cb802', view: 'Front' },
     ],
@@ -1735,6 +1788,7 @@ export const PRODUCTS = [
     ],
     lead: '8 weeks',
     stock: 'Made to order',
+    focus: [0.38, 0.38],
     images: [
       { id: 'photo-1606425288528-4cebbfc69de7', view: 'Front' },
     ],
@@ -1761,6 +1815,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.32, 0.48],
     images: [
       { id: 'photo-1561664701-5b89dafffdd5', view: 'Front' },
     ],
@@ -1787,6 +1842,7 @@ export const PRODUCTS = [
     ],
     lead: '5 weeks',
     stock: 'Made to order',
+    focus: [0.4, 0.4],
     images: [
       { id: 'photo-1786114528367-822e778d0962', view: 'Front' },
     ],
@@ -1812,6 +1868,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.55],
     images: [
       { id: 'photo-1589173956121-8891103b66b0', view: 'Front' },
     ],
@@ -1837,6 +1894,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.4, 0.35],
     images: [
       { id: 'photo-1718049720099-a035f05e539a', view: 'Front' },
     ],
@@ -1862,6 +1920,7 @@ export const PRODUCTS = [
     ],
     lead: '4–6 weeks',
     stock: 'Made to order',
+    focus: [0.5, 0.45],
     images: [
       { id: 'photo-1585056050604-f5cd7f56902d', view: 'Front' },
     ],
@@ -1887,6 +1946,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.42, 0.8],
     images: [
       { id: 'photo-1759722666813-5b972f5c4625', view: 'Front' },
       { id: 'photo-1762758889413-64d717f81b0d', view: 'Three-quarter' },
@@ -1939,6 +1999,7 @@ export const PRODUCTS = [
     ],
     lead: '3–4 weeks',
     stock: 'Made to order',
+    focus: [0.3, 0.65],
     images: [
       { id: 'photo-1578678809626-a3741782f0b8', view: 'Front' },
     ],
@@ -1964,6 +2025,7 @@ export const PRODUCTS = [
     ],
     lead: '3 weeks',
     stock: 'Made to order',
+    focus: [0.45, 0.55],
     images: [
       { id: 'photo-1626037235530-fe56de7d6459', view: 'Front' },
     ],
@@ -1990,6 +2052,7 @@ export const PRODUCTS = [
     ],
     lead: '3–4 weeks',
     stock: 'Made to order',
+    focus: [0.65, 0.55],
     images: [
       { id: 'photo-1613424777445-f93a2a48e285', view: 'Front' },
     ],
@@ -2016,6 +2079,7 @@ export const PRODUCTS = [
     ],
     lead: '3–4 weeks',
     stock: 'Made to order',
+    focus: [0.52, 0.58],
     images: [
       { id: 'photo-1643569556871-91ec60671ed7', view: 'Front' },
     ],
@@ -2042,6 +2106,7 @@ export const PRODUCTS = [
     ],
     lead: '6 weeks',
     stock: 'Made to order',
+    focus: [0.74, 0.7],
     images: [
       { id: 'photo-1694165748400-368e3af3b926', view: 'Front' },
     ],
@@ -2068,6 +2133,7 @@ export const PRODUCTS = [
     ],
     lead: '4 weeks',
     stock: 'Made to order',
+    focus: [0.48, 0.3],
     images: [
       { id: 'photo-1621826805983-4bb60ece28ae', view: 'Front' },
     ],
@@ -2094,6 +2160,7 @@ export const PRODUCTS = [
     ],
     lead: '3 weeks',
     stock: 'Made to order',
+    focus: [0.42, 0.52],
     images: [
       { id: 'photo-1523367310297-83064fc42a16', view: 'Front' },
     ],
@@ -2234,6 +2301,48 @@ export const bestsellers = () => PRODUCTS.filter(p => p.bestseller)
 
 /** The photo a piece is represented by everywhere except its own gallery. */
 export const cover = p => p.images[0].id
+
+/**
+ * How a view is re-framed from a piece's front photograph when the piece has no
+ * photograph of that view. `z` is the zoom (1 = the largest box of that ratio
+ * the photo holds), `dx`/`dy` move the crop away from the piece's centre, as a
+ * fraction of the photo. Front is the full subject, three-quarter is the widest
+ * frame, side and back sit to either flank, detail is the close-up.
+ */
+const REFRAME = {
+  Front: { ar: '1:1', z: 1, dx: 0, dy: 0 },
+  Side: { ar: '4:5', z: 1.5, dx: -0.06, dy: 0 },
+  'Three-quarter': { ar: '4:5', z: 1.15, dx: 0.05, dy: 0 },
+  Back: { ar: '4:5', z: 1.9, dx: 0.08, dy: -0.03 },
+  Detail: { ar: '4:5', z: 3, dx: 0, dy: 0.06 },
+}
+
+const clamp = n => Math.min(1, Math.max(0, +n.toFixed(3)))
+
+/**
+ * The gallery of a piece: always the five views in the brief's order — front,
+ * side, three-quarter, back, detail — so every product page reads the same.
+ * Front is the piece's front photograph and Detail its close-up when it has
+ * one; side, three-quarter and back are always re-framed from the front
+ * photograph, because a piece's other photographs are different rooms and would
+ * stop the set reading as one piece. `focus` (optional on a piece) is where the
+ * piece sits in that photograph, as `[x, y]` from 0 to 1, and `detailAt` where
+ * a re-framed close-up should land.
+ */
+export const gallery = p => {
+  const lead = p.images.find(i => i.view === 'Front') || p.images[0]
+  const [fx, fy] = p.focus || [0.5, 0.55]
+  const [dx, dy] = p.detailAt || [fx, fy]
+  return VIEWS.map(view => {
+    const own = (view === 'Front' || view === 'Detail') && p.images.find(i => i.view === view)
+    if (own) return { view, id: own.id, url: w => img(own.id, w) }
+    const r = REFRAME[view]
+    const at = view === 'Detail' ? [dx, dy] : [fx, fy]
+    const fp = [clamp(at[0] + r.dx), clamp(at[1] + r.dy), r.z]
+    // a re-framed crop is only as sharp as its source, so it is never asked for wider than 1400px
+    return { view, id: lead.id, url: w => imgAt(lead.id, Math.min(w, 1400), r.ar, fp) }
+  })
+}
 
 /** Every colour family a piece is actually offered in. */
 export const coloursOf = p => [...new Set(p.finishes.map(f => f.colour))]

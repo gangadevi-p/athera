@@ -235,7 +235,10 @@ Seven categories, named as the brief names them:
 To add a piece: add an entry to `PRODUCTS` with `cat`, `spaces`, `size`
 (`small`/`medium`/`large`, which drives the size filter), `care`, `stock`, its
 finishes — each with a `colour` from `COLOURS`, which drives the colour filter
-— and `images` as `{ id, view }` objects using names from `VIEWS`. Add
+— and `images` as `{ id, view }` objects using names from `VIEWS` (one `Front`
+photograph is enough; the gallery re-frames the other views from it — add a
+`focus: [x, y]` placing the piece in that photograph, and optionally a `Detail`
+close-up). Add
 `arrival: true` for New Arrivals, `featured: true` to be that category's
 candidate for the featured row, `bestseller: true` for the best-selling row.
 
@@ -270,9 +273,20 @@ Use it rather than reaching into `p.images[0]`.
   `pr`, `col`, `m`, `s`, `sort`), so a filtered view can be linked and the back
   button behaves. Multi-value parameters are comma lists. Colour and material
   filter on *families* (`COLOURS`, `MATERIAL_FILTERS`), not raw strings.
-- **The product gallery carries the brief's five views** — front, side,
-  three-quarter, back, detail — labelled under each frame. Not every piece has
-  all five; it shows the ones it has, in the order they are listed. Any frame
+- **Every product page shows the brief's five views, always, in this order** —
+  front, side, three-quarter, back, detail — labelled under each frame.
+  `gallery(p)` in `catalogue.js` builds them. Front and detail are the piece's
+  own photographs when it has them; side, three-quarter and back are
+  **re-framed from the front photograph** (an imgix focal-point crop at a
+  different zoom and offset, see `REFRAME`), as is detail when the piece has no
+  close-up. That was a deliberate choice: Unsplash has no true back-of-furniture
+  photographs, and a piece's other photographs are different rooms, so
+  re-framing is what keeps all five frames the same piece. They are crops, not
+  new camera angles. `focus: [x, y]` on a piece says where it sits in its front
+  photograph (0–1; default `[0.5, 0.55]`) so the crops stay on the piece rather
+  than the wall behind it — set for 67 of the 73, tune it if a piece is added or
+  its photo swapped. A piece's remaining entries in `images` are not shown in its
+  gallery (only `images[1]` is used, as the card's hover frame). Any frame
   opens `Gallery`'s zoom overlay: click to magnify 2.2×, move the pointer to
   pan, arrow keys to step, Escape to close.
 - **The availability check is a prototype.** `checkPostcode()` maps a postcode

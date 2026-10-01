@@ -11,6 +11,16 @@ const LINKS = [
   { to: '/spaces', label: 'Spaces' },
 ]
 
+/** Already home: glide up to the hero in place — no navigation, no page fade. */
+function homeClick(pathname) {
+  return e => {
+    if (pathname !== '/') return
+    e.preventDefault()
+    if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search)
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
+  }
+}
+
 /**
  * Minimal navigation. It floats over the hero with no ground of its own, and
  * settles onto paper as soon as the page moves — no blur, no glass.
@@ -37,14 +47,7 @@ function Nav({ onMenu }) {
           className="mark"
           to="/"
           aria-label="Aethera, home"
-          onClick={e => {
-            // already home: glide up to the hero in place — no navigation, no page fade
-            if (pathname === '/') {
-              e.preventDefault()
-              if (window.location.hash) window.history.replaceState(null, '', window.location.pathname + window.location.search)
-              window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
-            }
-          }}
+          onClick={homeClick(pathname)}
         >Aethera</Link>
         <nav className="nav__links" aria-label="Main">
           {LINKS.map(l => (
@@ -109,20 +112,19 @@ function Menu({ open, onClose }) {
 }
 
 function Footer() {
+  const { pathname } = useLocation()
   return (
     <footer className="foot">
       <div className="wrap">
+        {/* the logotype, set as wide as the page: light, spaced, and a link home */}
+        <div className="foot__logo">
+          <Link to="/" aria-label="Aethera, back to top" onClick={homeClick(pathname)}>Aethera</Link>
+        </div>
         <div className="foot__top">
-          <div className="foot__brand">
-            <span className="mark">Aethera</span>
-            <p className="fine">
-              Furniture made in small runs and delivered assembled, for rooms meant to be
-              lived in rather than looked at.
-            </p>
-          </div>
-          <div>
+          <div className="foot__shop">
             <h4>Shop</h4>
             <ul>
+              <li><Link to="/shop">All furniture</Link></li>
               {CATEGORIES.map(c => (
                 <li key={c.id}><Link to={`/shop?c=${c.id}`}>{c.short}</Link></li>
               ))}
@@ -143,10 +145,6 @@ function Footer() {
               <li><span className="mute">hello@aethera.studio</span></li>
             </ul>
           </div>
-        </div>
-        <div className="foot__base">
-          <span>© {new Date().getFullYear()} Aethera</span>
-          <span>Design prototype · no order is processed</span>
         </div>
       </div>
     </footer>

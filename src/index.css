@@ -409,20 +409,32 @@ main[data-home] { padding-top: 0 }
 
 /* ---------- footer ---------------------------------------------------- */
 
-.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 112px 0 40px }
-.foot__top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 72px }
-.foot__brand { display: flex; flex-direction: column; gap: 20px; max-width: 34ch }
-.foot__brand .mark { font-size: 1.7rem }
+.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 56px 0 72px }
+.foot__top { display: grid; grid-template-columns: 6fr 3fr 3fr; gap: 56px }
+/* the shop list runs in two columns, so the longest list stays short */
+.foot .foot__shop ul { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-auto-columns: minmax(0, 1fr); gap: 13px 32px }
+
+/* The logotype: the one place the brand is shown large. Light and broad —
+   hairline capitals, wide tracking, sized by its container so it always spans
+   exactly the width of the content, from the first margin to the last.
+   20.3cqw is calibrated to Italiana at .16em tracking (the word is 4.926em
+   wide without its trailing space) — change the face or the tracking and it
+   has to be re-measured. */
+.foot__logo { container-type: inline-size; padding-bottom: 52px }
+.foot__logo a {
+  display: block; white-space: nowrap;
+  font-family: var(--display); text-transform: uppercase;
+  font-size: 20.3cqw; line-height: .76; letter-spacing: .16em;
+  margin-right: -.16em; /* the last letter's tracking is not part of the width */
+  color: var(--rule);
+  transition: color .6s var(--ease);
+}
+.foot__logo a:hover { color: color-mix(in srgb, var(--rule), var(--ink) 22%) }
 .foot h4 { margin: 0 0 22px; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--mute); font-weight: 400 }
 .foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px }
 .foot ul a, .foot ul span { font-size: .86rem; color: var(--graphite) }
 .foot ul a { transition: color var(--t-hover) var(--ease) }
 .foot ul a:hover { color: var(--ink) }
-.foot__base {
-  border-top: 1px solid var(--rule); padding-top: 28px;
-  display: flex; justify-content: space-between; gap: 24px;
-  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
-}
 
 /* ---------- cart drawer ----------------------------------------------- */
 
