@@ -410,7 +410,6 @@
 
 @media (max-width: 1280px) {
   :root { --gutter: 64px; --sec: 140px; --sec-tight: 104px }
-  .nav__links { gap: 30px }
   .nav__util { gap: 22px }
   .cindex { gap: 56px }
   .craft { gap: 56px }
@@ -425,8 +424,7 @@
   :root { --sec: 120px; --sec-tight: 96px; --nav-h: 76px }
 
   /* the compact navigation is one button and the cart */
-  .nav__in { grid-template-columns: minmax(0, 1fr) auto }
-  .nav__links, .nav__u--acct, .nav__u--wish { display: none }
+  .nav__u--acct, .nav__u--wish { display: none }
   .nav__menu { display: inline-flex; border: 0; background: none; cursor: pointer }
 
 

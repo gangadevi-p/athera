@@ -62,7 +62,7 @@ export default function CategoryCarousel({ variant = 'a' }) {
           {SLIDES.map((c, i) => (
             <Link
               key={i}
-              to={`/shop?c=${c.id}`}
+              to={`/categories?k=${c.id}`}
               className={cx('cc__s', i === at && 'on')}
               aria-hidden={i >= N ? 'true' : undefined}
               tabIndex={i >= N ? -1 : undefined}

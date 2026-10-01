@@ -6,11 +6,6 @@ import { cx } from '../lib/format'
 import { useReveals } from '../lib/motion'
 import { useShop } from '../lib/shop'
 
-const LINKS = [
-  { to: '/shop', label: 'Furniture' },
-  { to: '/spaces', label: 'Spaces' },
-]
-
 /** Already home: glide up to the hero in place — no navigation, no page fade. */
 function homeClick(pathname) {
   return e => {
@@ -49,11 +44,6 @@ function Nav({ onMenu }) {
           aria-label="Aethera, home"
           onClick={homeClick(pathname)}
         >Aethera</Link>
-        <nav className="nav__links" aria-label="Main">
-          {LINKS.map(l => (
-            <NavLink key={l.to} to={l.to}>{l.label}</NavLink>
-          ))}
-        </nav>
         <div className="nav__util">
           <NavLink className="nav__u nav__u--acct" to="/account">
             {account ? account.name?.split(' ')[0] || 'Account' : 'Sign in'}
@@ -92,9 +82,6 @@ function Menu({ open, onClose }) {
         <span className="mark">Aethera</span>
         <button className="menu__x" type="button" onClick={onClose} aria-label="Close menu">&times;</button>
       </div>
-      <nav className="menu__nav" aria-label="Main">
-        {LINKS.map(l => <Link key={l.to} to={l.to} onClick={onClose}>{l.label}</Link>)}
-      </nav>
       <div className="menu__util">
         <Link className="nav__u" to="/account" onClick={onClose}>
           {account ? account.name?.split(' ')[0] || 'Account' : 'Sign in'}

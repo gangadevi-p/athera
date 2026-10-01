@@ -265,7 +265,9 @@ Use it rather than reaching into `p.images[0]`.
 - **The nav is `position: fixed`** and floats with no ground over the landing
   hero, settling onto paper past 40px of scroll. `main` carries
   `padding-top: var(--nav-h)` to clear it, removed on the landing page via
-  `main[data-home]`. Below 980px the links collapse into a full-screen
+  `main[data-home]`. It carries only the logotype, account and cart — there are
+  no section links; visitors move through the landing page. Below 980px the
+  account, saved and tracking links collapse into a full-screen
   editorial menu overlay; below 640px the product page grows a sticky
   add-to-cart bar (`.stickybuy`).
 - **The listing has all five filters from the brief** — category, price,

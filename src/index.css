@@ -352,7 +352,7 @@ main[data-home] { padding-top: 0 }
 .nav__in {
   max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter);
   height: var(--nav-h);
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center;
 }
 .mark {
   font-family: var(--display);
@@ -363,14 +363,12 @@ main[data-home] { padding-top: 0 }
   margin-right: -.38em;
   justify-self: start;
 }
-.nav__links { display: flex; align-items: center; gap: 44px }
-.nav__links a, .nav__u {
+.nav__u {
   font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
   color: var(--graphite); padding-bottom: 4px;
   background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
   transition: color var(--t-hover) var(--ease), background-size var(--t-hover) var(--ease);
 }
-.nav__links a:hover, .nav__links a[aria-current="page"],
 .nav__u:hover, .nav__u[aria-current="page"] { color: var(--ink); background-size: 100% 1px }
 
 .nav__util { justify-self: end; display: flex; align-items: center; gap: 28px }
@@ -400,12 +398,7 @@ main[data-home] { padding-top: 0 }
 .menu__top { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between }
 .menu__x { border: 0; background: none; padding: 0; cursor: pointer; font-size: 2rem; line-height: 1; color: var(--mute) }
 .menu__x:hover { color: var(--ink) }
-.menu__nav { display: flex; flex-direction: column; gap: 6px; margin: auto 0 }
-.menu__nav a {
-  font-family: var(--display); font-size: clamp(2.4rem, 9vw, 4rem);
-  text-transform: uppercase; letter-spacing: .02em; line-height: 1.12; color: var(--ink);
-}
-.menu__util { display: flex; flex-wrap: wrap; gap: 28px; padding-top: 36px; border-top: 1px solid var(--rule) }
+.menu__util { display: flex; flex-wrap: wrap; gap: 28px; margin-top: auto; padding-top: 36px; border-top: 1px solid var(--rule) }
 
 /* ---------- footer ---------------------------------------------------- */
 
@@ -827,7 +820,7 @@ html { scroll-snap-type: y proximity }
 .hero__scroll { display: none }
 
 /* the navigation floats over the photograph in warm white, then settles onto the page */
-.nav--float .mark, .nav--float .nav__links a, .nav--float .nav__u { color: var(--warm-white) }
+.nav--float .mark, .nav--float .nav__u { color: var(--warm-white) }
 .nav--float .nav__n { border-color: rgba(246, 244, 239, .7) }
 
 /* slow motion: the photograph settles from a close, held frame out to the full room, so its detail is revealed rather than shown at once */
