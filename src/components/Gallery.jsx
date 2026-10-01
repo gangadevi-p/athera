@@ -52,7 +52,7 @@ export default function Gallery({ p, opening = false }) {
     <>
       <div className="gal">
         {shots.map((s, i) => (
-          <figure className="gal__f" key={s.view} data-reveal={i > 0 ? 'mask' : undefined}>
+          <figure className="gal__f" key={`${p.id}-${s.view}`} data-reveal={i > 0 ? 'mask' : undefined}>
             <button
               type="button"
               className="gal__b"

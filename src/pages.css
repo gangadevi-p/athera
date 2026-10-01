@@ -457,7 +457,6 @@
   /* product rows stay horizontal on a phone — that is the point of them */
   .hrow { grid-auto-columns: 74vw }
 
-  .edit__detail { margin-top: -40px; max-width: 66% }
   .band .img { aspect-ratio: 16 / 9 }
   .band__t p { font-size: 1.15rem }
 
