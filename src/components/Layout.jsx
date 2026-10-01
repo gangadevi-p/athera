@@ -17,26 +17,47 @@ function homeClick(pathname) {
 }
 
 /**
- * Minimal navigation. It floats over the hero with no ground of its own, and
- * settles onto paper as soon as the page moves — no blur, no glass.
+ * Minimal navigation. It floats over the hero with no ground of its own for as
+ * long as the hero is beneath it, and settles onto paper only once the
+ * hero has scrolled out from under it — no blur, no glass. On the landing page
+ * it steps out of the way while you scroll down and comes back as soon as you
+ * scroll up.
  */
 function Nav({ onMenu }) {
   const { count, wish, account } = useShop()
   const { pathname } = useLocation()
-  const [top, setTop] = useState(true)
+  const [overHero, setOverHero] = useState(true)
+  const [away, setAway] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setTop(window.scrollY < 40)
+    let lastY = window.scrollY
+    setAway(false) // a new page always arrives with its navigation showing
+    const onScroll = () => {
+      const y = window.scrollY
+      const hero = document.querySelector('.hero')
+      const navH = document.querySelector('.nav')?.offsetHeight || 0
+      setOverHero(hero ? hero.getBoundingClientRect().bottom > navH : y < 40)
+      // direction, read over a few pixels so a trackpad's small steps still count
+      if (y < navH) { setAway(false); lastY = y; return }
+      if (Math.abs(y - lastY) < 6) return
+      setAway(y > lastY)
+      lastY = y
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
+  }, [pathname])
 
   // only the landing page has a hero for the nav to float over
-  const float = top && pathname === '/'
+  const home = pathname === '/'
+  const float = overHero && home
 
   return (
-    <header className={cx('nav', float && 'nav--float')}>
+    <header className={cx('nav', float && 'nav--float', away && home && 'nav--away')}>
       <div className="nav__in">
         <Link
           className="mark"

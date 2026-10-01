@@ -3,6 +3,7 @@ import Img from '../components/Img'
 import CategoryCarousel from '../components/CategoryCarousel'
 import FeaturedCollection from '../components/FeaturedCollection'
 import Philosophy from '../components/Philosophy'
+import sofaHero from '../assets/sofa-hero.png'
 import { CATEGORIES, PRODUCTS, SPACES } from '../data/catalogue'
 import { cx } from '../lib/format'
 
@@ -78,28 +79,27 @@ export default function Home() {
   return (
     <>
       {/* ---------- 1 · hero — full-screen visual ---------- */}
-      <section className="hero">
-        <div className="hero__media">
-          <Img
-            id="photo-1745429523617-0d837856ca35"
-            alt="A taupe sofa against a taupe wall, softly lit"
-            ratio="16 / 9"
-            ratioSm="3 / 4"
-            ar="16:9"
-            arSm="3:4"
-            fp={[0.5, 0.62]}
-            w={2600}
-            position="center 62%"
-            priority
-          />
-        </div>
+      <section className="hero hero--stage">
+        <div className="hero__media" aria-hidden="true" />
         <div className="wrap">
           <div className="hero__t">
-            <h1 className="disp d1" data-reveal="">Design spaces<br />that feel quieter.</h1>
+            <h1 className="disp d1" data-reveal=""><span>Design spaces</span> <span>that feel quieter.</span></h1>
             <div className="hero__cta" data-reveal="" data-delay="1">
               <Link className="btn btn--solid" to="/shop">Explore the collection</Link>
             </div>
           </div>
+        </div>
+        {/* the sofa, front-on and standing on the floor, never shown larger than its own pixels */}
+        <div className="hero__stage">
+          <img
+            className="hero__sofa"
+            src={sofaHero}
+            alt="A long, low three-seat sofa in brown bouclé seen from the front, with travertine-panelled arms on bronze plinths"
+            width="2172"
+            height="724"
+            fetchpriority="high"
+            decoding="async"
+          />
         </div>
       </section>
 

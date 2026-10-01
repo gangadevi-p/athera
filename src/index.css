@@ -338,16 +338,19 @@ main[data-home] { padding-top: 0 }
 }
 
 /* ---------- nav ------------------------------------------------------- */
-/* Floats over the hero, then settles onto paper once the page moves.
-   No blur, no glass — it either has a ground or it does not. */
+/* Floats over the hero while the hero is beneath it, then settles onto paper.
+   No blur, no glass — it either has a ground or it does not. On the landing page
+   it slides away while scrolling down and returns on the way back up. */
 
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 40;
   background: var(--paper);
   border-bottom: 1px solid var(--rule);
-  transition: background .45s var(--ease), border-color .45s var(--ease);
+  transition: background .45s var(--ease), border-color .45s var(--ease), transform .45s var(--ease);
 }
 .nav--float { background: transparent; border-color: transparent }
+.nav--away { transform: translateY(-100%) }
+.nav--away:focus-within { transform: none } /* tabbing into it brings it back */
 
 .nav__in {
   max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter);
@@ -788,7 +791,7 @@ html { scroll-snap-type: y proximity }
   .fcs .fcl--1 { grid-column: 1 / -1 !important }
 }
 
-/* ---------- hero: one full-bleed photograph that fills the screen on any device ---------- */
+/* ---------- hero: fills the screen on any device — a full-bleed photograph, or a piece on a stage ---------- */
 .hero {
   position: relative; isolation: isolate; overflow: hidden;
   height: 100svh; min-height: 520px;
@@ -807,8 +810,11 @@ html { scroll-snap-type: y proximity }
     linear-gradient(0deg, rgba(36, 26, 20, .5) 0%, rgba(36, 26, 20, 0) 40%),
     linear-gradient(180deg, rgba(36, 26, 20, .38) 0%, rgba(36, 26, 20, 0) 18%);
 }
-.hero__t { display: flex; flex-direction: column; align-items: flex-start; gap: clamp(14px, 2.6svh, 28px); max-width: min(27.2ch, 90%) } /* 34ch at the old 16px body: the headline keeps its line breaks */
-.hero__t .d1 { font-size: clamp(2.1rem, min(6svh, 6.4vw), 4.2rem) }
+.hero__t { display: flex; flex-direction: column; align-items: flex-start; gap: clamp(18px, 3.6svh, 36px) }
+/* the headline is always two lines: each line holds together, and the size is capped so the
+   longer one ("that feel quieter.", 10.8em wide in Georgia) fits between the margins on any screen */
+.hero__t .d1 { font-size: clamp(1.5rem, min(6svh, (100vw - 2 * var(--gutter)) / 11.2), 4.2rem); line-height: 1.04 }
+.hero__t .d1 span { display: block; white-space: nowrap }
 .hero__t .lead { max-width: 34ch; font-size: clamp(1.15rem, 1.9svh + .25rem, 1.33rem) }
 .hero .disp, .hero .eyebrow, .hero .lead { color: var(--warm-white) }
 .hero .lead { opacity: .92 }
@@ -832,10 +838,43 @@ html { scroll-snap-type: y proximity }
 .nav--float .mark, .nav--float .nav__u { color: var(--warm-white) }
 .nav--float .nav__n { border-color: rgba(246, 244, 239, .7) }
 
-/* slow motion: the photograph settles from a close, held frame out to the full room, so its detail is revealed rather than shown at once */
-@keyframes hero-settle { from { transform: scale(1.16) } to { transform: scale(1) } }
-.hero__media .img img { transform-origin: 50% 62%; animation: hero-settle 14s cubic-bezier(.16, .6, .2, 1) both }
-@media (prefers-reduced-motion: reduce) { .hero__media .img img { animation: none } }
+/* stage: a cut-out piece shown front-on in a warm room — the piece standing on the floor at the
+   foot of the section, a glow on the wall behind it, and the words centred, both ways, in the
+   wall above it. The piece is never drawn larger than its own pixels (2172 wide); when the screen
+   is short it gives way, so the words always keep their room. */
+.hero--stage { --floor: clamp(28px, 6svh, 64px); flex-direction: column; align-items: stretch; gap: clamp(20px, 4svh, 48px); padding-bottom: var(--floor) }
+.hero--stage .hero__media {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 72%, rgba(214, 180, 148, .4), rgba(214, 180, 148, 0) 70%),
+    linear-gradient(180deg, #4e3f35 0%, #67533f 38%, #7a6352 66%, #6a5444 80%, #45372e 92%, #362b25 100%);
+}
+/* a little weight under the navigation and the words, and on the floor — no side wash, the room is symmetrical */
+.hero--stage .hero__media::after {
+  background:
+    linear-gradient(180deg, rgba(36, 26, 20, .38) 0%, rgba(36, 26, 20, 0) 32%),
+    linear-gradient(0deg, rgba(36, 26, 20, .45) 0%, rgba(36, 26, 20, 0) 18%);
+}
+.hero--stage > .wrap { flex: 1 1 0; display: flex; align-items: center; justify-content: center }
+.hero--stage .hero__t { align-items: center; text-align: center }
+.hero__stage { flex: 0 1 auto; min-height: 0; display: flex; align-items: flex-end; justify-content: center; padding: 0 var(--gutter) }
+.hero__sofa {
+  display: block; width: auto; height: auto;
+  max-width: min(100%, 82vw, 1600px); max-height: 100%; /* as wide as the room allows, still under its own 2172px */
+  /* the file has clear bands above the cushions (rows 0–95) and under the plinths (622–723);
+     cropping to rows 96–621 makes the box the sofa itself, so it stands on the floor line and
+     the words centre against what you actually see */
+  aspect-ratio: 2172 / 526; object-fit: cover; object-position: 50% 48.5%;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 4px 4px rgba(20, 14, 10, .5)) drop-shadow(0 24px 30px rgba(20, 14, 10, .4)); /* contact, then cast */
+  animation: sofa-in 1.4s var(--ease) both, hero-settle 14s cubic-bezier(.45, 0, .55, 1) infinite alternate both;
+}
+@keyframes sofa-in { from { opacity: 0; translate: 0 14px } to { opacity: 1; translate: 0 0 } }
+/* slow motion, on a loop: the piece settles from a close, held frame down to its place on the
+   floor, then eases back, 14s each way. Easing is slow at both ends so neither turn jolts, and the
+   swell stays small (8%) so it never reaches the words, even on a short screen. */
+@keyframes hero-settle { from { scale: 1.08 } to { scale: 1 } }
+@media (prefers-reduced-motion: reduce) { .hero__sofa { animation: none } }
+@media (max-width: 640px) { .hero__sofa { max-width: 100% } }
 
 /* ---------- brand philosophy: what we believe — a statement and three principles, each layout fits one screen ---------- */
 .ph { position: relative; margin-top: var(--sec); scroll-snap-align: start; scroll-margin-top: var(--nav-h) } /* margin, not padding: the section itself still fits one screen */
