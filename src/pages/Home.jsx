@@ -2,16 +2,14 @@ import { Link } from 'react-router-dom'
 import Img from '../components/Img'
 import CategoryCarousel from '../components/CategoryCarousel'
 import FeaturedCollection from '../components/FeaturedCollection'
-import LifestyleEditorial from '../components/LifestyleEditorial'
 import Philosophy from '../components/Philosophy'
 import { CATEGORIES, PRODUCTS, SPACES } from '../data/catalogue'
 import { cx } from '../lib/format'
 
 /**
- * The landing page carries the brief's nine parts, in the visual concept's
- * rhythm: no two consecutive sections share a shape. Full-screen visual ·
- * editorial index · horizontal row · asymmetric composition · grid ·
- * split-screen · texture band · spread · closing.
+ * The landing page runs in the visual concept's rhythm: no two consecutive
+ * sections share a shape. Full-screen visual · category carousel · featured
+ * collections · brand philosophy · split-screen spaces.
  *
  * Navigation and footer live in Layout.
  */
@@ -126,14 +124,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- 4 · lifestyle editorial — asymmetric composition ---------- */}
-      <LifestyleEditorial variant="c" />
-
       {/* ---------- brand philosophy — statement, close-ups, evidence ---------- */}
       <Philosophy variant="a" />
 
       {/* ---------- 6 · shop by space — split-screen ---------- */}
-      <section className="sec sec--tight">
+      <section className="sec sec--tight sec--gap">
         <div className="wrap">
           <Head
             eyebrow="Shop by space"

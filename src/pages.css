@@ -399,11 +399,6 @@
   .cindex { grid-template-columns: minmax(0, 1fr); gap: 40px }
   .cindex__frame { aspect-ratio: 16 / 9 }
 
-  /* the editorial composition stacks but keeps its offset detail */
-  .edit__lead, .edit__t, .edit__detail, .edit__cap { grid-column: 1 / -1 }
-  .edit__detail { margin-top: -56px; max-width: 58% }
-  .edit__cap { padding-bottom: 0 }
-
   .split { grid-template-columns: minmax(0, 1fr) }
   .split--lead { grid-column: auto }
   .split__t { padding: 40px var(--gutter) 36px }
