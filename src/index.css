@@ -409,7 +409,7 @@ main[data-home] { padding-top: 0 }
 
 /* ---------- footer ---------------------------------------------------- */
 
-.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 56px 0 72px }
+.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 56px 0 40px }
 .foot__top { display: grid; grid-template-columns: 6fr 3fr 3fr; gap: 56px }
 /* the shop list runs in two columns, so the longest list stays short */
 .foot .foot__shop ul { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-auto-columns: minmax(0, 1fr); gap: 13px 32px }
@@ -435,6 +435,11 @@ main[data-home] { padding-top: 0 }
 .foot ul a, .foot ul span { font-size: .86rem; color: var(--graphite) }
 .foot ul a { transition: color var(--t-hover) var(--ease) }
 .foot ul a:hover { color: var(--ink) }
+.foot__base {
+  margin-top: 72px; border-top: 1px solid var(--rule); padding-top: 28px;
+  display: flex; justify-content: space-between; gap: 24px;
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+}
 
 /* ---------- cart drawer ----------------------------------------------- */
 

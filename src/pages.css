@@ -488,10 +488,11 @@
 
   .sum, .acct__side { padding: 28px 24px }
   .drawer { width: 100%; padding: 26px 24px 32px }
-  .foot { padding: 48px 0 64px }
+  .foot { padding: 48px 0 32px }
   .foot__top { grid-template-columns: minmax(0, 1fr); gap: 36px }
   .foot .foot__shop ul { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: minmax(0, 1fr) }
   .foot__logo { padding-bottom: 44px }
+  .foot__base { margin-top: 48px; flex-direction: column; gap: 10px }
 
   .sroom > .img { aspect-ratio: 4 / 3 !important }
   .sroom__t { bottom: 26px }

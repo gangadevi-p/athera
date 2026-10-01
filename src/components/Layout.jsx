@@ -146,6 +146,10 @@ function Footer() {
             </ul>
           </div>
         </div>
+        <div className="foot__base">
+          <span>© {new Date().getFullYear()} Aethera</span>
+          <span>Design prototype · no order is processed</span>
+        </div>
       </div>
     </footer>
   )
