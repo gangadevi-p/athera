@@ -35,12 +35,12 @@ function Availability({ p }) {
       </div>
       <form className="avail__f" onSubmit={submit}>
         <div className="field">
-          <label htmlFor="zipcheck">Postcode</label>
+          <label className="sr" htmlFor="zipcheck">Postcode</label>
           <input
             id="zipcheck"
             name="zipcheck"
             inputMode="numeric"
-            placeholder="e.g. 10012"
+            placeholder="Postcode, e.g. 10012"
             value={code}
             onChange={e => { setCode(e.target.value); setResult(null); setMiss(false) }}
           />
@@ -114,6 +114,8 @@ function Detail({ p }) {
                 </div>
               </div>
 
+              <Availability p={p} />
+
               <div className="pdp__acts">
                 <button
                   className="btn btn--solid btn--block"
@@ -124,32 +126,6 @@ function Detail({ p }) {
                 </button>
                 <SaveButton id={p.id} name={p.name} withLabel className="pdp__save" />
               </div>
-
-              <Availability p={p} />
-
-              <dl className="spec">
-                <div><dt>Dimensions</dt><dd>{dims(p.dim)}{p.dim.seat ? ` · seat ${p.dim.seat} cm` : ''}</dd></div>
-                <div><dt>Materials</dt><dd>{p.materials.join(', ')}</dd></div>
-                <div><dt>Designer</dt><dd>{p.designer}, {p.year}</dd></div>
-              </dl>
-
-              <details className="disc">
-                <summary>Care instructions</summary>
-                <p>{p.care}</p>
-              </details>
-
-              <details className="disc">
-                <summary>Delivery and returns</summary>
-                <p>
-                  White-glove delivery is included: the piece arrives assembled and is placed in
-                  the room you choose, with the packaging taken away. Thirty-day returns, and a
-                  ten-year guarantee on every frame.
-                </p>
-              </details>
-
-              <p className="fine">
-                Secure checkout · guest checkout available · no account required
-              </p>
             </div>
           </div>
         </div>
@@ -164,6 +140,33 @@ function Detail({ p }) {
           <button className="btn btn--solid" type="button" onClick={() => add(p.id, fi)}>
             Add to cart
           </button>
+        </div>
+      </section>
+
+      <section className="pdetail">
+        <div className="wrap pdetail__list">
+          <details className="disc">
+            <summary>Dimensions</summary>
+            <dl className="spec">
+              <div><dt>Dimensions</dt><dd>{dims(p.dim)}{p.dim.seat ? ` · seat ${p.dim.seat} cm` : ''}</dd></div>
+              <div><dt>Materials</dt><dd>{p.materials.join(', ')}</dd></div>
+              <div><dt>Designer</dt><dd>{p.designer}, {p.year}</dd></div>
+            </dl>
+          </details>
+
+          <details className="disc">
+            <summary>Care instructions</summary>
+            <p>{p.care}</p>
+          </details>
+
+          <details className="disc">
+            <summary>Delivery and returns</summary>
+            <p>
+              White-glove delivery is included: the piece arrives assembled and is placed in
+              the room you choose, with the packaging taken away. Thirty-day returns, and a
+              ten-year guarantee on every frame.
+            </p>
+          </details>
         </div>
       </section>
 

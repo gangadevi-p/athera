@@ -274,7 +274,10 @@ Use it rather than reaching into `p.images[0]`.
   button behaves. Multi-value parameters are comma lists. Colour and material
   filter on *families* (`COLOURS`, `MATERIAL_FILTERS`), not raw strings.
 - **Every product page shows the brief's five views, always, in this order** —
-  front, side, three-quarter, back, detail — labelled under each frame.
+  front, side, three-quarter, back, detail — as 4:5 close-ups in a column to the left of
+  one large 1:1 frame (a labelled strip beneath it on a phone); choosing a close-up
+  crossfades it into the large frame. The product panel is centred against the
+  gallery, across its column and down.
   `gallery(p)` in `catalogue.js` builds them. Front and detail are the piece's
   own photographs when it has them; side, three-quarter and back are
   **re-framed from the front photograph** (an imgix focal-point crop at a
@@ -286,7 +289,7 @@ Use it rather than reaching into `p.images[0]`.
   photograph (0–1; default `[0.5, 0.55]`) so the crops stay on the piece rather
   than the wall behind it — set for 67 of the 73, tune it if a piece is added or
   its photo swapped. A piece's remaining entries in `images` are not shown in its
-  gallery (only `images[1]` is used, as the card's hover frame). Any frame
+  gallery (only `images[1]` is used, as the card's hover frame). The large frame
   opens `Gallery`'s zoom overlay: click to magnify 2.2×, move the pointer to
   pan, arrow keys to step, Escape to close.
 - **The availability check is a prototype.** `checkPostcode()` maps a postcode
@@ -310,7 +313,9 @@ Use it rather than reaching into `p.images[0]`.
 - **Type rule:** the display serif is for hero, section and editorial
   headings only. Product names, prices, navigation, buttons, filters and form
   UI are sans (`.pname`, `.ptitle`, `.price`).
-- The product gallery is the whole left column on `/p/:id`; the right column is
+- The product gallery is the left column on `/p/:id`, its width capped by the
+  screen height (`--galw`) so the large frame and the close-ups fit one screen;
+  the right column is
   sticky (`top: 122px`, clearing the 86px nav).
 - **localStorage keys** are `aethera.cart`, `aethera.wishlist`,
   `aethera.account`, `aethera.orders`. All reads and writes go through the

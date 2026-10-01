@@ -4,13 +4,15 @@ import { gallery } from '../data/catalogue'
 import { cx } from '../lib/format'
 
 /**
- * The product gallery: always the five views the brief names — front, side,
- * three-quarter, back, detail, in that order — each labelled, at the two ratios
- * it specifies: 1:1 for the opening frame, 4:5 for the rest. `gallery()` re-frames
- * the front photograph for any view a piece has no photograph of. Any frame
- * opens a zoom view; inside it, click to magnify and move the pointer to pan.
+ * The product gallery: one large 1:1 frame, with the five views the brief
+ * names — front, side, three-quarter, back, detail, in that order — as labelled
+ * 4:5 close-ups beneath it. Choosing a close-up brings it into the large frame.
+ * `gallery()` re-frames the front photograph for any view a piece has no
+ * photograph of. The large frame opens a zoom view; inside it, click to magnify
+ * and move the pointer to pan, and the arrow keys step through the views.
  */
 export default function Gallery({ p, opening = false }) {
+  const [view, setView] = useState(0)
   const [at, setAt] = useState(-1)
   const [big, setBig] = useState(false)
   const [origin, setOrigin] = useState('50% 50%')
@@ -18,7 +20,12 @@ export default function Gallery({ p, opening = false }) {
   const open = at >= 0
   const shot = open ? shots[at] : null
 
-  const close = useCallback(() => { setAt(-1); setBig(false) }, [])
+  // closing the zoom leaves the large frame on whichever view it ended on
+  const close = useCallback(() => {
+    if (at >= 0) setView(at)
+    setAt(-1)
+    setBig(false)
+  }, [at])
   const step = useCallback(
     d => { setBig(false); setAt(i => (i + d + shots.length) % shots.length) },
     [shots.length]
@@ -51,27 +58,45 @@ export default function Gallery({ p, opening = false }) {
   return (
     <>
       <div className="gal">
-        {shots.map((s, i) => (
-          <figure className="gal__f" key={`${p.id}-${s.view}`} data-reveal={i > 0 ? 'mask' : undefined}>
-            <button
-              type="button"
-              className="gal__b"
-              onClick={() => setAt(i)}
-              aria-label={`${p.name}, ${s.view.toLowerCase()} view — open zoom`}
-              // the opening frame carries the name the card expands from
-              style={i === 0 && opening ? { viewTransitionName: 'piece' } : undefined}
-            >
-              <Img
-                src={s.url(1400)}
-                alt={`${p.name}, ${s.view.toLowerCase()} view`}
-                ratio={i === 0 ? '1 / 1' : '4 / 5'}
-                priority={i === 0}
-              />
-              <span className="gal__zoom" aria-hidden="true">Zoom</span>
-            </button>
-            <figcaption className="gal__cap">{s.view} view</figcaption>
-          </figure>
-        ))}
+        {/* every view is layered in the frame, so choosing a close-up
+            crossfades rather than flashing the placeholder */}
+        <button
+          type="button"
+          className="gal__stage"
+          onClick={() => setAt(view)}
+          aria-label={`${p.name}, ${shots[view].view.toLowerCase()} view — open zoom`}
+          // the opening frame carries the name the card expands from
+          style={view === 0 && opening ? { viewTransitionName: 'piece' } : undefined}
+        >
+          {shots.map((s, i) => (
+            <Img
+              key={`${p.id}-${s.view}`}
+              className={cx('gal__layer', i === view && 'on')}
+              src={s.url(1400)}
+              alt={i === view ? `${p.name}, ${s.view.toLowerCase()} view` : ''}
+              ratio="1 / 1"
+              priority={i === 0}
+            />
+          ))}
+          <span className="gal__zoom" aria-hidden="true">Zoom</span>
+        </button>
+
+        <div className="gal__thumbs" role="group" aria-label="Views">
+          {shots.map((s, i) => (
+            <figure className="gal__f" key={`${p.id}-${s.view}`}>
+              <button
+                type="button"
+                className={cx('gal__t', i === view && 'on')}
+                onClick={() => setView(i)}
+                aria-pressed={i === view}
+                aria-label={`Show ${s.view.toLowerCase()} view`}
+              >
+                <Img src={s.url(360)} alt="" ratio="4 / 5" />
+              </button>
+              <figcaption className="gal__cap">{s.view}</figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
 
       {open && (
