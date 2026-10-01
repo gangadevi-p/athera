@@ -5,7 +5,7 @@
    in index.css.
    ========================================================================= */
 
-.phead { display: flex; flex-direction: column; gap: 24px; max-width: 62ch; margin-bottom: 80px }
+.phead { display: flex; flex-direction: column; gap: 24px; max-width: 49.6ch; margin-bottom: 80px } /* 62ch at the old 16px body: the display title keeps its measure */
 .phead .lead { max-width: 54ch }
 .phead--short { margin-bottom: 52px; gap: 20px }
 
@@ -28,14 +28,14 @@
 
 .filter {
   background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
-  font-size: .78rem; letter-spacing: .06em; color: var(--mute);
+  font-size: 1.03rem; letter-spacing: .03em; color: var(--mute);
   border-bottom: 1px solid transparent;
   transition: color var(--t-hover) var(--ease), border-color var(--t-hover) var(--ease);
 }
 .filter:hover, .filter.on { color: var(--ink) }
 .filter.on { border-color: var(--ink) }
 
-.check { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: .82rem; color: var(--mute) }
+.check { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 1.07rem; color: var(--mute) }
 .check input { position: absolute; opacity: 0; width: 0; height: 0 }
 .check__b {
   width: 13px; height: 13px; flex: none;
@@ -48,7 +48,7 @@
 .check.on .check__b { background: var(--ink); border-color: var(--ink) }
 .check input:focus-visible + .check__b { outline: 1px solid var(--accent); outline-offset: 3px }
 .check__t { display: flex; align-items: center; gap: 9px; min-width: 0 }
-.check__t em { font-style: normal; font-size: .72rem; color: var(--mute) }
+.check__t em { font-style: normal; font-size: .97rem; color: var(--mute) }
 
 .plp__bar {
   display: flex; justify-content: space-between; align-items: center; gap: 24px;
@@ -57,7 +57,7 @@
 .sortf { display: flex; align-items: center; gap: 14px }
 .sortf select {
   border: 0; background: none; padding: 2px 0; cursor: pointer;
-  font-size: .78rem; color: var(--ink);
+  font-size: 1.03rem; color: var(--ink);
 }
 .sortf select:focus { outline: 0; border-bottom: 1px solid var(--ink) }
 
@@ -65,14 +65,14 @@
 .pill {
   display: inline-flex; align-items: baseline; gap: .6em;
   border: 0; padding: 0 0 4px; cursor: pointer;
-  font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+  font-size: .97rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
   background:
     linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat,
     linear-gradient(var(--rule), var(--rule)) 0 100% / 100% 1px no-repeat;
   transition: background-size var(--t-hover) var(--ease);
 }
 .pill:hover { background-size: 100% 1px, 100% 1px }
-.pill span { color: var(--mute); font-size: .9rem; line-height: 1 }
+.pill span { color: var(--mute); font-size: 1.15rem; line-height: 1 }
 
 .plp { row-gap: 84px }
 .plp__main .empty { padding: 56px 0 }
@@ -99,14 +99,14 @@
 .pdp__side { position: sticky; top: calc(var(--nav-h) + 36px) }
 .pdp__panel { display: flex; flex-direction: column; gap: 32px; max-width: 46ch; margin: 0 auto }
 
-.crumb { display: flex; gap: 10px; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mute) }
+.crumb { display: flex; gap: 10px; font-size: .93rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute) }
 .crumb a:hover { color: var(--ink) }
 
-.pdp__price { margin: -20px 0 0; font-size: 1.1rem; color: var(--ink); font-variant-numeric: tabular-nums }
-.pdp__excerpt { margin: 0; font-size: .98rem; line-height: 1.75; color: var(--graphite) }
+.pdp__price { margin: -20px 0 0; font-size: 1.35rem; color: var(--ink); font-variant-numeric: tabular-nums }
+.pdp__excerpt { margin: 0; font-size: 1.23rem; line-height: 1.75; color: var(--graphite) }
 .pdp__opt { display: flex; flex-direction: column; gap: 16px }
 .pdp__optHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px }
-.pdp__optVal { font-size: .88rem; color: var(--ink) }
+.pdp__optVal { font-size: 1.13rem; color: var(--ink) }
 
 .pdp__acts { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: stretch }
 .pdp__save { justify-content: center }
@@ -132,7 +132,7 @@
   position: absolute; right: 18px; bottom: 18px;
   padding: 9px 15px;
   background: var(--paper);
-  font-size: .62rem; letter-spacing: .24em; text-transform: uppercase; color: var(--ink);
+  font-size: .87rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
   opacity: 0; transition: opacity var(--t-hover) var(--ease);
 }
 .gal__stage:hover .gal__zoom, .gal__stage:focus-visible .gal__zoom { opacity: 1 }
@@ -152,7 +152,7 @@
 .gal__t.on::after { transform: scaleX(1) }
 .gal__cap {
   display: none; padding-top: 13px;
-  font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute);
+  font-size: .83rem; letter-spacing: .05em; text-transform: uppercase; color: var(--mute);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .gal__t.on + .gal__cap { color: var(--ink) }
@@ -165,7 +165,7 @@
   background: var(--paper);
 }
 .zoom__bar { display: flex; justify-content: space-between; align-items: center; gap: 24px }
-.zoom__x { border: 0; background: none; padding: 0; cursor: pointer; font-size: 1.8rem; line-height: 1; color: var(--mute) }
+.zoom__x { border: 0; background: none; padding: 0; cursor: pointer; font-size: 2.05rem; line-height: 1; color: var(--mute) }
 .zoom__x:hover { color: var(--ink) }
 .zoom__stage {
   position: relative; overflow: hidden; min-height: 0;
@@ -192,17 +192,17 @@
 .disc summary {
   cursor: pointer; list-style: none;
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--ink);
+  font-size: .97rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
 }
 .disc summary::-webkit-details-marker { display: none }
-.disc summary::after { content: "+"; color: var(--mute); font-size: 1rem; line-height: 1 }
+.disc summary::after { content: "+"; color: var(--mute); font-size: 1.25rem; line-height: 1 }
 .disc[open] summary::after { content: "–" }
-.disc p { margin: 14px 0 4px; font-size: .88rem; line-height: 1.75; color: var(--mute) }
+.disc p { margin: 14px 0 4px; font-size: 1.13rem; line-height: 1.75; color: var(--mute) }
 
 .spec { margin: 0; display: flex; flex-direction: column; border-top: 1px solid var(--rule) }
 .spec > div { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 20px; padding: 8px 0; border-bottom: 1px solid var(--rule) }
-.spec dt { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mute) }
-.spec dd { margin: 0; font-size: .9rem }
+.spec dt { font-size: .93rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute) }
+.spec dd { margin: 0; font-size: 1.15rem }
 .spec dd span { display: block }
 
 /* the one action that matters, following the reader down a narrow screen */
@@ -214,16 +214,16 @@
   background: var(--paper); border-top: 1px solid var(--rule);
 }
 .stickybuy__t { display: flex; flex-direction: column; gap: 3px; min-width: 0 }
-.stickybuy__t .pname { font-size: .8rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
-.stickybuy__t .price { font-size: .78rem; color: var(--mute) }
+.stickybuy__t .pname { font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.stickybuy__t .price { font-size: 1.03rem; color: var(--mute) }
 .stickybuy .btn { padding: 14px 24px; white-space: nowrap }
 
 /* product details — dimensions, care, delivery, folded behind a plus, no rules */
 .pdetail { padding: 88px 0 }
 .pdetail__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; align-items: start }
 .pdetail .disc { padding: 0 }
-.pdetail .disc summary { font-size: .78rem }
-.pdetail .disc p { font-size: .9rem }
+.pdetail .disc summary { font-size: 1.03rem }
+.pdetail .disc p { font-size: 1.15rem }
 .pdetail .spec { margin-top: 16px }
 .pdetail .spec, .pdetail .spec > div { border: 0 }
 /* a column is too narrow for label beside value, so each label sits above its value */
@@ -264,7 +264,7 @@
 }
 .wline__t { display: flex; flex-direction: column; gap: 6px; align-items: flex-start }
 .wline__t .fine { margin: 0; max-width: 52ch }
-.wline .price { min-width: 92px; text-align: right; font-size: 1rem }
+.wline .price { min-width: 92px; text-align: right; font-size: 1.25rem }
 .wline__a { display: flex; flex-direction: column; gap: 10px; align-items: center }
 .wline__a .btn { padding: 12px 22px; white-space: nowrap }
 
@@ -275,11 +275,11 @@
 .cline { display: grid; grid-template-columns: 104px minmax(0, 1fr) auto auto; gap: 36px; align-items: center; padding: 30px 0; border-bottom: 1px solid var(--rule) }
 .cline__t { display: flex; flex-direction: column; gap: 6px; align-items: flex-start }
 .cline__t .fine { margin: 0 }
-.cline__amt { min-width: 96px; text-align: right; font-size: 1rem; color: var(--ink); font-variant-numeric: tabular-nums }
+.cline__amt { min-width: 96px; text-align: right; font-size: 1.25rem; color: var(--ink); font-variant-numeric: tabular-nums }
 
 .sum { position: sticky; top: calc(var(--nav-h) + 36px); display: flex; flex-direction: column; gap: 20px; padding: 40px; background: var(--bone); border: 1px solid var(--rule) }
-.sum__row { display: flex; justify-content: space-between; gap: 16px; font-size: .92rem }
-.sum__total { padding-top: 18px; border-top: 1px solid var(--rule); font-size: 1.05rem; color: var(--ink) }
+.sum__row { display: flex; justify-content: space-between; gap: 16px; font-size: 1.17rem }
+.sum__total { padding-top: 18px; border-top: 1px solid var(--rule); font-size: 1.3rem; color: var(--ink) }
 .sum__total b { font-weight: 400; font-variant-numeric: tabular-nums }
 .sum .fine { margin: 0 }
 .sum .linkbtn { align-self: flex-start }
@@ -296,7 +296,7 @@
 .co__signin { display: flex; flex-direction: column; gap: 24px }
 
 .step { padding-top: 26px; border-top: 1px solid var(--rule) }
-.step legend { display: flex; align-items: baseline; gap: 14px; font-size: .72rem; letter-spacing: .24em; color: var(--ink) }
+.step legend { display: flex; align-items: baseline; gap: 14px; font-size: .97rem; letter-spacing: .12em; color: var(--ink) }
 .step__n { color: var(--mute) }
 
 .ship { display: flex; flex-direction: column; gap: 10px }
@@ -307,14 +307,14 @@
 }
 .ship label.on { border-color: var(--ink) }
 .ship input { grid-row: span 2; accent-color: var(--ink) }
-.ship b { font-weight: 400; font-size: .88rem; color: var(--ink) }
-.ship small { grid-column: 2; font-size: .74rem; color: var(--mute) }
-.ship em { grid-row: span 2; font-style: normal; font-size: .86rem }
+.ship b { font-weight: 400; font-size: 1.13rem; color: var(--ink) }
+.ship small { grid-column: 2; font-size: .99rem; color: var(--mute) }
+.ship em { grid-row: span 2; font-style: normal; font-size: 1.11rem }
 
 .colines { list-style: none; margin: 0; padding: 0 0 22px; display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid var(--rule) }
 .colines li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; align-items: center }
 .colines .fine { margin: 2px 0 0 }
-.colines li > span { font-size: .9rem; font-variant-numeric: tabular-nums }
+.colines li > span { font-size: 1.15rem; font-variant-numeric: tabular-nums }
 
 .conf { padding: 72px 0 var(--sec) }
 .conf__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 96px; align-items: start }
@@ -354,7 +354,7 @@
 }
 .track__steps li.done .track__dot { background: var(--ink); border-color: var(--ink) }
 .track__steps li.now .track__dot { box-shadow: 0 0 0 4px rgba(126, 138, 115, .3) }
-.track__when { font-size: .78rem; font-variant-numeric: tabular-nums }
+.track__when { font-size: 1.03rem; font-variant-numeric: tabular-nums }
 .track__items { display: flex; flex-direction: column; gap: 20px }
 
 /* ---------- account --------------------------------------------------- */
@@ -369,7 +369,7 @@
 .acct__side .eyebrow:not(:first-child) { margin-top: 18px }
 .acct__side .fine { margin: 0 }
 .acct__orders { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px }
-.acct__orders li { display: flex; justify-content: space-between; gap: 16px; font-size: .86rem }
+.acct__orders li { display: flex; justify-content: space-between; gap: 16px; font-size: 1.11rem }
 .acct__side .linkbtn { align-self: flex-start; margin-top: 12px }
 
 /* ---------- room assistant -------------------------------------------- */
@@ -387,8 +387,8 @@
 .read__t { display: flex; flex-direction: column; gap: 26px }
 .read__list { margin: 0; display: flex; flex-direction: column; border-top: 1px solid var(--rule) }
 .read__list > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--rule) }
-.read__list dt { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: var(--mute) }
-.read__list dd { margin: 0; font-size: .92rem }
+.read__list dt { font-size: .93rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute) }
+.read__list dd { margin: 0; font-size: 1.17rem }
 .read__note { margin: 0; font-family: var(--display); font-size: 1.32rem; line-height: 1.5; color: var(--ink); max-width: 40ch }
 
 .picks { align-items: stretch }
@@ -543,7 +543,7 @@
 /* category filters: sharp rectangles, text at full strength, the stroke softened */
 .cats__tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px }
 .cats__tabs button {
-  font: inherit; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+  font: inherit; font-size: .97rem; letter-spacing: .08em; text-transform: uppercase;
   padding: 13px 24px; border: 1px solid color-mix(in srgb, var(--ink) 35%, transparent); border-radius: 0;
   background: transparent; color: var(--ink); cursor: pointer;
 }
@@ -552,7 +552,7 @@
 .cats__sec { padding-top: 40px }
 .cats__top { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 26px }
 .cats__top > div { display: flex; flex-direction: column; gap: 10px }
-.cats__top .lead { max-width: 44ch; font-size: 1rem; margin: 0 }
+.cats__top .lead { max-width: 44ch; font-size: 1.25rem; margin: 0 }
 .cats__tabs { margin-top: 0 }
 .cgrid { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px 24px }
 .cgrid a { display: flex; flex-direction: column; gap: 6px }

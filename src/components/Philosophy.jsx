@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import Img from './Img'
 
 /**
@@ -48,8 +47,6 @@ function Principle({ p }) {
   )
 }
 
-const cta = <Link className="tlink" to="/shop">Explore the collection</Link>
-
 export default function Philosophy({ variant = 'a' }) {
   if (variant === 'b') {
     return (
@@ -97,7 +94,6 @@ export default function Philosophy({ variant = 'a' }) {
         <div className="ph__list" data-reveal="" data-delay="2">
           {PRINCIPLES.map(p => <Principle key={p.n} p={p} />)}
         </div>
-        <span data-reveal="" data-delay="3">{cta}</span>
       </div>
       <div className="ph__img" data-reveal="mask"><Photo k="vases" w={1800} ratio="2 / 3" priority /></div>
     </section>
