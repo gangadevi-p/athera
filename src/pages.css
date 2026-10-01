@@ -229,13 +229,6 @@
 /* a column is too narrow for label beside value, so each label sits above its value */
 .pdetail .spec > div { grid-template-columns: minmax(0, 1fr); gap: 4px }
 
-/* craftsmanship story */
-.story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 80px; align-items: start }
-.story__t { display: flex; flex-direction: column; gap: 18px }
-.story__b { display: flex; flex-direction: column; gap: 20px }
-.story__b p { margin: 0; font-size: 1.08rem; line-height: 1.8; max-width: 62ch }
-.story__b .fine { max-width: 62ch }
-
 /* ---------- spaces ---------------------------------------------------- */
 
 .spreads { display: flex; flex-direction: column; gap: 140px }
@@ -421,7 +414,7 @@
   .nav__util { gap: 22px }
   .cindex { gap: 56px }
   .craft { gap: 56px }
-  .pdp__in, .cart, .co, .read, .story, .news, .track, .acct__grid { gap: 60px }
+  .pdp__in, .cart, .co, .read, .news, .track, .acct__grid { gap: 60px }
   .plp__in { grid-template-columns: 210px minmax(0, 1fr); gap: 52px }
   .spreads { gap: 108px }
   .spread { gap: 60px }
@@ -467,7 +460,6 @@
   .pdp__in { grid-template-columns: minmax(0, 1fr); gap: 44px }
   .pdp__side { position: static }
   .pdp__panel { max-width: none }
-  .story { grid-template-columns: minmax(0, 1fr); gap: 28px }
 
   .spread, .sroom__intro, .cart, .co, .conf__in, .read, .track, .track__head, .acct__grid {
     grid-template-columns: minmax(0, 1fr);

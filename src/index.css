@@ -524,8 +524,8 @@ main[data-home] { padding-top: 0 }
   font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
 }
 .save svg {
-  width: 13px; height: 17px; display: block;
-  fill: none; stroke: currentColor; stroke-width: 1.2px;
+  width: 17px; height: 15px; display: block;
+  fill: none; stroke: currentColor; stroke-width: 1.2px; stroke-linejoin: round;
   transition: fill var(--t-hover) var(--ease);
 }
 .save:hover svg { fill: rgba(43, 42, 39, .14) }

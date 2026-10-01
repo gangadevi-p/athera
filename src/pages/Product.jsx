@@ -4,7 +4,7 @@ import Gallery from '../components/Gallery'
 import ProductCard from '../components/ProductCard'
 import SaveButton from '../components/SaveButton'
 import NotFound from './NotFound'
-import { PRODUCTS, SPACES, byId, catById } from '../data/catalogue'
+import { PRODUCTS, byId, catById } from '../data/catalogue'
 import { checkPostcode, dims, money } from '../lib/format'
 import { useShop } from '../lib/shop'
 
@@ -70,7 +70,6 @@ function Detail({ p }) {
   const cat = catById(p.cat)
   const finish = p.finishes[fi]
   const related = PRODUCTS.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 3)
-  const spaces = SPACES.filter(s => p.spaces.includes(s.id))
 
   return (
     <>
@@ -167,29 +166,6 @@ function Detail({ p }) {
               ten-year guarantee on every frame.
             </p>
           </details>
-        </div>
-      </section>
-
-      <section className="sec sec--tight sec--bone">
-        <div className="wrap story">
-          <div className="story__t">
-            <span className="eyebrow">Craftsmanship</span>
-            <h2 className="disp d3">How it is made</h2>
-          </div>
-          <div className="story__b">
-            <p>{p.description}</p>
-            {spaces.length > 0 && (
-              <p className="fine">
-                Shown in{' '}
-                {spaces.map((s, i) => (
-                  <span key={s.id}>
-                    {i > 0 && ', '}
-                    <Link className="ulink" to={`/spaces/${s.id}`}>{s.name.toLowerCase()}</Link>
-                  </span>
-                ))}.
-              </p>
-            )}
-          </div>
         </div>
       </section>
 
