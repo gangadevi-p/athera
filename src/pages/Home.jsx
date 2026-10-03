@@ -3,7 +3,7 @@ import Img from '../components/Img'
 import CategoryCarousel from '../components/CategoryCarousel'
 import FeaturedCollection from '../components/FeaturedCollection'
 import Philosophy from '../components/Philosophy'
-import sofaHero from '../assets/sofa-hero.png'
+import sofaHero from '../assets/sofa-hero.webp'
 import { CATEGORIES, PRODUCTS, SPACES } from '../data/catalogue'
 import { cx } from '../lib/format'
 
@@ -98,7 +98,6 @@ export default function Home() {
             width="2172"
             height="724"
             fetchpriority="high"
-            decoding="async"
           />
         </div>
       </section>
