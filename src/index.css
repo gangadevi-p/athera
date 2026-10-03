@@ -410,10 +410,9 @@ main[data-home] { padding-top: 0 }
 
 /* ---------- footer ---------------------------------------------------- */
 
-.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 36px 0 32px }
-.foot__top { display: grid; grid-template-columns: 6fr 3fr 3fr; gap: 56px }
-/* the shop list runs in two columns, so the longest list stays short */
-.foot .foot__shop ul { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-auto-columns: minmax(0, 1fr); gap: 13px 32px }
+.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 26px 0 20px }
+.foot__top { display: flex; flex-direction: column; align-items: center; text-align: center }
+.foot .foot__top ul { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px 36px }
 
 /* The logotype: the one place the brand is shown large. Broad —
    serif capitals, wide tracking, sized by its container so it always spans
@@ -421,7 +420,7 @@ main[data-home] { padding-top: 0 }
    17.4cqw is calibrated to Georgia at .16em tracking (the word is 5.744em
    wide without its trailing space) — change the face or the tracking and it
    has to be re-measured. */
-.foot__logo { container-type: inline-size; padding-bottom: 36px }
+.foot__logo { container-type: inline-size; padding-bottom: 22px }
 .foot__logo a {
   display: block; white-space: nowrap;
   font-family: var(--display); text-transform: uppercase;
@@ -431,14 +430,14 @@ main[data-home] { padding-top: 0 }
   transition: color .6s var(--ease);
 }
 .foot__logo a:hover { color: color-mix(in srgb, var(--rule), var(--ink) 22%) }
-.foot h4 { margin: 0 0 22px; font-size: .93rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); font-weight: 400 }
-.foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 13px }
+.foot h4 { margin: 0 0 12px; font-size: .93rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); font-weight: 400 }
+.foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px }
 .foot ul a, .foot ul span { font-size: 1.11rem; color: var(--graphite) }
 .foot ul a { transition: color var(--t-hover) var(--ease) }
 .foot ul a:hover { color: var(--ink) }
 .foot__base {
-  margin-top: 72px; border-top: 1px solid var(--rule); padding-top: 28px;
-  display: flex; justify-content: space-between; gap: 24px;
+  margin-top: 28px; border-top: 1px solid var(--rule); padding-top: 16px;
+  display: flex; justify-content: center; gap: 24px;
   font-size: .97rem; letter-spacing: .07em; text-transform: uppercase; color: var(--mute);
 }
 

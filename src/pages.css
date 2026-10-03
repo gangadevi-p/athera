@@ -498,8 +498,6 @@
   .wline__a { grid-column: 2 / -1; flex-direction: row; align-items: center; gap: 22px }
 
   .rooms { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-  .foot__top { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px }
-  .foot__shop { grid-column: 1 / -1 }
 
   /* the space banner is a thin strip at this width */
   .sroom > .img { aspect-ratio: 16 / 9 !important }
@@ -557,11 +555,9 @@
 
   .sum, .acct__side { padding: 28px 24px }
   .drawer { width: 100%; padding: 26px 24px 32px }
-  .foot { padding: 48px 0 32px }
-  .foot__top { grid-template-columns: minmax(0, 1fr); gap: 36px }
-  .foot .foot__shop ul { grid-auto-flow: row; grid-template-rows: none; grid-template-columns: minmax(0, 1fr) }
-  .foot__logo { padding-bottom: 44px }
-  .foot__base { margin-top: 48px; flex-direction: column; gap: 10px }
+  .foot { padding: 32px 0 20px }
+  .foot__logo { padding-bottom: 26px }
+  .foot__base { margin-top: 28px; flex-direction: column; gap: 10px }
 
   .sroom > .img { aspect-ratio: 4 / 3 !important }
   .sroom__t { bottom: 26px }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import CartDrawer from './CartDrawer'
-import { CATEGORIES, SPACES } from '../data/catalogue'
 import { cx } from '../lib/format'
 import { useReveals } from '../lib/motion'
 import { useShop } from '../lib/shop'
@@ -134,36 +133,16 @@ function Footer() {
           <Link to="/" aria-label="Aethera, back to top" onClick={homeClick(pathname)}>Aethera</Link>
         </div>
         <div className="foot__top">
-          <div className="foot__shop">
-            <h4>Shop</h4>
-            <ul>
-              <li><Link to="/shop">All furniture</Link></li>
-              {CATEGORIES.map(c => (
-                <li key={c.id}><Link to={`/shop?c=${c.id}`}>{c.short}</Link></li>
-              ))}
-            </ul>
-          </div>
           <div>
-            <h4>Spaces</h4>
             <ul>
-              {SPACES.map(s => <li key={s.id}><Link to={`/spaces/${s.id}`}>{s.name}</Link></li>)}
-            </ul>
-          </div>
-          <div>
-            <h4>Help</h4>
-            <ul>
-              <li><Link to="/track">Track an order</Link></li>
-              <li><Link to="/help#delivery">Delivery &amp; returns</Link></li>
+              <li><Link to="/help">Help</Link></li>
               <li><Link to="/help#care">Care</Link></li>
               <li><Link to="/help#contact">Contact</Link></li>
-              <li><Link to="/wishlist">Wishlist</Link></li>
-              <li><Link to="/account">Sign in</Link></li>
             </ul>
           </div>
         </div>
         <div className="foot__base">
           <span>© {new Date().getFullYear()} Aethera</span>
-          <span>Design prototype · no order is processed</span>
         </div>
       </div>
     </footer>
