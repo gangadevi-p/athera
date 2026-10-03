@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
+import BackButton from '../components/BackButton'
 import Img from '../components/Img'
 import ProductCard from '../components/ProductCard'
 import NotFound from './NotFound'
@@ -17,7 +18,10 @@ export default function Space() {
       <section className="sroom">
         <Img id={s.cover} alt={s.name} ratio="21 / 9" w={2000} priority />
         <div className="wrap sroom__t">
-          <span className="eyebrow">Shop by space</span>
+          <div className="phead__row">
+            <BackButton to="/spaces" light />
+            <span className="eyebrow">Shop by space</span>
+          </div>
           <h1 className="disp d1">{s.name}</h1>
         </div>
       </section>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
+import BackButton from '../components/BackButton'
 import ProductCard from '../components/ProductCard'
 import {
   CATEGORIES,
@@ -155,7 +156,10 @@ export default function Shop({ byCategory = false }) {
     <section className={cx('sec sec--shop', (col || byCategory) && 'sec--col')}>
       <div className="wrap">
         <div className="phead phead--wide">
-          <span className="eyebrow">{col ? 'Collection' : byCategory ? 'Shop by category' : 'Furniture'}</span>
+          <div className="phead__row">
+            <BackButton to={byCategory ? '/categories' : '/'} />
+            <span className="eyebrow">{col ? 'Collection' : byCategory ? 'Shop by category' : 'Furniture'}</span>
+          </div>
           <h1 className="disp d2">{col ? col.name : c ? c.name : 'The collection'}</h1>
           <p className="lead">
             {col

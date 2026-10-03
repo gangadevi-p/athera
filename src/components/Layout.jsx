@@ -65,16 +65,14 @@ function Nav({ onMenu }) {
           onClick={homeClick(pathname)}
         >Aethera</Link>
         <div className="nav__util">
-          {wish.length > 0 && (
-            <NavLink className="nav__u nav__u--wish" to="/wishlist">
-              Saved <span className="nav__n">{wish.length}</span>
-            </NavLink>
-          )}
           <NavLink className="nav__u nav__u--acct" to="/account">
             {account ? account.name?.split(' ')[0] || 'Account' : 'Sign in'}
           </NavLink>
-          <NavLink className="nav__u" to="/cart">
-            Cart <span className="nav__n">{count}</span>
+          <NavLink className="nav__u" to="/wishlist" aria-label={`Wishlist, ${wish.length} saved`}>
+            <span className="nav__long">Wishlist</span><span className="nav__short" aria-hidden="true">&#9825;</span>
+          </NavLink>
+          <NavLink className="nav__u" to="/cart" aria-label={`Cart, ${count} ${count === 1 ? 'item' : 'items'}`}>
+            Cart
           </NavLink>
           <button className="nav__menu nav__u" type="button" onClick={onMenu}>
             Menu
@@ -87,7 +85,7 @@ function Nav({ onMenu }) {
 
 /** The compact navigation: a full-screen editorial overlay, not a dropdown. */
 function Menu({ open, onClose }) {
-  const { count, wish, account } = useShop()
+  const { account } = useShop()
 
   useEffect(() => {
     if (!open) return
@@ -112,10 +110,10 @@ function Menu({ open, onClose }) {
           {account ? account.name?.split(' ')[0] || 'Account' : 'Sign in'}
         </Link>
         <Link className="nav__u" to="/wishlist" onClick={onClose}>
-          Saved <span className="nav__n">{wish.length}</span>
+          Wishlist
         </Link>
         <Link className="nav__u" to="/cart" onClick={onClose}>
-          Cart <span className="nav__n">{count}</span>
+          Cart
         </Link>
         <Link className="nav__u" to="/track" onClick={onClose}>Track an order</Link>
       </div>

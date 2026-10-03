@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import BackButton from '../components/BackButton'
 import Img from '../components/Img'
 import { SPACES, inSpace } from '../data/catalogue'
 import { cx } from '../lib/format'
@@ -8,7 +9,10 @@ export default function Spaces() {
     <section className="sec">
       <div className="wrap">
         <div className="phead">
-          <span className="eyebrow">Shop by space</span>
+          <div className="phead__row">
+            <BackButton to="/" />
+            <span className="eyebrow">Shop by space</span>
+          </div>
           <h1 className="disp d1">Designed for<br />every room</h1>
           <p className="lead">
             Explore furniture and layouts tailored to the way you live. Each room is a short

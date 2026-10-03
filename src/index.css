@@ -390,6 +390,8 @@ main[data-home] { padding-top: 0 }
 }
 .nav__u:hover .nav__n { border-color: var(--ink) }
 
+.nav__short { display: none; font-size: 1.15rem; line-height: 1 }
+
 /* the menu button only exists below the desktop canvas */
 .nav__menu { display: none }
 

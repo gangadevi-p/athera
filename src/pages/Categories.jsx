@@ -1,4 +1,5 @@
 import { Link, useSearchParams } from 'react-router-dom'
+import BackButton from '../components/BackButton'
 import Img from '../components/Img'
 import Shop from './Shop'
 import { CATEGORIES } from '../data/catalogue'
@@ -24,7 +25,10 @@ export default function Categories() {
     <section className="sec sec--shop sec--col">
       <div className="wrap">
         <div className="phead phead--wide">
-          <span className="eyebrow">Shop by category</span>
+          <div className="phead__row">
+            <BackButton to="/" />
+            <span className="eyebrow">Shop by category</span>
+          </div>
           <h1 className="disp d2">Seven ways in</h1>
           <p className="lead">The whole collection, grouped the way a room is actually put together.</p>
         </div>

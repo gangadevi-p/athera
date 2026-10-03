@@ -452,8 +452,8 @@
 @media (max-width: 980px) {
   :root { --sec: 120px; --sec-tight: 96px; --nav-h: 76px }
 
-  /* the compact navigation is one button and the cart */
-  .nav__u--acct, .nav__u--wish { display: none }
+  /* the compact navigation is one button, the wishlist and the cart */
+  .nav__u--acct { display: none }
   .nav__menu { display: inline-flex; border: 0; background: none; cursor: pointer }
 
 
@@ -507,8 +507,11 @@
 @media (max-width: 640px) {
   :root { --gutter: 20px; --sec: 96px; --sec-tight: 72px; --nav-h: 68px }
 
-  .mark { font-size: 1.25rem }
-  .nav__util { gap: 16px }
+  .mark { font-size: 1.25rem; letter-spacing: .24em; margin-right: -.24em }
+  .nav__util { gap: 12px }
+  /* on a phone the wishlist is a heart, so the mark, wishlist, cart and menu all fit */
+  .nav__long { display: none }
+  .nav__short { display: inline }
 
   .grid-4, .grid-3, .rooms, .row { grid-template-columns: minmax(0, 1fr) }
   .plp { row-gap: 64px }
@@ -639,3 +642,21 @@
   .sec--col .plp { column-gap: 36px }
   .sec--col .cgrid { column-gap: 36px }
 }
+
+/* ---------- back: an icon beside a page's title, no label ---------- */
+.phead__row { display: flex; align-items: center; gap: 12px }
+.back {
+  flex: none; width: 30px; height: 30px; margin: -6px 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--rule); border-radius: 50%;
+  background: none; color: var(--ink); cursor: pointer;
+  transition: background-color var(--t-hover) var(--ease), color var(--t-hover) var(--ease),
+    border-color var(--t-hover) var(--ease), transform var(--t-hover) var(--ease);
+}
+.back svg { transition: transform var(--t-hover) var(--ease) }
+.back:hover { background: var(--ink); border-color: var(--ink); color: var(--paper) }
+.back:hover svg { transform: translateX(-2px) }
+.back:focus-visible { outline: 2px solid currentColor; outline-offset: 3px }
+.back--light { border-color: rgba(246, 244, 239, .55); color: var(--paper) }
+.back--light:hover { background: var(--paper); border-color: var(--paper); color: var(--ink) }
+.back svg { width: 16px; height: 16px }
