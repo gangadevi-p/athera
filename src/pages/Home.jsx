@@ -4,20 +4,22 @@ import CategoryCarousel from '../components/CategoryCarousel'
 import FeaturedCollection from '../components/FeaturedCollection'
 import Philosophy from '../components/Philosophy'
 import sofaHero from '../assets/sofa-hero.webp'
-import { CATEGORIES, PRODUCTS, SPACES } from '../data/catalogue'
-import { cx } from '../lib/format'
+import { SPACES } from '../data/catalogue'
 
 /**
  * The landing page runs in the visual concept's rhythm: no two consecutive
- * sections share a shape. Full-screen visual · category carousel · featured
- * collections · brand philosophy · split-screen spaces.
+ * sections share a shape.
+ *
+ *   full-screen visual · assurances · category carousel · featured collections ·
+ *   brand philosophy · three spaces
  *
  * Navigation and footer live in Layout.
  */
 
-function Head({ eyebrow, title, lead: text, to, cta = 'View all' }) {
+/** Section header: eyebrow, title, optional lead and a single link. `compact` is the one-screen version. */
+function Head({ eyebrow, title, lead: text, to, cta = 'View all', compact = false }) {
   return (
-    <div className="head">
+    <div className={compact ? 'head head--c' : 'head'}>
       <div className="head__t">
         <span className="eyebrow" data-reveal="">{eyebrow}</span>
         <h2 className="disp d2" data-reveal="" data-delay="1">{title}</h2>
@@ -28,54 +30,7 @@ function Head({ eyebrow, title, lead: text, to, cta = 'View all' }) {
   )
 }
 
-/** Shop by category, as an index against one large frame rather than a grid. */
-function CategoryIndex() {
-  const [at, setAt] = useState(0)
-
-  return (
-    <div className="cindex">
-      <div className="cindex__stage cindex__frame" data-reveal="mask">
-        {CATEGORIES.map((c, i) => (
-          <Img
-            key={c.id}
-            id={c.image}
-            alt={c.name}
-            ratio="4 / 5"
-            w={1000}
-            priority={i === 0}
-            className={cx(i === at && 'on')}
-          />
-        ))}
-      </div>
-
-      <div>
-        <ul className="cindex__list">
-          {CATEGORIES.map((c, i) => (
-            <li key={c.id} data-reveal="" data-delay={Math.min(i, 5)}>
-              <Link
-                to={`/shop?c=${c.id}`}
-                onMouseEnter={() => setAt(i)}
-                onFocus={() => setAt(i)}
-              >
-                <span className="cindex__n">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="cindex__name">{c.short}</h3>
-                <span className="cindex__items">{c.items}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <div className="cindex__foot" data-reveal="">
-          <p className="fine">{PRODUCTS.length} pieces in all, made to order.</p>
-          <Link className="tlink" to="/shop">All furniture</Link>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export default function Home() {
-  const [leadSpace, ...restSpaces] = SPACES
-
   return (
     <>
       {/* ---------- 1 · hero — full-screen visual ---------- */}
@@ -102,7 +57,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- 2 · shop by category — editorial index ---------- */}
+      {/* ---------- 2 · the three things a buyer of a large piece wants to know ---------- */}
+      <section className="assure" aria-label="How we work">
+        <div className="wrap assure__in">
+          <p data-reveal="">Made to order, in small runs</p>
+          <p data-reveal="" data-delay="1">White-glove delivery, included</p>
+          <p data-reveal="" data-delay="2">30-day returns · 10-year guarantee</p>
+        </div>
+      </section>
+
+      {/* ---------- 3 · shop by category — slow carousel ---------- */}
       <section className="sec" id="categories">
         <div className="wrap">
           <Head
@@ -116,47 +80,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- 3 · featured collection — one story, a few pieces ---------- */}
+      {/* ---------- 4 · featured collections — curated sets, not categories ---------- */}
       <section className="sec sec--bone sec--fit" id="featured">
         <div className="wrap">
           <FeaturedCollection variant="b" />
         </div>
       </section>
 
-      {/* ---------- brand philosophy — statement, close-ups, evidence ---------- */}
+      {/* ---------- 6 · brand philosophy — statement, close-ups, evidence ---------- */}
       <Philosophy variant="a" />
 
-      {/* ---------- 6 · shop by space — split-screen ---------- */}
-      <section className="sec sec--tight sec--gap">
-        <div className="wrap">
-          <Head
-            eyebrow="Shop by space"
-            title="Designed for every room"
-            lead="Three rooms, each a short list rather than a catalogue."
-            to="/spaces"
-            cta="All spaces"
-          />
-        </div>
-        <div className="split">
-          <Link className="split__pane split--lead" to={`/spaces/${leadSpace.id}`} data-reveal="mask">
-            <Img id={leadSpace.cover} alt={leadSpace.name} ratio="21 / 9" w={2000} />
-            <div className="split__t">
-              <h3 className="disp d3">{leadSpace.name}</h3>
-              <p className="fine">{leadSpace.tagline}</p>
+      {/* ---------- 7 · shop by space — three equal rooms ---------- */}
+      <section className="sec sec--fit" id="spaces">
+        <div className="fit__col">
+          <div className="wrap">
+            <Head compact eyebrow="Shop by space" title="Designed for every room" to="/spaces" />
+            <div className="split">
+              {SPACES.map((s, i) => (
+                <Link className="split__pane" key={s.id} to={`/spaces/${s.id}`} data-reveal="mask" data-delay={i + 1}>
+                  <Img id={s.cover} alt={s.name} ratio="4 / 5" w={1200} />
+                  <div className="split__t">
+                    <h3 className="disp d3">{s.name}</h3>
+                    <p className="fine">{s.tagline}</p>
+                  </div>
+                </Link>
+              ))}
             </div>
-          </Link>
-          {restSpaces.map((s, i) => (
-            <Link className="split__pane" key={s.id} to={`/spaces/${s.id}`} data-reveal="mask" data-delay={i + 1}>
-              <Img id={s.cover} alt={s.name} ratio="4 / 5" w={1200} />
-              <div className="split__t">
-                <h3 className="disp d3">{s.name}</h3>
-                <p className="fine">{s.tagline}</p>
-              </div>
-            </Link>
-          ))}
+          </div>
         </div>
       </section>
-
     </>
   )
 }

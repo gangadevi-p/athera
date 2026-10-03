@@ -12,6 +12,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Done from './pages/Done'
 import Track from './pages/Track'
+import Help from './pages/Help'
 import NotFound from './pages/NotFound'
 
 /**
@@ -47,6 +48,7 @@ export const routes = [
       { path: '/checkout', element: <Checkout /> },
       { path: '/done', element: <Done /> },
       { path: '/track', element: <Track /> },
+      { path: '/help', element: <Help /> },
       { path: '*', element: <NotFound /> },
     ],
   },

@@ -5,6 +5,7 @@ import {
   MATERIAL_FILTERS,
   PRODUCTS,
   catById,
+  collectionById,
   hasMaterial,
 } from '../data/catalogue'
 import { cx } from '../lib/format'
@@ -49,6 +50,7 @@ export default function Shop() {
 
   const cat = CATEGORIES.some(x => x.id === params.get('c')) ? params.get('c') : null
   const mats = list(params.get('m'))
+  const col = collectionById(params.get('col')) || null
   const sort = SORTS.some(s => s.id === params.get('sort')) ? params.get('sort') : 'featured'
 
   const set = (key, value) => {
@@ -61,12 +63,13 @@ export default function Shop() {
   const toggle = (key, current, id) =>
     set(key, current.includes(id) ? current.filter(x => x !== id) : [...current, id])
 
-  /* clears the facets but keeps the chosen category, which has its own row */
+  /* clears the facets but keeps the chosen category (its own row) */
   const clear = () => setParams(cat ? { c: cat } : {}, { replace: true })
 
   /* ---------- the filtered, sorted list ---------- */
 
   let list_ = PRODUCTS.filter(p => {
+    if (col && !col.pieces.includes(p.id)) return false
     if (cat && p.cat !== cat) return false
     if (mats.length && !mats.some(m => hasMaterial(p, m))) return false
     return true
@@ -77,6 +80,7 @@ export default function Shop() {
   if (sort === 'new') list_ = [...list_].sort((a, b) => b.year - a.year)
 
   const active = [
+    ...(col ? [{ key: 'col', id: col.id, name: col.name, clear: () => set('col', null) }] : []),
     ...mats.map(m => ({ key: 'm', id: m, name: MATERIAL_FILTERS.find(x => x.id === m).name, clear: () => toggle('m', mats, m) })),
   ]
 
@@ -86,12 +90,14 @@ export default function Shop() {
     <section className="sec sec--shop">
       <div className="wrap">
         <div className="phead phead--wide">
-          <span className="eyebrow">Furniture</span>
-          <h1 className="disp d1">{c ? c.name : 'The collection'}</h1>
+          <span className="eyebrow">{col ? 'Collection' : 'Furniture'}</span>
+          <h1 className="disp d1">{col ? col.name : c ? c.name : 'The collection'}</h1>
           <p className="lead">
-            {c
-              ? c.tagline
-              : 'Made in small runs and delivered assembled.'}
+            {col
+              ? col.note
+              : c
+                ? c.tagline
+                : 'Made in small runs and delivered assembled.'}
           </p>
         </div>
 

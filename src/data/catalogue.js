@@ -2289,8 +2289,54 @@ export const ROOMS = [
   },
 ]
 
+/* ---------- featured collections ---------- */
+
+/**
+ * Curated sets that cut across the categories: a mood, a material, a way of
+ * living. Each is a hand-picked list of pieces (the listing shows it at
+ * `/shop?col=<id>`), so a collection is never just a category under another name.
+ */
+export const COLLECTIONS = [
+  {
+    id: 'quiet-morning',
+    name: 'The Quiet Morning Collection',
+    image: 'photo-1617325247661-675ab4b64ae2',
+    note: 'A bed, a bedside, and the linen and wool that make a room slow to wake in.',
+    pieces: ['linen-platform-bed', 'oak-bedside-table', 'linen-bed-bench', 'ash-bedside-table', 'linen-cushion-set', 'merino-wool-throw', 'wool-flatweave-rug'],
+  },
+  {
+    id: 'living-in-oak',
+    name: 'Living in Oak',
+    image: 'photo-1763279934323-edb3735f6a6e',
+    note: 'One timber, from the dining table to the hall: pale, oiled, and left to darken.',
+    pieces: ['oak-dining-table', 'oak-dining-chair', 'oak-dining-bench', 'oak-frame-coffee-table', 'oak-nesting-tables', 'oak-hall-bench', 'oak-wall-shelf', 'fluted-oak-sideboard'],
+  },
+  {
+    id: 'slow-evenings',
+    name: 'Objects for Slow Evenings',
+    image: 'photo-1667312939978-64cf31718a6e',
+    note: 'Low light, soft surfaces and something to put a drink down on.',
+    pieces: ['ceramic-table-lamp', 'brass-table-lamp', 'stone-lamp-table', 'washi-floor-lamp', 'brass-wall-sconce', 'ceramic-vessel-set', 'merino-wool-throw', 'boucle-pouf'],
+  },
+  {
+    id: 'linen-walnut',
+    name: 'The Linen & Walnut Collection',
+    image: 'photo-1694721025063-08eff99ba558',
+    note: 'Washed Belgian linen against dark, close-grained walnut.',
+    pieces: ['linen-lounge-sofa', 'linen-daybed', 'walnut-reading-chair', 'walnut-side-table', 'round-walnut-dining-table', 'walnut-panel-bed', 'walnut-nightstand', 'walnut-bookcase'],
+  },
+  {
+    id: 'made-in-cane',
+    name: 'Made in Cane',
+    image: 'photo-1758486561455-ebd0d3ba7423',
+    note: 'Hand-woven by one family workshop, from chairs to cabinet fronts.',
+    pieces: ['cane-back-armchair', 'cane-dining-chair', 'cane-headboard-bed', 'cane-front-cabinet', 'oak-cane-sideboard', 'woven-cylinder-pendant', 'rattan-cluster-pendant', 'seagrass-basket'],
+  },
+]
+
 /* ---------- lookups ---------- */
 
+export const collectionById = id => COLLECTIONS.find(c => c.id === id)
 export const byId = id => PRODUCTS.find(p => p.id === id)
 export const catById = id => CATEGORIES.find(c => c.id === id)
 export const spaceById = id => SPACES.find(s => s.id === id)

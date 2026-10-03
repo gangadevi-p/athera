@@ -410,7 +410,6 @@
 @media (max-width: 1280px) {
   :root { --gutter: 64px; --sec: 140px; --sec-tight: 104px }
   .nav__util { gap: 22px }
-  .cindex { gap: 56px }
   .craft { gap: 56px }
   .pdp__in, .cart, .co, .read, .news, .track, .acct__grid { gap: 60px }
   .plp__in { grid-template-columns: 210px minmax(0, 1fr); gap: 52px }
@@ -430,13 +429,12 @@
   .grid-4, .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)) }
   .head { grid-template-columns: minmax(0, 1fr); gap: 24px }
 
-  /* the category index keeps its frame above the list */
-  .cindex { grid-template-columns: minmax(0, 1fr); gap: 40px }
-  .cindex__frame { aspect-ratio: 16 / 9 }
-
   .split { grid-template-columns: minmax(0, 1fr) }
-  .split--lead { grid-column: auto }
+  .split__pane { height: auto; aspect-ratio: 16 / 9 }
   .split__t { padding: 40px var(--gutter) 36px }
+
+  .assure__in { grid-template-columns: minmax(0, 1fr); gap: 6px }
+  .assure__in p + p { border-left: 0 }
 
   .band .img { aspect-ratio: 21 / 9 }
 

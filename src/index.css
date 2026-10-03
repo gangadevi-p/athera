@@ -206,7 +206,7 @@ main[data-home] { padding-top: 0 }
 
 .lead { font-size: 1.33rem; line-height: 1.78; max-width: 52ch; margin: 0 }
 .mute { color: var(--mute) }
-.fine { font-size: 1.03rem; color: var(--mute); line-height: 1.65 }
+.fine { font-size: 1.03rem; font-weight: 400; color: var(--graphite); line-height: 1.65 }
 
 /* product names and prices are functional type: sans, not the display serif */
 .pname {
@@ -244,6 +244,11 @@ main[data-home] { padding-top: 0 }
 }
 .head__t { display: flex; flex-direction: column; gap: 18px; max-width: 49.6ch } /* 62ch at the old 16px body: the display title keeps its measure */
 .head__t .lead { max-width: 54ch }
+
+/* the landing page's compact header: eyebrow, title, one link — short enough to sit above a full-height row on one screen */
+.head--c { padding-bottom: clamp(10px, 2svh, 20px); margin-bottom: clamp(16px, 3svh, 32px) }
+.head--c .head__t { gap: clamp(6px, 1.2svh, 12px) }
+.head--c .d2 { font-size: clamp(1.8rem, 5.2svh, 3rem) }
 
 /* ---------- controls -------------------------------------------------- */
 
@@ -575,28 +580,9 @@ legend { padding: 0 0 4px; font-size: .93rem; letter-spacing: .13em; text-transf
    No two consecutive sections share a shape.
    ========================================================================= */
 
-/* 2 · shop by category — an index, not a grid of cards */
-.cindex { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 88px; align-items: center }
-.cindex__stage { position: relative }
-.cindex__stage .img { position: absolute; inset: 0; opacity: 0; transition: opacity .7s var(--ease) }
-.cindex__stage .img.on { opacity: 1 }
-.cindex__frame { aspect-ratio: 4 / 5 }
-.cindex__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule) }
-.cindex__list li { border-bottom: 1px solid var(--rule) }
-.cindex__list a {
-  display: grid; grid-template-columns: 3.5ch minmax(0, 1fr) auto;
-  gap: 28px; align-items: baseline;
-  padding: 22px 0;
-  transition: padding-left var(--t-hover) var(--ease), color var(--t-hover) var(--ease);
-}
-.cindex__list a:hover { padding-left: 14px }
-.cindex__n { font-size: .93rem; letter-spacing: .1em; color: var(--mute); font-variant-numeric: tabular-nums }
-.cindex__name {
-  margin: 0; font-family: var(--display); font-size: clamp(1.3rem, 2vw, 2rem);
-  text-transform: uppercase; letter-spacing: .02em; line-height: 1.1; color: var(--ink);
-}
-.cindex__items { font-size: 1.01rem; color: var(--mute); text-align: right }
-.cindex__foot { display: flex; justify-content: space-between; align-items: baseline; gap: 32px; padding-top: 28px }
+/* what is left of a screen once the nav, the section's padding and a compact header are taken off */
+:root { --fit-body: clamp(300px, calc(100svh - var(--nav-h) - clamp(32px, 6svh, 80px) - clamp(110px, 20svh, 160px)), 620px) }
+.fit__col { width: 100% }
 
 /* 3 · horizontal product row — bleeds off the right edge */
 .hrow {
@@ -615,19 +601,19 @@ legend { padding: 0 0 4px; font-size: .93rem; letter-spacing: .13em; text-transf
 .hrow__hint::after { content: ""; flex: 1; height: 1px; background: var(--rule) }
 
 /* 6 · split-screen storytelling — spaces */
-.split { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) }
-.split__pane { position: relative; display: block; overflow: hidden }
+.split { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px }
+.split__pane { position: relative; display: block; overflow: hidden; height: var(--fit-body) }
+.split__pane .img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto }
 .split__pane .img img { transition: opacity var(--t-image) var(--ease), transform 1.6s var(--ease) }
 .split__pane:hover .img img { transform: scale(1.04) }
 .split__t {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-  padding: 48px var(--gutter) 44px;
+  padding: 64px 32px 32px;
   display: flex; flex-direction: column; gap: 10px;
-  background: linear-gradient(180deg, rgba(36, 26, 20, 0), rgba(36, 26, 20, .58));
+  background: linear-gradient(180deg, rgba(36, 26, 20, 0), rgba(36, 26, 20, .66));
 }
 .split__t .disp, .split__t .fine { color: var(--paper) }
 .split__t .fine { max-width: 32ch }
-.split--lead { grid-column: span 2 }
 
 /* 7 · a cropped texture band between sections */
 .band { position: relative; overflow: hidden }
@@ -667,53 +653,6 @@ legend { padding: 0 0 4px; font-size: .93rem; letter-spacing: .13em; text-transf
 .news__f .fine { margin: 0 }
 .news__done { margin: 0; font-family: var(--display); font-size: 1.35rem; line-height: 1.5; color: var(--ink); max-width: 34ch }
 
-
-/* ---------- shop by category · review variations (cv) ---------- */
-.cvsw { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 0 0 48px; padding: 14px 0; border-top: 1px dashed var(--rule); border-bottom: 1px dashed var(--rule) }
-.cvsw__b { font: inherit; font-size: .97rem; letter-spacing: .07em; text-transform: uppercase; padding: 8px 14px; border: 1px solid var(--rule); background: transparent; color: var(--graphite); cursor: pointer }
-.cvsw__b.on, .cvsw__b:hover { background: var(--ink); border-color: var(--ink); color: var(--paper) }
-
-/* A · mosaic */
-.cmos { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 32px; row-gap: 72px; align-items: start }
-.cmos__t { display: block }
-.cmos__frame { display: block; overflow: hidden }
-.cmos__frame .img img { transition: transform 1.1s var(--ease) }
-.cmos__t:hover .cmos__frame .img img { transform: scale(1.04) }
-.cmos__cap { display: flex; align-items: baseline; gap: 18px; padding-top: 18px }
-.cmos__name { font-family: var(--display); font-size: clamp(1.2rem, 1.7vw, 1.6rem); text-transform: uppercase; letter-spacing: .02em; color: var(--ink) }
-.cmos__foot { grid-column: 9 / span 4; align-self: center; display: flex; flex-direction: column; gap: 16px }
-
-/* B · panels */
-.cpan { display: flex; height: min(72vh, 640px); gap: 6px }
-.cpan__p { position: relative; flex: 1 1 0; min-width: 0; overflow: hidden; color: var(--warm-white); transition: flex-grow .8s var(--ease) }
-.cpan__p.on { flex-grow: 5 }
-.cpan__p .img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto }
-.cpan__p::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(36,26,20,.6), rgba(36,26,20,0) 55%), rgba(36,26,20,.18); transition: background .8s var(--ease) }
-.cpan__p.on::after { background: linear-gradient(0deg, rgba(36,26,20,.6), rgba(36,26,20,0) 55%) }
-.cpan__n { position: absolute; z-index: 1; top: 22px; left: 22px; font-size: .93rem; letter-spacing: .1em }
-.cpan__cap { position: absolute; z-index: 1; left: 22px; right: 22px; bottom: 24px; display: flex; flex-direction: column; gap: 8px }
-.cpan__name { font-family: var(--display); font-size: 1.5rem; text-transform: uppercase; letter-spacing: .02em; line-height: 1.1; white-space: nowrap; opacity: 0; transition: opacity .5s var(--ease) }
-.cpan__items { font-size: 1.03rem; opacity: 0; transition: opacity .5s var(--ease) }
-.cpan__p.on .cpan__name, .cpan__p.on .cpan__items { opacity: 1; transition-delay: .3s }
-
-/* C · rail */
-.crail { display: flex; gap: 28px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 20px; margin-right: calc(var(--gutter) * -1); padding-right: var(--gutter); scrollbar-width: thin }
-.crail__c { flex: 0 0 clamp(260px, 24vw, 340px); scroll-snap-align: start; display: flex; flex-direction: column }
-.crail__n { font-family: var(--display); font-size: 3.4rem; line-height: 1; color: var(--rule); margin-bottom: 14px; transition: color var(--t-hover) var(--ease) }
-.crail__c:hover .crail__n { color: var(--accent) }
-.crail__frame { display: block; overflow: hidden }
-.crail__frame .img img { transition: transform 1s var(--ease) }
-.crail__c:hover .crail__frame .img img { transform: scale(1.04) }
-.crail__name { padding-top: 16px; font-size: 1.2rem; color: var(--ink) }
-.crail__items { padding-top: 4px; font-size: 1.01rem; color: var(--mute) }
-@media (max-width: 980px) {
-  .cmos { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 40px }
-  .cmos__t { grid-column: auto !important; margin-top: 0 !important }
-  .cmos__foot { grid-column: 1 / -1 }
-  .cpan { flex-direction: column; height: auto }
-  .cpan__p, .cpan__p.on { flex: none; height: 120px }
-  .cpan__p.on { height: 320px }
-}
 
 /* ---------- shop by category · slow carousel ---------- */
 .cc { --cc-move: 2400ms; --cc-gap: 24px }
@@ -925,3 +864,19 @@ html { scroll-snap-type: y proximity }
   .ph__strip { height: 44svh }
   .ph--c .ph__wrap { gap: 40px }
 }
+
+/* ---------- landing: what a buyer of a large piece wants to know, in one line ---------- */
+.assure { border-bottom: 1px solid var(--rule) }
+.assure__in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) }
+.assure__in p {
+  margin: 0; padding: 26px 12px; text-align: center;
+  font-size: .88rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite);
+}
+.assure__in p + p { border-left: 1px solid var(--rule) }
+
+/* ---------- help: delivery, returns, care, contact ---------- */
+.help { max-width: 760px }
+.help__s { padding: 44px 0; border-top: 1px solid var(--rule); scroll-margin-top: calc(var(--nav-h) + 24px) }
+.help__s h2 { margin-bottom: 18px }
+.help__s p { margin: 0 0 14px; max-width: 62ch; font-size: 1.15rem; line-height: 1.75; color: var(--graphite) }
+.help__s p:last-child { margin-bottom: 0 }

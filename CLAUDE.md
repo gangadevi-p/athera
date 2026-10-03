@@ -72,7 +72,7 @@ never pure black**, so there is no near-black left in the palette.
 72–100px mobile bands. `.g12` is the twelve-column grid the asymmetric
 compositions are set on.
 
-Type: **Italiana** (display, uppercase, `.disp` + `.d1/.d2/.d3`) and **Jost**
+Type: **Georgia** (display — see Decisions; uppercase, `.disp` + `.d1/.d2/.d3`) and **Jost**
 (300/400 body, `.eyebrow` for tracked small caps). No Tailwind classes are
 used; Tailwind is installed but its directives were removed.
 
@@ -248,6 +248,22 @@ Use it rather than reaching into `p.images[0]`.
 ## Decisions and gotchas
 
 - **Prices are `$`**, placeholders. One price per piece; finishes do not change it.
+- **Current landing page (supersedes the nine-part list below where they differ).**
+  Hero · assurance strip · category carousel · featured collections · philosophy ·
+  three spaces (equal panes sized from `--fit-body` in `index.css`) · footer.
+  There are no best-seller or newsletter sections on it (`Newsletter.jsx` is
+  unused). Featured collections and the spaces row each fit one screen; the
+  category carousel is taller than one.
+- **Featured collections are curated sets, not categories.** `COLLECTIONS` in
+  `catalogue.js` lists the pieces; each tile opens `/shop?col=<id>`. Keep `p` out
+  of query names (see Commands).
+- **Display type is Georgia**, by the owner's choice (2026-10-02) — not
+  Italiana, whatever the Design section below says. The footer logotype
+  (`17.4cqw`) and the hero headline cap are calibrated to it; re-measure both if
+  the face or tracking changes.
+- **`/help`** holds delivery & returns, care and contact (footer deep-links to
+  `#delivery`, `#care`, `#contact`). Its copy repeats the product page and
+  checkout; change them together.
 - **The landing page is the brief's nine parts, in order**: navigation, hero,
   shop by category, featured collection, lifestyle editorial, best-selling,
   craftsmanship, brand philosophy, newsletter, footer. Shop-by-space is kept
@@ -265,8 +281,9 @@ Use it rather than reaching into `p.images[0]`.
 - **The nav is `position: fixed`** and floats with no ground over the landing
   hero, settling onto paper past 40px of scroll. `main` carries
   `padding-top: var(--nav-h)` to clear it, removed on the landing page via
-  `main[data-home]`. It carries only the logotype, account and cart — there are
-  no section links; visitors move through the landing page. Below 980px the
+  `main[data-home]`. It carries the logotype,
+  saved (only once something is saved), account and cart — there are no section
+  links; visitors move through the landing page. Below 980px the
   account, saved and tracking links collapse into a full-screen
   editorial menu overlay; below 640px the product page grows a sticky
   add-to-cart bar (`.stickybuy`).

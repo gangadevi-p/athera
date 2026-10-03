@@ -66,6 +66,11 @@ function Nav({ onMenu }) {
           onClick={homeClick(pathname)}
         >Aethera</Link>
         <div className="nav__util">
+          {wish.length > 0 && (
+            <NavLink className="nav__u nav__u--wish" to="/wishlist">
+              Saved <span className="nav__n">{wish.length}</span>
+            </NavLink>
+          )}
           <NavLink className="nav__u nav__u--acct" to="/account">
             {account ? account.name?.split(' ')[0] || 'Account' : 'Sign in'}
           </NavLink>
@@ -148,9 +153,11 @@ function Footer() {
             <h4>Help</h4>
             <ul>
               <li><Link to="/track">Track an order</Link></li>
+              <li><Link to="/help#delivery">Delivery &amp; returns</Link></li>
+              <li><Link to="/help#care">Care</Link></li>
+              <li><Link to="/help#contact">Contact</Link></li>
               <li><Link to="/wishlist">Wishlist</Link></li>
               <li><Link to="/account">Sign in</Link></li>
-              <li><span className="mute">hello@aethera.studio</span></li>
             </ul>
           </div>
         </div>
