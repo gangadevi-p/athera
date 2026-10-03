@@ -7,6 +7,9 @@
 
 .phead { display: flex; flex-direction: column; gap: 24px; max-width: 49.6ch; margin-bottom: 80px } /* 62ch at the old 16px body: the display title keeps its measure */
 .phead .lead { max-width: 54ch }
+.phead--wide { max-width: none; gap: 16px; margin-bottom: 28px } /* the shop title stays on one line so the category list rises into the first screen */
+.sec--shop { padding-top: clamp(32px, 6svh, 64px) }
+.plp__top { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 36px }
 .phead--short { margin-bottom: 52px; gap: 20px }
 
 .empty { display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; padding: 80px 0 }
@@ -50,10 +53,6 @@
 .check__t { display: flex; align-items: center; gap: 9px; min-width: 0 }
 .check__t em { font-style: normal; font-size: .97rem; color: var(--mute) }
 
-.plp__bar {
-  display: flex; justify-content: space-between; align-items: center; gap: 24px;
-  padding-bottom: 16px; margin-bottom: 20px; border-bottom: 1px solid var(--rule);
-}
 .sortf { display: flex; align-items: center; gap: 14px }
 .sortf select {
   border: 0; background: none; padding: 2px 0; cursor: pointer;
@@ -453,7 +452,6 @@
     display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 26px 48px;
   }
-  .rail__head { grid-column: 1 / -1 }
 
   .pdp__in { grid-template-columns: minmax(0, 1fr); gap: 44px }
   .pdp__side { position: static }
@@ -495,7 +493,7 @@
   .band .img { aspect-ratio: 16 / 9 }
   .band__t p { font-size: 1.15rem }
 
-  .plp__bar { flex-direction: column; align-items: flex-start; gap: 14px }
+  .plp__top { flex-direction: column; align-items: flex-start; gap: 20px }
   .plp__foot { flex-direction: column; align-items: flex-start; gap: 20px }
 
   .pdp__acts { grid-template-columns: minmax(0, 1fr) }
