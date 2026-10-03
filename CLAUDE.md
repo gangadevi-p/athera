@@ -254,9 +254,38 @@ Use it rather than reaching into `p.images[0]`.
   There are no best-seller or newsletter sections on it (`Newsletter.jsx` is
   unused). Featured collections and the spaces row each fit one screen; the
   category carousel is taller than one.
+- **Heading and subheading scale.** Section titles and the shop/category page
+  titles are `.d2` (`clamp(1.8rem, 2.9vw, 3rem)`); the subheading under any of
+  them is `.lead` (1.1rem) and stays on one line — `.head__t`, `.phead`,
+  `.cats__top` and `.empty` all give it the width to do so. Copy longer than
+  about 100 characters (the Account page's intro) wraps naturally. On the
+  landing page the space-pane taglines (`.split__t .fine`) and collection names
+  (`.fcl__name`) are sized in `vw` so the longest ones — 59 and 29 characters —
+  fit one line from 1280px and 1100px up; below that they wrap. If you change
+  that copy or those sizes, re-measure the longest string.
 - **Featured collections are curated sets, not categories.** `COLLECTIONS` in
   `catalogue.js` lists the pieces; each tile opens `/shop?col=<id>`. Keep `p` out
-  of query names (see Commands).
+  of query names (see Commands). The shop has three filters, on every view of it — the whole
+  collection, a category, a featured collection: **Material** (`m`), **Colour**
+  (`clr`) and **Size** (`s`). They are folded by default, in a column, built
+  from the same `.disc` rows as the product page's dimensions, care and delivery
+  (name left, plus right, a minus while open, no rules). Clicking one opens its
+  options in place and pushes the rest down; a click outside the list of filters,
+  or Escape, folds it, and only one is open at a time (a click on another filter
+  switches to it — never close on press, the row slides out from under the
+  pointer). Ticked values show as pills named for their group ("Colour: Walnut")
+  and stay when you leave a collection. Options no piece can satisfy, given the
+  category, the collection and the other ticks, are dimmed. `col` is the collection,
+  which is why colour is `clr`, not `col`.
+  **Sort** is a name with a **chevron** close beside it (not a plus; it points
+  up while open) at the top right of the listing (`sort`: `low`, `high`, `new`)
+  and opens as a **popup** over the page — the
+  owner does not want the pieces to move when it is used, so it is absolutely
+  positioned and adds no pill row. It folds once an option is chosen, shows the
+  choice beside its name ("Sort (Newest)"), and ticking the chosen option again
+  goes back to the curated order — there is no "Featured" option. The inline
+  filters push the page down, so a click elsewhere folds them on *click*, never
+  on press.
 - **Display type is Georgia**, by the owner's choice (2026-10-02) — not
   Italiana, whatever the Design section below says. The footer logotype
   (`17.4cqw`) and the hero headline cap are calibrated to it; re-measure both if

@@ -5,15 +5,15 @@
    in index.css.
    ========================================================================= */
 
-.phead { display: flex; flex-direction: column; gap: 24px; max-width: 49.6ch; margin-bottom: 80px } /* 62ch at the old 16px body: the display title keeps its measure */
-.phead .lead { max-width: 54ch }
-.phead--wide { max-width: none; gap: 16px; margin-bottom: 28px } /* the shop title stays on one line so the category list rises into the first screen */
+.phead { display: flex; flex-direction: column; gap: 24px; margin-bottom: 80px }
+.phead .lead { max-width: none } /* a page's subheading stays on one line; the titles break where they are told to */
+.phead--wide { gap: 16px; margin-bottom: 28px } /* the shop title stays on one line so the category list rises into the first screen */
 .sec--shop { padding-top: clamp(32px, 6svh, 64px) }
-.plp__top { display: flex; justify-content: space-between; align-items: center; gap: 24px; margin-bottom: 36px }
+.plp__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 36px }
 .phead--short { margin-bottom: 52px; gap: 20px }
 
 .empty { display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; padding: 80px 0 }
-.empty .lead { max-width: 42ch }
+.empty .lead { max-width: 90ch }
 
 /* ---------- listing: rail + results ----------------------------------- */
 
@@ -28,6 +28,36 @@
 .rail__g > .eyebrow { padding-bottom: 12px; border-bottom: 1px solid var(--rule) }
 .rail__l { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px }
 .rail__cols { display: flex; flex-direction: column; gap: 14px }
+
+/* a featured collection's filters fold away exactly like the product page's dimensions, care and delivery
+   (.disc): the name, a plus at the end, and when it is open the options come out in place, pushing what is
+   below down. Material, Colour, Size in a column; no rules. */
+.rail.rail--menus { gap: 0; display: flex; flex-direction: column }
+.fdisc { padding: 15px 0 }
+.disc.fdisc summary { font-size: 1.03rem } /* the product page's size; two classes to beat .disc summary below */
+/* the sort, at the top right of the listing: its name with a chevron close beside it (not a plus), opening as a popup
+   over the page — the row keeps its size, so nothing below it (the pills, the pieces) moves */
+.fsort { position: relative; z-index: 7; flex: none }
+.disc.fsort summary { justify-content: flex-start; gap: 12px }
+.disc.fsort summary::after {
+  content: ""; flex: none; width: 7px; height: 7px; margin-top: -4px;
+  border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+  color: var(--ink); font-size: 0; transform: rotate(45deg);
+  transition: transform var(--t-hover) var(--ease), margin-top var(--t-hover) var(--ease);
+}
+.disc.fsort[open] summary::after { content: ""; margin-top: 4px; transform: rotate(-135deg) } /* points up while it is open */
+.fsort .fdisc__o {
+  position: absolute; top: calc(100% - 4px); right: 0;
+  min-width: 100%; width: max-content; margin: 0; gap: 10px;
+  padding: 18px 20px 20px;
+  background: var(--paper); border: 1px solid var(--ink);
+}
+.fsort[open] .fdisc__o { animation: pop-in .25s var(--ease) both }
+@keyframes pop-in { from { opacity: 0; transform: translateY(-6px) } to { opacity: 1; transform: none } }
+.fdisc__n { margin-left: .6em; color: var(--mute); letter-spacing: .04em }
+.fdisc__o { display: flex; flex-direction: column; gap: 12px; margin: 18px 0 6px }
+.fdisc__o--sw { display: grid; grid-template-columns: repeat(2, max-content); gap: 12px 28px }
+.fdisc .check { line-height: 1.5 }
 
 .filter {
   background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
@@ -46,6 +76,13 @@
   transition: background .2s var(--ease), border-color .2s var(--ease);
 }
 .check:hover { color: var(--ink) }
+.check.off { opacity: .35; cursor: default; pointer-events: none }
+
+/* colour: the swatch is the control — a ring when ticked, no box */
+.check--sw .check__b { display: none }
+.check--sw .dot--sm { width: 16px; height: 16px; transition: box-shadow var(--t-hover) var(--ease) }
+.check--sw.on .dot { box-shadow: 0 0 0 1px var(--paper), 0 0 0 2px var(--ink) }
+.check--sw input:focus-visible ~ .check__t .dot { outline: 1px solid var(--accent); outline-offset: 3px }
 .check:hover .check__b { border-color: var(--ink) }
 .check.on { color: var(--ink) }
 .check.on .check__b { background: var(--ink); border-color: var(--ink) }
@@ -53,12 +90,6 @@
 .check__t { display: flex; align-items: center; gap: 9px; min-width: 0 }
 .check__t em { font-style: normal; font-size: .97rem; color: var(--mute) }
 
-.sortf { display: flex; align-items: center; gap: 14px }
-.sortf select {
-  border: 0; background: none; padding: 2px 0; cursor: pointer;
-  font-size: 1.03rem; color: var(--ink);
-}
-.sortf select:focus { outline: 0; border-bottom: 1px solid var(--ink) }
 
 .plp__active { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 48px }
 .pill {
@@ -492,6 +523,7 @@
   .band__t p { font-size: 1.15rem }
 
   .plp__top { flex-direction: column; align-items: flex-start; gap: 20px }
+  .fsort .fdisc__o { left: 0; right: auto } /* the sort sits at the left under the tabs here, so its popup opens rightwards */
   .plp__foot { flex-direction: column; align-items: flex-start; gap: 20px }
 
   .pdp__acts { grid-template-columns: minmax(0, 1fr) }
@@ -548,7 +580,7 @@
 .cats__sec { padding-top: 40px }
 .cats__top { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 26px }
 .cats__top > div { display: flex; flex-direction: column; gap: 10px }
-.cats__top .lead { max-width: 44ch; font-size: 1.25rem; margin: 0 }
+.cats__top .lead { max-width: none; margin: 0 }
 .cats__tabs { margin-top: 0 }
 .cgrid { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px 24px }
 .cgrid a { display: flex; flex-direction: column; gap: 6px }

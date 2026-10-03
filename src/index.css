@@ -192,7 +192,7 @@ main[data-home] { padding-top: 0 }
 }
 
 .d1 { font-size: clamp(3.2rem, 5.6vw, 6rem) }
-.d2 { font-size: clamp(2.2rem, 3.8vw, 4rem) }
+.d2 { font-size: clamp(1.8rem, 2.9vw, 3rem) }
 .d3 { font-size: clamp(1.6rem, 2.4vw, 2.6rem) }
 
 .eyebrow {
@@ -204,7 +204,7 @@ main[data-home] { padding-top: 0 }
   font-weight: 400;
 }
 
-.lead { font-size: 1.33rem; line-height: 1.78; max-width: 52ch; margin: 0 }
+.lead { font-size: 1.1rem; line-height: 1.65; max-width: 60ch; margin: 0 }
 .mute { color: var(--mute) }
 .fine { font-size: 1.03rem; font-weight: 400; color: var(--graphite); line-height: 1.65 }
 
@@ -242,13 +242,12 @@ main[data-home] { padding-top: 0 }
   margin-bottom: 64px;
   border-bottom: 1px solid var(--rule);
 }
-.head__t { display: flex; flex-direction: column; gap: 18px; max-width: 49.6ch } /* 62ch at the old 16px body: the display title keeps its measure */
-.head__t .lead { max-width: 54ch }
+.head__t { display: flex; flex-direction: column; gap: 18px; max-width: 90ch } /* the titles are short; the width is for the subheading, which stays on one line */
+.head__t .lead { max-width: none }
 
 /* the landing page's compact header: eyebrow, title, one link — short enough to sit above a full-height row on one screen */
 .head--c { padding-bottom: clamp(10px, 2svh, 20px); margin-bottom: clamp(16px, 3svh, 32px) }
-.head--c .head__t { gap: clamp(6px, 1.2svh, 12px) }
-.head--c .d2 { font-size: clamp(1.8rem, 5.2svh, 3rem) }
+.head--c .head__t { gap: clamp(6px, 1.2svh, 12px); max-width: none } /* the title stays on one line at the shared size */
 
 /* ---------- controls -------------------------------------------------- */
 
@@ -581,7 +580,7 @@ legend { padding: 0 0 4px; font-size: .93rem; letter-spacing: .13em; text-transf
    ========================================================================= */
 
 /* what is left of a screen once the nav, the section's padding and a compact header are taken off */
-:root { --fit-body: clamp(300px, calc(100svh - var(--nav-h) - clamp(32px, 6svh, 80px) - clamp(110px, 20svh, 160px)), 620px) }
+:root { --fit-body: clamp(300px, calc(100svh - var(--nav-h) - clamp(32px, 6svh, 80px) - clamp(96px, 17svh, 140px)), 620px) }
 .fit__col { width: 100% }
 
 /* 3 · horizontal product row — bleeds off the right edge */
@@ -608,12 +607,14 @@ legend { padding: 0 0 4px; font-size: .93rem; letter-spacing: .13em; text-transf
 .split__pane:hover .img img { transform: scale(1.04) }
 .split__t {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
-  padding: 64px 32px 32px;
-  display: flex; flex-direction: column; gap: 10px;
+  padding: 64px 22px 28px;
+  display: flex; flex-direction: column; gap: 8px;
   background: linear-gradient(180deg, rgba(36, 26, 20, 0), rgba(36, 26, 20, .66));
 }
 .split__t .disp, .split__t .fine { color: var(--paper) }
-.split__t .fine { max-width: 32ch }
+/* the longest tagline (59 characters) fits a pane at every desktop width: .95vw, between .78rem and .9rem */
+.split__t .fine { max-width: none; font-weight: 400; font-size: clamp(.78rem, .95vw, .9rem) }
+@media (min-width: 1280px) { .split__t .fine { white-space: nowrap } }
 
 /* 7 · a cropped texture band between sections */
 .band { position: relative; overflow: hidden }
@@ -689,16 +690,17 @@ legend { padding: 0 0 4px; font-size: .93rem; letter-spacing: .13em; text-transf
 .sec--fit > .wrap { width: 100% }
 html { scroll-snap-type: y proximity }
 
-:root { --fc-head: clamp(64px, 13svh, 104px) }
-.fcs__head { height: var(--fc-head); display: flex; flex-direction: column; justify-content: flex-end; gap: 6px; padding-bottom: clamp(10px, 2svh, 20px) }
-.fcs__head .d3 { font-size: clamp(1.4rem, 3.6svh, 2.2rem) }
-.fcs { --fc-h: calc(100svh - var(--nav-h) - clamp(32px, 6svh, 80px) - var(--fc-head)); --cap: clamp(34px, 6svh, 52px); height: var(--fc-h); gap: clamp(12px, 1.6vw, 24px) }
+/* the header is the same as every other landing header (eyebrow, d2 title, hairline); its height is reserved so the grid below can be sized from what is left */
+:root { --fc-head: clamp(84px, 12.5svh, 112px); --fc-gap: clamp(16px, 3svh, 32px) }
+.fcs__head { height: var(--fc-head); display: flex; flex-direction: column; justify-content: flex-end; gap: clamp(6px, 1.2svh, 12px); padding-bottom: clamp(10px, 2svh, 20px); border-bottom: 1px solid var(--rule) }
+.fcs { --fc-h: calc(100svh - var(--nav-h) - clamp(32px, 6svh, 80px) - var(--fc-head) - var(--fc-gap)); --cap: clamp(30px, 5svh, 44px); height: var(--fc-h); margin-top: var(--fc-gap); gap: clamp(12px, 1.6vw, 24px) }
 .fcl { display: flex; flex-direction: column; min-width: 0; min-height: 0 }
 .fcl__img { display: block; position: relative; flex: 1; min-height: 0; overflow: hidden }
 .fcl__img .img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto }
 .fcl__img .img img { transition: transform 1.1s var(--ease) }
 .fcl:hover .fcl__img .img img { transform: scale(1.03) }
-.fcl__name { flex: none; height: var(--cap); display: flex; align-items: flex-end; font-family: var(--display); font-size: clamp(.95rem, 2.3svh, 1.3rem); text-transform: uppercase; letter-spacing: .04em; line-height: 1.15; color: var(--ink) }
+.fcl__name { flex: none; height: var(--cap); display: flex; align-items: flex-end; font-family: var(--display); font-size: clamp(.8rem, 1.1vw, 1.02rem); text-transform: uppercase; letter-spacing: 0; line-height: 1.15; color: var(--ink) }
+@media (min-width: 1100px) { .fcl__name { white-space: nowrap } } /* "The Linen & Walnut Collection" is the longest name; it fits a small tile at every width from here up */
 
 /* A · staggered: five columns, different widths, images ending at different heights */
 .fcs--a { display: grid; grid-template-columns: 1.3fr 1fr 1.15fr 1fr 1.3fr; align-items: end }
