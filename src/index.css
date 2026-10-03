@@ -517,12 +517,23 @@ main[data-home] { padding-top: 0 }
 
 /* ---------- save / wishlist ------------------------------------------- */
 
+/* glass, never a white fill: a frosted pane over whatever is behind it — on a card
+   the photograph shows through, blurred (same recipe as the hero button) */
 .save {
   display: inline-flex; align-items: center; gap: .7em;
-  padding: 8px; border: 0; background: none; cursor: pointer;
+  padding: 7px; cursor: pointer;
   color: var(--ink);
   font-size: .95rem; letter-spacing: .11em; text-transform: uppercase;
+  background: rgba(255, 255, 255, .3);
+  border: 1px solid rgba(255, 255, 255, .55);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 6px 20px rgba(43, 42, 39, .14);
+  transition:
+    background var(--t-hover) var(--ease),
+    border-color var(--t-hover) var(--ease);
 }
+.save:hover { background: rgba(255, 255, 255, .46); border-color: rgba(255, 255, 255, .78) }
 .save svg {
   width: 17px; height: 15px; display: block;
   fill: none; stroke: currentColor; stroke-width: 1.2px; stroke-linejoin: round;
@@ -530,9 +541,16 @@ main[data-home] { padding-top: 0 }
 }
 .save:hover svg { fill: rgba(43, 42, 39, .14) }
 .save--on svg { fill: currentColor }
-.pcard__save { padding: 10px; background: var(--paper) }
-.save--label { padding: 17px 24px; border: 1px solid var(--rule) }
-.save--label:hover { border-color: var(--ink) }
+.pcard__save { padding: 9px }
+/* on the product page the ground is plain white, so there is nothing to blur: the
+   pane is tinted instead — smoked glass with a lit top edge, never a white fill */
+.save--label {
+  padding: 16px 23px;
+  background: rgba(43, 42, 39, .06);
+  border-color: rgba(43, 42, 39, .13);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 6px 18px rgba(43, 42, 39, .08);
+}
+.save--label:hover { background: rgba(43, 42, 39, .11); border-color: rgba(43, 42, 39, .26) }
 
 /* ---------- swatches -------------------------------------------------- */
 
