@@ -247,6 +247,7 @@ main[data-home] { padding-top: 0 }
 
 /* the landing page's compact header: eyebrow, title, one link — short enough to sit above a full-height row on one screen */
 .head--c { padding-bottom: clamp(10px, 2svh, 20px); margin-bottom: clamp(16px, 3svh, 32px) }
+.head--bare { border-bottom: 0 } /* landing headers sit on whitespace alone, no rule */
 .head--c .head__t { gap: clamp(6px, 1.2svh, 12px); max-width: none } /* the title stays on one line at the shared size */
 
 /* ---------- controls -------------------------------------------------- */
@@ -409,7 +410,7 @@ main[data-home] { padding-top: 0 }
 
 /* ---------- footer ---------------------------------------------------- */
 
-.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 56px 0 40px }
+.foot { background: var(--bone); border-top: 1px solid var(--rule); padding: 36px 0 32px }
 .foot__top { display: grid; grid-template-columns: 6fr 3fr 3fr; gap: 56px }
 /* the shop list runs in two columns, so the longest list stays short */
 .foot .foot__shop ul { display: grid; grid-auto-flow: column; grid-template-rows: repeat(4, auto); grid-auto-columns: minmax(0, 1fr); gap: 13px 32px }
@@ -420,12 +421,12 @@ main[data-home] { padding-top: 0 }
    17.4cqw is calibrated to Georgia at .16em tracking (the word is 5.744em
    wide without its trailing space) — change the face or the tracking and it
    has to be re-measured. */
-.foot__logo { container-type: inline-size; padding-bottom: 52px }
+.foot__logo { container-type: inline-size; padding-bottom: 36px }
 .foot__logo a {
   display: block; white-space: nowrap;
   font-family: var(--display); text-transform: uppercase;
-  font-size: 17.4cqw; line-height: .76; letter-spacing: .16em;
-  margin-right: -.16em; /* the last letter's tracking is not part of the width */
+  font-size: 9.6cqw; line-height: .76; letter-spacing: .16em;
+  text-align: center; text-indent: .16em; /* centred: the last letter's tracking is not ink, so offset it */
   color: var(--rule);
   transition: color .6s var(--ease);
 }
@@ -710,7 +711,7 @@ html { scroll-snap-type: y proximity }
 
 /* the header is the same as every other landing header (eyebrow, d2 title, hairline); its height is reserved so the grid below can be sized from what is left */
 :root { --fc-head: clamp(84px, 12.5svh, 112px); --fc-gap: clamp(16px, 3svh, 32px) }
-.fcs__head { height: var(--fc-head); display: flex; flex-direction: column; justify-content: flex-end; gap: clamp(6px, 1.2svh, 12px); padding-bottom: clamp(10px, 2svh, 20px); border-bottom: 1px solid var(--rule) }
+.fcs__head { height: var(--fc-head); display: flex; flex-direction: column; justify-content: flex-end; gap: clamp(6px, 1.2svh, 12px); padding-bottom: clamp(10px, 2svh, 20px) }
 .fcs { --fc-h: calc(100svh - var(--nav-h) - clamp(32px, 6svh, 80px) - var(--fc-head) - var(--fc-gap)); --cap: clamp(30px, 5svh, 44px); height: var(--fc-h); margin-top: var(--fc-gap); gap: clamp(12px, 1.6vw, 24px) }
 .fcl { display: flex; flex-direction: column; min-width: 0; min-height: 0 }
 .fcl__img { display: block; position: relative; flex: 1; min-height: 0; overflow: hidden }
@@ -849,8 +850,8 @@ html { scroll-snap-type: y proximity }
 .ph--a { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); padding-inline: calc((100% - min(100%, var(--max))) / 2 + var(--gutter)) }
 .ph__body { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: clamp(14px, 3svh, 32px); padding: 0 clamp(32px, 5vw, 88px) 0 0 }
 .ph__mid { margin: 0; max-width: 20ch; font-size: clamp(1.7rem, min(5svh, 3.4vw), 3.1rem); line-height: 1.1; color: var(--ink) }
-.ph__list { width: 100%; max-width: 560px; border-top: 1px solid var(--rule) }
-.ph__list .pp { padding: clamp(8px, 1.7svh, 16px) 0; border-bottom: 1px solid var(--rule) }
+.ph__list { width: 100%; max-width: 560px }
+.ph__list .pp { padding: clamp(8px, 1.7svh, 16px) 0 }
 .ph__img { position: relative }
 
 /* B · principles: the statement across the page, three principles, a wide strip of light beneath */
@@ -886,13 +887,11 @@ html { scroll-snap-type: y proximity }
 }
 
 /* ---------- landing: what a buyer of a large piece wants to know, in one line ---------- */
-.assure { border-bottom: 1px solid var(--rule) }
 .assure__in { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) }
 .assure__in p {
   margin: 0; padding: 26px 12px; text-align: center;
   font-size: .88rem; font-weight: 400; letter-spacing: .1em; text-transform: uppercase; color: var(--graphite);
 }
-.assure__in p + p { border-left: 1px solid var(--rule) }
 
 /* ---------- help: delivery, returns, care, contact ---------- */
 .help { max-width: 760px }

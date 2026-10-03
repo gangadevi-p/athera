@@ -19,7 +19,7 @@ import { SPACES } from '../data/catalogue'
 /** Section header: eyebrow, title, optional lead and a single link. `compact` is the one-screen version. */
 function Head({ eyebrow, title, lead: text, to, cta = 'View all', compact = false }) {
   return (
-    <div className={compact ? 'head head--c' : 'head'}>
+    <div className={compact ? 'head head--c head--bare' : 'head head--bare'}>
       <div className="head__t">
         <span className="eyebrow" data-reveal="">{eyebrow}</span>
         <h2 className="disp d2" data-reveal="" data-delay="1">{title}</h2>
@@ -70,7 +70,7 @@ export default function Home() {
       <section className="sec" id="categories">
         <div className="wrap">
           <Head
-            eyebrow="Shop by category"
+            eyebrow="Category"
             title="Seven ways in"
             lead="The whole collection, grouped the way a room is actually put together."
             to="/categories"
@@ -94,7 +94,7 @@ export default function Home() {
       <section className="sec sec--fit" id="spaces">
         <div className="fit__col">
           <div className="wrap">
-            <Head compact eyebrow="Shop by space" title="Designed for every room" to="/spaces" />
+            <Head compact eyebrow="Space" title="Designed for every room" to="/spaces" />
             <div className="split">
               {SPACES.map((s, i) => (
                 <Link className="split__pane" key={s.id} to={`/spaces/${s.id}`} data-reveal="mask" data-delay={i + 1}>

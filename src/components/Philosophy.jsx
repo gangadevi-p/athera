@@ -16,7 +16,7 @@ import Img from './Img'
  * Every layout is sized from the viewport, so it fits one screen.
  */
 
-const STATEMENT = 'We make fewer things, in smaller runs, for rooms meant to be lived in rather than looked at.'
+const STATEMENT = 'Fewer things, made to last.'
 
 const PRINCIPLES = [
   { n: '01', t: 'Quiet over loud.', d: 'A piece should settle into a room, not announce itself.' },

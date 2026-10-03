@@ -26,7 +26,7 @@ export default function FeaturedCollection({ variant = 'a' }) {
   return (
     <>
       <div className="fcs__head">
-        <span className="eyebrow" data-reveal="">Featured collections</span>
+        <span className="eyebrow" data-reveal="">Featured</span>
         <h2 className="disp d2" data-reveal="" data-delay="1">Five small stories</h2>
       </div>
       <div className={`fcs fcs--${variant}`}>
