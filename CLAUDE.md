@@ -208,7 +208,7 @@ src/
                       account, assistant, responsive
 ```
 
-Routes: `/`, `/shop`, `/p/:id`, `/spaces`, `/spaces/:id`, `/assistant`,
+Routes: `/`, `/shop`, `/categories`, `/p/:id`, `/spaces`, `/spaces/:id`, `/assistant`,
 `/wishlist`, `/account`, `/cart`, `/checkout`, `/done`, `/track`.
 
 > **The router is a data router.** `App.jsx` exports a `routes` array and
@@ -256,13 +256,32 @@ Use it rather than reaching into `p.images[0]`.
   category carousel is taller than one.
 - **Heading and subheading scale.** Section titles and the shop/category page
   titles are `.d2` (`clamp(1.8rem, 2.9vw, 3rem)`); the subheading under any of
-  them is `.lead` (1.1rem) and stays on one line — `.head__t`, `.phead`,
-  `.cats__top` and `.empty` all give it the width to do so. Copy longer than
+  them is `.lead` (1.1rem) and stays on one line — `.head__t`, `.phead`
+  and `.empty` all give it the width to do so. (The featured-collection and
+  category pages are the exception: see the next point.) Copy longer than
   about 100 characters (the Account page's intro) wraps naturally. On the
   landing page the space-pane taglines (`.split__t .fine`) and collection names
   (`.fcl__name`) are sized in `vw` so the longest ones — 59 and 29 characters —
   fit one line from 1280px and 1100px up; below that they wrap. If you change
   that copy or those sizes, re-measure the longest string.
+- **The featured-collection page and the category page are one compact design,
+  approved by the owner (2026-10-04) — do not change it unless asked.**
+  `Shop.jsx` adds `.sec--col` to its section for a collection (`col`) and, when
+  rendered as `<Shop byCategory />`, for a chosen category. `Categories.jsx` shows
+  its overview of the seven (also `.sec--col`) until `?k=<id>` is chosen, then
+  renders that listing: the category lives in `k` instead of `c`, the title is the
+  category's name over its tagline, and the "All" tab goes back to the overview.
+  So `/categories?k=sofas` is the featured-collection layout — filter column,
+  Sort, pills, three-wide grid of the category's pieces. One block at the end of
+  `pages.css` ("compact listing pages") styles both. Every size there is its
+  compact value plus `--room` times a slope, where
+  `--room = clamp(0px, min(100svh - 600px, 100vw - 1000px), 350px)`: on a
+  600px-tall window it is the compact scale, which keeps the first row of
+  photographs on screen; on a full-HD window (950px tall) it is roomier — title
+  50px, tabs 16.8px, names 20.8px, images 315 x 420. Plain `/shop` and
+  `/shop?c=` keep the site's larger sizes on purpose. The photographs are limited
+  by the 1440px page box (`--max`); making them bigger means widening it, which
+  also moves the nav and footer.
 - **Featured collections are curated sets, not categories.** `COLLECTIONS` in
   `catalogue.js` lists the pieces; each tile opens `/shop?col=<id>`. Keep `p` out
   of query names (see Commands). The shop has three filters, on every view of it — the whole

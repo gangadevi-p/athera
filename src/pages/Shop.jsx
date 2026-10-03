@@ -71,10 +71,13 @@ function Check({ on, off = false, swatch = false, onChange, children }) {
   )
 }
 
-export default function Shop() {
+/* `byCategory` is the category page (/categories?k=<id>): the same listing, with the category in `k` instead of `c`,
+   shown once a category is chosen (Categories.jsx shows the overview of all seven before that). */
+export default function Shop({ byCategory = false }) {
   const [params, setParams] = useSearchParams()
+  const catKey = byCategory ? 'k' : 'c'
 
-  const cat = CATEGORIES.some(x => x.id === params.get('c')) ? params.get('c') : null
+  const cat = CATEGORIES.some(x => x.id === params.get(catKey)) ? params.get(catKey) : null
   const col = collectionById(params.get('col')) || null
   /* what is ticked, ignoring any value the facet does not have */
   const sel = Object.fromEntries(FACETS.map(f => [f.key, list(params.get(f.key)).filter(id => f.options.some(o => o.id === id))]))
@@ -113,7 +116,10 @@ export default function Shop() {
     set(key, current.includes(id) ? current.filter(x => x !== id) : [...current, id])
 
   /* clears the facets but keeps the chosen category (its own row) and the collection */
-  const clear = () => setParams({ ...(cat && { c: cat }), ...(col && { col: col.id }) }, { replace: true })
+  const clear = () => setParams({ ...(cat && { [catKey]: cat }), ...(col && { col: col.id }) }, { replace: true })
+
+  /* a category tab; "All" on the category page goes back to its overview of the seven */
+  const pickCat = id => (byCategory && !id ? setParams({}, { replace: true }) : set(catKey, id))
 
   /* ---------- the filtered, sorted list ---------- */
 
@@ -146,10 +152,10 @@ export default function Shop() {
   const c = cat ? catById(cat) : null
 
   return (
-    <section className="sec sec--shop">
+    <section className={cx('sec sec--shop', (col || byCategory) && 'sec--col')}>
       <div className="wrap">
         <div className="phead phead--wide">
-          <span className="eyebrow">{col ? 'Collection' : 'Furniture'}</span>
+          <span className="eyebrow">{col ? 'Collection' : byCategory ? 'Shop by category' : 'Furniture'}</span>
           <h1 className="disp d2">{col ? col.name : c ? c.name : 'The collection'}</h1>
           <p className="lead">
             {col
@@ -162,9 +168,9 @@ export default function Shop() {
 
         <div className="plp__top">
           <div className="cats__tabs" role="group" aria-label="Filter by category">
-            <button type="button" aria-pressed={!cat} onClick={() => set('c', null)}>All</button>
+            <button type="button" aria-pressed={!cat} onClick={() => pickCat(null)}>All</button>
             {CATEGORIES.map((x, i) => (
-              <button key={x.id} type="button" aria-pressed={cat === x.id} onClick={() => set('c', x.id)}>{TABS[i]}</button>
+              <button key={x.id} type="button" aria-pressed={cat === x.id} onClick={() => pickCat(x.id)}>{TABS[i]}</button>
             ))}
           </div>
           <FilterMenu

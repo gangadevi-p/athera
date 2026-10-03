@@ -577,13 +577,69 @@
 }
 .cats__tabs button:hover { border-color: color-mix(in srgb, var(--ink) 70%, transparent) }
 .cats__tabs button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--paper) }
-.cats__sec { padding-top: 40px }
-.cats__top { display: flex; justify-content: space-between; align-items: flex-end; gap: 48px; margin-bottom: 26px }
-.cats__top > div { display: flex; flex-direction: column; gap: 10px }
-.cats__top .lead { max-width: none; margin: 0 }
 .cats__tabs { margin-top: 0 }
 .cgrid { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px 24px }
 .cgrid a { display: flex; flex-direction: column; gap: 6px }
 .cgrid__img { display: block; margin-bottom: 10px }
-@media (max-width: 980px) { .cats__top { flex-direction: column; align-items: flex-start; gap: 14px } .cgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px } }
+@media (max-width: 980px) { .cgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 20px } }
 @media (max-width: 640px) { .cgrid { grid-template-columns: minmax(0, 1fr) } }
+
+/* ---------- compact listing pages -------------------------------------
+   A featured collection's page and the category page are one design, set in smaller type than the rest of the shop —
+   title, subheading, filters, pieces — and with tighter gaps between them, so the first row of photographs is on the
+   first screen with no scrolling. Both carry `.sec--col`: Shop.jsx adds it for a collection (`col`) and for a chosen
+   category (`byCategory`), and Categories.jsx for its overview of the seven. Nothing else carries it.
+
+   Everything follows `--room`, how much the window has to spare: 0 on a 600px-tall window (the compact sizes, which keep
+   the first row of photographs on screen), up to 350px on a window 950px tall and wide — a full-HD monitor — where the
+   sizes are roomier than the rest of the site. Each size is its compact value plus `--room` times a slope, so a short
+   window gives up the extra before a photograph is cut. Under 1000px wide there is no room to spare. After the rules
+   they override. */
+.sec--col {
+  --room: clamp(0px, min(100svh - 600px, 100vw - 1000px), 350px);
+  --cp: calc(8px + var(--room) * .114);   /* above the title block */
+  --cg: calc(4px + var(--room) * .04);    /* inside the title block */
+  --cm: calc(8px + var(--room) * .069);   /* between the title block, the filter row, the chosen filters and the pieces */
+  padding-top: var(--cp);
+}
+.sec--col .eyebrow { font-size: calc(.78rem + var(--room) * .0101); line-height: 1.2 }
+.sec--col .phead .disp { font-size: clamp(1.35rem, min(calc(1.35rem + var(--room) * .08), 3.4vw), 3.1rem) }
+.sec--col .phead .lead { font-size: calc(.95rem + var(--room) * .0137); line-height: 1.4 }
+.sec--col .cats__tabs { gap: calc(8px + var(--room) * .0114) }
+.sec--col .cats__tabs button {
+  font-size: calc(.8rem + var(--room) * .0114); line-height: 1.2;
+  padding: calc(8px + var(--room) * .0143) calc(16px + var(--room) * .0286);
+}
+.sec--col .pname { font-size: calc(1rem + var(--room) * .0137); line-height: 1.35 }
+.sec--col .price { font-size: calc(.97rem + var(--room) * .0129); line-height: 1.35 }
+
+/* the category overview: its grid sits straight under the tabs row, which carries the gap */
+.sec--col .cgrid { margin-top: 0 }
+
+/* the listing: the rest of its type and gaps */
+.sec--col .phead--wide { gap: var(--cg); margin-bottom: var(--cm) }
+.sec--col .plp__top { margin-bottom: var(--cm) }
+.sec--col .disc.fdisc summary { font-size: calc(.85rem + var(--room) * .0114); line-height: 1.3 }
+.sec--col .rail--menus .disc summary::after { font-size: calc(1.05rem + var(--room) * .0137) }
+.sec--col .fdisc { padding: calc(11px + var(--room) * .0171) 0 }
+.sec--col .fsort { padding: calc(8px + var(--room) * .0143) 0 } /* the sort row is as tall as the tabs beside it */
+.sec--col .fdisc__o { gap: calc(9px + var(--room) * .0143); margin: calc(12px + var(--room) * .0171) 0 4px }
+.sec--col .check { font-size: calc(.88rem + var(--room) * .01) }
+.sec--col .check__t em { font-size: calc(.8rem + var(--room) * .0091) }
+.sec--col .plp__active { margin-bottom: var(--cm) }
+.sec--col .pill { font-size: calc(.8rem + var(--room) * .0091); line-height: 1.3 }
+.sec--col .pill span { font-size: calc(1rem + var(--room) * .0114) }
+.sec--col .plp__active .linkbtn { font-size: calc(.8rem + var(--room) * .0091) }
+.sec--col .pcard__meta { padding-top: calc(14px + var(--room) * .0229); row-gap: calc(4px + var(--room) * .0057) }
+.sec--col .pcard__mat { font-size: calc(.88rem + var(--room) * .01) }
+.sec--col .plp__foot .fine { font-size: calc(.88rem + var(--room) * .01) }
+.sec--col .plp__foot .tlink { font-size: calc(.82rem + var(--room) * .0091) }
+.sec--col .empty .d3 { font-size: calc(1.4rem + var(--room) * .0366) }
+.sec--col .empty .lead { font-size: calc(.95rem + var(--room) * .0137) }
+
+/* a narrower filter column and closer columns give the photographs more of the width (the tablet and phone layouts keep theirs) */
+@media (min-width: 981px) {
+  .sec--col .plp__in { grid-template-columns: 208px minmax(0, 1fr); gap: 56px }
+  .sec--col .plp { column-gap: 36px }
+  .sec--col .cgrid { column-gap: 36px }
+}

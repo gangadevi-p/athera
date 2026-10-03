@@ -1,11 +1,13 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import Img from '../components/Img'
-import { CATEGORIES, PRODUCTS, cover } from '../data/catalogue'
-import { money } from '../lib/format'
+import Shop from './Shop'
+import { CATEGORIES } from '../data/catalogue'
 
 /**
- * Filter by category, then a plain grid of the pieces. Static: no reveals, no
- * drift, no hover swaps.
+ * Shop by category. With no category chosen, the seven of them as a plain grid
+ * (static: no reveals, no drift, no hover swaps). Once one is chosen the page is
+ * the featured collection's page — the same listing, filters and sort — for that
+ * category's pieces, so the two read as one.
  */
 
 const TABS = ['Sofas', 'Tables', 'Dining', 'Beds', 'Storage', 'Lighting', 'Objects']
@@ -13,57 +15,39 @@ const TABS = ['Sofas', 'Tables', 'Dining', 'Beds', 'Storage', 'Lighting', 'Objec
 export default function Categories() {
   const [sp, setSp] = useSearchParams()
   const chosen = CATEGORIES.find(c => c.id === sp.get('k')) || null
-  const pieces = chosen ? PRODUCTS.filter(p => p.cat === chosen.id) : []
-  const choose = id => setSp(id ? { k: id } : {}, { replace: true, preventScrollReset: true })
+
+  if (chosen) return <Shop byCategory />
+
+  const choose = id => setSp({ k: id }, { replace: true, preventScrollReset: true })
 
   return (
-    <section className="sec cats__sec">
+    <section className="sec sec--shop sec--col">
       <div className="wrap">
-        <div className="cats__top">
-          <div>
-            <span className="eyebrow">Shop by category</span>
-            <h1 className="disp d2">Seven ways in</h1>
+        <div className="phead phead--wide">
+          <span className="eyebrow">Shop by category</span>
+          <h1 className="disp d2">Seven ways in</h1>
+          <p className="lead">The whole collection, grouped the way a room is actually put together.</p>
+        </div>
+
+        <div className="plp__top">
+          <div className="cats__tabs" role="group" aria-label="Filter categories">
+            <button type="button" aria-pressed="true">All</button>
+            {CATEGORIES.map((c, i) => (
+              <button key={c.id} type="button" aria-pressed="false" onClick={() => choose(c.id)}>{TABS[i]}</button>
+            ))}
           </div>
-          <p className="lead">
-            {chosen ? chosen.tagline : 'The whole collection, grouped the way a room is actually put together.'}
-          </p>
         </div>
 
-        <div className="cats__tabs" role="group" aria-label="Filter categories">
-          <button type="button" aria-pressed={!chosen} onClick={() => choose(null)}>All</button>
+        <ul className="cgrid">
           {CATEGORIES.map((c, i) => (
-            <button key={c.id} type="button" aria-pressed={chosen?.id === c.id} onClick={() => choose(c.id)}>{TABS[i]}</button>
+            <li key={c.id}>
+              <Link to={`/categories?k=${c.id}`}>
+                <span className="cgrid__img"><Img id={c.image} alt={c.name} ratio="3 / 4" w={900} priority={i < 6} /></span>
+                <span className="pname">{c.short}</span>
+              </Link>
+            </li>
           ))}
-        </div>
-
-        {chosen ? (
-          <>
-            <ul className="cgrid">
-              {pieces.map((p, i) => (
-                <li key={p.id}>
-                  <Link to={`/p/${p.id}`}>
-                    <span className="cgrid__img"><Img id={cover(p)} alt={p.name} ratio="3 / 4" w={900} priority={i < 6} /></span>
-                    <span className="pname">{p.name}</span>
-                    <span className="price">{money(p.price)}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <>
-            <ul className="cgrid">
-              {CATEGORIES.map((c, i) => (
-                <li key={c.id}>
-                  <Link to={`/categories?k=${c.id}`}>
-                    <span className="cgrid__img"><Img id={c.image} alt={c.name} ratio="3 / 4" w={900} priority={i < 6} /></span>
-                    <span className="pname">{c.short}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+        </ul>
       </div>
     </section>
   )
