@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useParams, useViewTransitionState } from 'react-router-dom'
+import BackButton from '../components/BackButton'
 import Gallery from '../components/Gallery'
 import ProductCard from '../components/ProductCard'
 import SaveButton from '../components/SaveButton'
@@ -7,6 +8,10 @@ import NotFound from './NotFound'
 import { PRODUCTS, byId, catById } from '../data/catalogue'
 import { checkPostcode, dims, money } from '../lib/format'
 import { useShop } from '../lib/shop'
+
+/** Materials as one running list: only the first item opens a capital, proper nouns keep theirs. */
+const materials = list =>
+  list.map((m, i) => (i === 0 || /^(FSC|Belgian|Danish)/.test(m) ? m : m[0].toLowerCase() + m.slice(1))).join(', ')
 
 /** '10–12 weeks' → 10; 'In stock' → 0. */
 const leadWeeks = lead => {
@@ -81,11 +86,14 @@ function Detail({ p }) {
 
           <div className="pdp__side">
             <div className="pdp__panel">
-              <nav className="crumb" aria-label="Breadcrumb">
-                <Link to="/shop">Furniture</Link>
-                <span>/</span>
-                <Link to={`/shop?c=${cat.id}`}>{cat.short}</Link>
-              </nav>
+              <div className="phead__row">
+                <BackButton to={`/shop?c=${cat.id}`} />
+                <nav className="crumb" aria-label="Breadcrumb">
+                  <Link to="/shop">Furniture</Link>
+                  <span>/</span>
+                  <Link to={`/shop?c=${cat.id}`}>{cat.short}</Link>
+                </nav>
+              </div>
 
               <h1 className="ptitle">{p.name}</h1>
               <p className="pdp__price">{money(p.price)}</p>
@@ -147,8 +155,8 @@ function Detail({ p }) {
           <details className="disc">
             <summary>Dimensions</summary>
             <dl className="spec">
-              <div><dt>Dimensions</dt><dd>{dims(p.dim)}{p.dim.seat ? ` · seat ${p.dim.seat} cm` : ''}</dd></div>
-              <div><dt>Materials</dt><dd>{p.materials.join(', ')}</dd></div>
+              <div><dt>Size</dt><dd>{dims(p.dim)}{p.dim.seat ? ` · seat ${p.dim.seat} cm` : ''}</dd></div>
+              <div><dt>Materials</dt><dd>{materials(p.materials)}</dd></div>
               <div><dt>Designer</dt><dd>{p.designer}, {p.year}</dd></div>
             </dl>
           </details>

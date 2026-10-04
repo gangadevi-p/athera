@@ -1,72 +1,103 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Img from './Img'
 import { gallery } from '../data/catalogue'
 import { cx } from '../lib/format'
 
+const SCALE = 2.6
+
 /**
  * The product gallery: one large 1:1 frame, with the five views the brief
  * names — front, side, three-quarter, back, detail, in that order — as labelled
- * 4:5 close-ups beneath it. Choosing a close-up brings it into the large frame.
+ * 4:5 close-ups beside it. Choosing a close-up brings it into the large frame.
  * `gallery()` re-frames the front photograph for any view a piece has no
- * photograph of. The large frame opens a zoom view; inside it, click to magnify
- * and move the pointer to pan, and the arrow keys step through the views.
+ * photograph of. There is no zoom page or overlay: the frame magnifies in place.
+ * Click (or tap, or Enter) to enlarge: the view then holds still where it was
+ * clicked, drag to move around it, click again or press Escape to return. Once the pointer arrives, a 2400px file is fetched
+ * for the view on show, so the magnified detail is sharp rather than stretched.
  */
 export default function Gallery({ p, opening = false }) {
   const [view, setView] = useState(0)
-  const [at, setAt] = useState(-1)
-  const [big, setBig] = useState(false)
-  const [origin, setOrigin] = useState('50% 50%')
+  const [zoomed, setZoomed] = useState(false)
+  const [armed, setArmed] = useState(false)
+  const [hi, setHi] = useState('')
+  const [origin, setOrigin] = useState({ x: 50, y: 50 })
+  const drag = useRef(null)
   const shots = useMemo(() => gallery(p), [p])
-  const open = at >= 0
-  const shot = open ? shots[at] : null
+  const hiUrl = shots[view].url(2400)
 
-  // closing the zoom leaves the large frame on whichever view it ended on
-  const close = useCallback(() => {
-    if (at >= 0) setView(at)
-    setAt(-1)
-    setBig(false)
-  }, [at])
-  const step = useCallback(
-    d => { setBig(false); setAt(i => (i + d + shots.length) % shots.length) },
-    [shots.length]
-  )
+  const pick = i => { setZoomed(false); setHi(''); setView(i) }
 
   useEffect(() => {
-    if (!open) return
-    const onKey = e => {
-      if (e.key === 'Escape') close()
-      if (e.key === 'ArrowRight') step(1)
-      if (e.key === 'ArrowLeft') step(-1)
-    }
+    if (!zoomed) return
+    const onKey = e => { if (e.key === 'Escape') setZoomed(false) }
     document.addEventListener('keydown', onKey)
-    const prev = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-    return () => {
-      document.removeEventListener('keydown', onKey)
-      document.body.style.overflow = prev
-    }
-  }, [open, close, step])
+    return () => document.removeEventListener('keydown', onKey)
+  }, [zoomed])
 
-  const track = e => {
-    if (!big) return
+  const at = (e, el) => {
+    const r = el.getBoundingClientRect()
+    return {
+      x: Math.min(100, Math.max(0, ((e.clientX - r.left) / r.width) * 100)),
+      y: Math.min(100, Math.max(0, ((e.clientY - r.top) / r.height) * 100)),
+    }
+  }
+
+  // enlarging holds the view where it was clicked; only a drag moves it
+  const down = e => {
+    if (!zoomed) return
+    drag.current = { x: e.clientX, y: e.clientY, from: origin, moved: false }
+    e.currentTarget.setPointerCapture?.(e.pointerId)
+  }
+  const move = e => {
+    const d = drag.current
+    if (!d) return
     const r = e.currentTarget.getBoundingClientRect()
-    setOrigin(
-      `${((e.clientX - r.left) / r.width) * 100}% ${((e.clientY - r.top) / r.height) * 100}%`
-    )
+    const dx = e.clientX - d.x
+    const dy = e.clientY - d.y
+    if (Math.abs(dx) + Math.abs(dy) > 4) d.moved = true
+    if (!d.moved) return
+    // moving the content by n pixels moves the origin by -n / (scale - 1)
+    const k = 100 / (SCALE - 1)
+    setOrigin({
+      x: Math.min(100, Math.max(0, d.from.x - (dx / r.width) * k)),
+      y: Math.min(100, Math.max(0, d.from.y - (dy / r.height) * k)),
+    })
+  }
+  const toggle = e => {
+    const moved = drag.current?.moved
+    drag.current = null
+    if (moved) return
+    if (!zoomed) setOrigin(at(e, e.currentTarget))
+    setZoomed(z => !z)
+  }
+
+  // the arrow keys step through the views while the frame has focus
+  const key = e => {
+    if (e.key === 'ArrowRight') pick((view + 1) % shots.length)
+    if (e.key === 'ArrowLeft') pick((view - 1 + shots.length) % shots.length)
   }
 
   return (
-    <>
-      <div className="gal">
-        {/* every view is layered in the frame, so choosing a close-up
-            crossfades rather than flashing the placeholder */}
-        <button
-          type="button"
-          className="gal__stage"
-          onClick={() => setAt(view)}
-          aria-label={`${p.name}, ${shots[view].view.toLowerCase()} view — open zoom`}
-          // the opening frame carries the name the card expands from
-          style={view === 0 && opening ? { viewTransitionName: 'piece' } : undefined}
+    <div className="gal">
+      {/* every view is layered in the frame, so choosing a close-up
+          crossfades rather than flashing the placeholder */}
+      <button
+        type="button"
+        className={cx('gal__stage', zoomed && 'gal__stage--zoomed')}
+        onClick={toggle}
+        onPointerEnter={() => setArmed(true)}
+        onFocus={() => setArmed(true)}
+        onPointerDown={down}
+        onPointerMove={move}
+        onKeyDown={key}
+        aria-pressed={zoomed}
+        aria-label={`${p.name}, ${shots[view].view.toLowerCase()} view — ${zoomed ? 'return to full view' : 'magnify'}`}
+        // the opening frame carries the name the card expands from
+        style={view === 0 && opening ? { viewTransitionName: 'piece' } : undefined}
+      >
+        <span
+          className="gal__zoomer"
+          style={{ transformOrigin: `${origin.x}% ${origin.y}%`, transform: zoomed ? `scale(${SCALE})` : undefined }}
         >
           {shots.map((s, i) => (
             <Img
@@ -78,61 +109,36 @@ export default function Gallery({ p, opening = false }) {
               priority={i === 0}
             />
           ))}
-          <span className="gal__zoom" aria-hidden="true">Zoom</span>
-        </button>
-
-        <div className="gal__thumbs" role="group" aria-label="Views">
-          {shots.map((s, i) => (
-            <figure className="gal__f" key={`${p.id}-${s.view}`}>
-              <button
-                type="button"
-                className={cx('gal__t', i === view && 'on')}
-                onClick={() => setView(i)}
-                aria-pressed={i === view}
-                aria-label={`Show ${s.view.toLowerCase()} view`}
-              >
-                <Img src={s.url(360)} alt="" ratio="4 / 5" />
-              </button>
-              <figcaption className="gal__cap">{s.view}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </div>
-
-      {open && (
-        <div className="zoom" role="dialog" aria-modal="true" aria-label={`${p.name}, zoom`}>
-          <div className="zoom__bar">
-            <span className="eyebrow">
-              {p.name} · {shot.view} view · {at + 1}/{shots.length}
-            </span>
-            <button className="zoom__x" type="button" onClick={close} aria-label="Close zoom">
-              &times;
-            </button>
-          </div>
-
-          <div
-            className={cx('zoom__stage', big && 'on')}
-            onMouseMove={track}
-            onClick={() => setBig(v => !v)}
-            role="button"
-            tabIndex={0}
-            aria-label={big ? 'Reduce' : 'Magnify'}
-            onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setBig(v => !v) } }}
-          >
+          {armed && (
             <img
-              src={shot.url(2000)}
-              alt={`${p.name}, ${shot.view.toLowerCase()} view`}
-              style={big ? { transform: 'scale(2.2)', transformOrigin: origin } : undefined}
+              key={hiUrl}
+              className={cx('gal__hi', hi === hiUrl && 'on')}
+              src={hiUrl}
+              alt=""
+              decoding="async"
+              onLoad={() => setHi(hiUrl)}
             />
-          </div>
+          )}
+        </span>
+        <span className="gal__zoom" aria-hidden="true">Zoom</span>
+      </button>
 
-          <div className="zoom__nav">
-            <button className="tlink" type="button" onClick={() => step(-1)}>Previous</button>
-            <span className="fine">{big ? 'Click to reduce' : 'Click the photograph to magnify'}</span>
-            <button className="tlink" type="button" onClick={() => step(1)}>Next</button>
-          </div>
-        </div>
-      )}
-    </>
+      <div className="gal__thumbs" role="group" aria-label="Views">
+        {shots.map((s, i) => (
+          <figure className="gal__f" key={`${p.id}-${s.view}`}>
+            <button
+              type="button"
+              className={cx('gal__t', i === view && 'on')}
+              onClick={() => pick(i)}
+              aria-pressed={i === view}
+              aria-label={`Show ${s.view.toLowerCase()} view`}
+            >
+              <Img src={s.url(360)} alt="" ratio="4 / 5" />
+            </button>
+            <figcaption className="gal__cap">{s.view}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
   )
 }
