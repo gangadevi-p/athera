@@ -285,6 +285,8 @@ main[data-home] { padding-top: 0 }
   transition: opacity var(--t-image) var(--ease), transform 1.2s var(--ease);
 }
 .img--on img { opacity: 1 }
+/* photographs cut from our own sheets are already graded; the shared grade would only dull them */
+.img--own img { filter: none }
 .img__fb {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;

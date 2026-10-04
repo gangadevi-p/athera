@@ -1,0 +1,783 @@
+[
+ {
+  "id": "sofas-00",
+  "left": 3,
+  "top": 3,
+  "width": 374,
+  "height": 268,
+  "out": [
+   1122,
+   1496
+  ]
+ },
+ {
+  "id": "sofas-01",
+  "left": 387,
+  "top": 3,
+  "width": 376,
+  "height": 268,
+  "out": [
+   1128,
+   1504
+  ]
+ },
+ {
+  "id": "sofas-03",
+  "left": 1160,
+  "top": 3,
+  "width": 373,
+  "height": 268,
+  "out": [
+   1119,
+   1492
+  ]
+ },
+ {
+  "id": "sofas-04",
+  "left": 3,
+  "top": 281,
+  "width": 374,
+  "height": 253,
+  "out": [
+   1122,
+   1496
+  ]
+ },
+ {
+  "id": "sofas-05",
+  "left": 387,
+  "top": 281,
+  "width": 376,
+  "height": 253,
+  "out": [
+   1128,
+   1504
+  ]
+ },
+ {
+  "id": "sofas-07",
+  "left": 1160,
+  "top": 281,
+  "width": 373,
+  "height": 253,
+  "out": [
+   1119,
+   1492
+  ]
+ },
+ {
+  "id": "sofas-08",
+  "left": 3,
+  "top": 544,
+  "width": 374,
+  "height": 231,
+  "out": [
+   1122,
+   1496
+  ]
+ },
+ {
+  "id": "sofas-09",
+  "left": 387,
+  "top": 544,
+  "width": 376,
+  "height": 231,
+  "out": [
+   1128,
+   1504
+  ]
+ },
+ {
+  "id": "sofas-10",
+  "left": 774,
+  "top": 544,
+  "width": 375,
+  "height": 231,
+  "out": [
+   1125,
+   1500
+  ]
+ },
+ {
+  "id": "sofas-11",
+  "left": 1160,
+  "top": 544,
+  "width": 373,
+  "height": 231,
+  "out": [
+   1119,
+   1492
+  ]
+ },
+ {
+  "id": "sofas-13",
+  "left": 387,
+  "top": 785,
+  "width": 376,
+  "height": 236,
+  "out": [
+   1128,
+   1504
+  ]
+ },
+ {
+  "id": "sofas-14",
+  "left": 774,
+  "top": 785,
+  "width": 375,
+  "height": 236,
+  "out": [
+   1125,
+   1500
+  ]
+ },
+ {
+  "id": "sofas-15",
+  "left": 1160,
+  "top": 785,
+  "width": 373,
+  "height": 236,
+  "out": [
+   1119,
+   1492
+  ]
+ },
+ {
+  "id": "coffee-00",
+  "left": 3,
+  "top": 3,
+  "width": 299,
+  "height": 244,
+  "out": [
+   897,
+   732
+  ]
+ },
+ {
+  "id": "coffee-01",
+  "left": 314,
+  "top": 3,
+  "width": 299,
+  "height": 244,
+  "out": [
+   897,
+   732
+  ]
+ },
+ {
+  "id": "coffee-02",
+  "left": 625,
+  "top": 3,
+  "width": 296,
+  "height": 244,
+  "out": [
+   888,
+   732
+  ]
+ },
+ {
+  "id": "coffee-04",
+  "left": 1236,
+  "top": 3,
+  "width": 297,
+  "height": 244,
+  "out": [
+   891,
+   732
+  ]
+ },
+ {
+  "id": "coffee-06",
+  "left": 315,
+  "top": 258,
+  "width": 298,
+  "height": 248,
+  "out": [
+   894,
+   744
+  ]
+ },
+ {
+  "id": "coffee-07",
+  "left": 625,
+  "top": 258,
+  "width": 296,
+  "height": 248,
+  "out": [
+   888,
+   744
+  ]
+ },
+ {
+  "id": "coffee-08",
+  "left": 932,
+  "top": 258,
+  "width": 291,
+  "height": 248,
+  "out": [
+   873,
+   744
+  ]
+ },
+ {
+  "id": "coffee-09",
+  "left": 1236,
+  "top": 258,
+  "width": 297,
+  "height": 248,
+  "out": [
+   891,
+   744
+  ]
+ },
+ {
+  "id": "coffee-12",
+  "left": 625,
+  "top": 518,
+  "width": 295,
+  "height": 239,
+  "out": [
+   885,
+   717
+  ]
+ },
+ {
+  "id": "coffee-14",
+  "left": 1236,
+  "top": 518,
+  "width": 297,
+  "height": 239,
+  "out": [
+   891,
+   717
+  ]
+ },
+ {
+  "id": "coffee-16",
+  "left": 315,
+  "top": 770,
+  "width": 298,
+  "height": 251,
+  "out": [
+   894,
+   753
+  ]
+ },
+ {
+  "id": "dining-01",
+  "left": 393,
+  "top": 3,
+  "width": 387,
+  "height": 294,
+  "out": [
+   1161,
+   882
+  ]
+ },
+ {
+  "id": "dining-02",
+  "left": 790,
+  "top": 3,
+  "width": 355,
+  "height": 294,
+  "out": [
+   1065,
+   882
+  ]
+ },
+ {
+  "id": "dining-03",
+  "left": 1155,
+  "top": 3,
+  "width": 378,
+  "height": 294,
+  "out": [
+   1134,
+   882
+  ]
+ },
+ {
+  "id": "dining-05",
+  "left": 271,
+  "top": 305,
+  "width": 255,
+  "height": 202,
+  "out": [
+   765,
+   606
+  ]
+ },
+ {
+  "id": "dining-07",
+  "left": 790,
+  "top": 305,
+  "width": 237,
+  "height": 202,
+  "out": [
+   711,
+   606
+  ]
+ },
+ {
+  "id": "dining-08",
+  "left": 1037,
+  "top": 305,
+  "width": 231,
+  "height": 202,
+  "out": [
+   693,
+   606
+  ]
+ },
+ {
+  "id": "dining-13",
+  "left": 1156,
+  "top": 516,
+  "width": 377,
+  "height": 293,
+  "out": [
+   1131,
+   879
+  ]
+ },
+ {
+  "id": "dining-15",
+  "left": 271,
+  "top": 818,
+  "width": 255,
+  "height": 203,
+  "out": [
+   765,
+   609
+  ]
+ },
+ {
+  "id": "dining-17",
+  "left": 791,
+  "top": 818,
+  "width": 235,
+  "height": 203,
+  "out": [
+   705,
+   609
+  ]
+ },
+ {
+  "id": "dining-18",
+  "left": 1038,
+  "top": 818,
+  "width": 230,
+  "height": 203,
+  "out": [
+   690,
+   609
+  ]
+ },
+ {
+  "id": "beds-00",
+  "left": 3,
+  "top": 3,
+  "width": 376,
+  "height": 318,
+  "out": [
+   1128,
+   954
+  ]
+ },
+ {
+  "id": "beds-01",
+  "left": 389,
+  "top": 3,
+  "width": 375,
+  "height": 318,
+  "out": [
+   1125,
+   954
+  ]
+ },
+ {
+  "id": "beds-04",
+  "left": 3,
+  "top": 329,
+  "width": 376,
+  "height": 307,
+  "out": [
+   1128,
+   921
+  ]
+ },
+ {
+  "id": "beds-05",
+  "left": 389,
+  "top": 329,
+  "width": 376,
+  "height": 307,
+  "out": [
+   1128,
+   921
+  ]
+ },
+ {
+  "id": "beds-06",
+  "left": 774,
+  "top": 329,
+  "width": 381,
+  "height": 307,
+  "out": [
+   1143,
+   921
+  ]
+ },
+ {
+  "id": "beds-07",
+  "left": 1165,
+  "top": 329,
+  "width": 368,
+  "height": 307,
+  "out": [
+   1104,
+   921
+  ]
+ },
+ {
+  "id": "beds-08",
+  "left": 3,
+  "top": 644,
+  "width": 376,
+  "height": 377,
+  "out": [
+   1128,
+   1131
+  ]
+ },
+ {
+  "id": "beds-10",
+  "left": 774,
+  "top": 644,
+  "width": 381,
+  "height": 377,
+  "out": [
+   1143,
+   1131
+  ]
+ },
+ {
+  "id": "bedside-00",
+  "left": 3,
+  "top": 3,
+  "width": 290,
+  "height": 320,
+  "out": [
+   870,
+   960
+  ]
+ },
+ {
+  "id": "bedside-01",
+  "left": 304,
+  "top": 3,
+  "width": 310,
+  "height": 320,
+  "out": [
+   930,
+   960
+  ]
+ },
+ {
+  "id": "bedside-09",
+  "left": 1250,
+  "top": 333,
+  "width": 283,
+  "height": 327,
+  "out": [
+   849,
+   981
+  ]
+ },
+ {
+  "id": "bedside-11",
+  "left": 304,
+  "top": 671,
+  "width": 310,
+  "height": 350,
+  "out": [
+   930,
+   1050
+  ]
+ },
+ {
+  "id": "storage-00",
+  "left": 3,
+  "top": 3,
+  "width": 262,
+  "height": 353,
+  "out": [
+   786,
+   1059
+  ]
+ },
+ {
+  "id": "storage-01",
+  "left": 275,
+  "top": 3,
+  "width": 249,
+  "height": 353,
+  "out": [
+   747,
+   1059
+  ]
+ },
+ {
+  "id": "storage-06",
+  "left": 3,
+  "top": 366,
+  "width": 305,
+  "height": 294,
+  "out": [
+   915,
+   882
+  ]
+ },
+ {
+  "id": "storage-07",
+  "left": 318,
+  "top": 366,
+  "width": 320,
+  "height": 294,
+  "out": [
+   960,
+   882
+  ]
+ },
+ {
+  "id": "storage-08",
+  "left": 648,
+  "top": 366,
+  "width": 259,
+  "height": 294,
+  "out": [
+   777,
+   882
+  ]
+ },
+ {
+  "id": "storage-09",
+  "left": 917,
+  "top": 366,
+  "width": 359,
+  "height": 294,
+  "out": [
+   1077,
+   882
+  ]
+ },
+ {
+  "id": "storage-10",
+  "left": 1286,
+  "top": 366,
+  "width": 247,
+  "height": 294,
+  "out": [
+   741,
+   882
+  ]
+ },
+ {
+  "id": "storage-11",
+  "left": 3,
+  "top": 670,
+  "width": 297,
+  "height": 351,
+  "out": [
+   891,
+   1053
+  ]
+ },
+ {
+  "id": "storage-12",
+  "left": 310,
+  "top": 670,
+  "width": 289,
+  "height": 351,
+  "out": [
+   867,
+   1053
+  ]
+ },
+ {
+  "id": "storage-14",
+  "left": 907,
+  "top": 670,
+  "width": 361,
+  "height": 351,
+  "out": [
+   1083,
+   1053
+  ]
+ },
+ {
+  "id": "storage-15",
+  "left": 1278,
+  "top": 670,
+  "width": 255,
+  "height": 351,
+  "out": [
+   765,
+   1053
+  ]
+ },
+ {
+  "id": "objects-03",
+  "left": 926,
+  "top": 3,
+  "width": 297,
+  "height": 251,
+  "out": [
+   891,
+   753
+  ]
+ },
+ {
+  "id": "objects-05",
+  "left": 3,
+  "top": 263,
+  "width": 300,
+  "height": 235,
+  "out": [
+   900,
+   705
+  ]
+ },
+ {
+  "id": "objects-07",
+  "left": 634,
+  "top": 263,
+  "width": 282,
+  "height": 235,
+  "out": [
+   846,
+   705
+  ]
+ },
+ {
+  "id": "objects-10",
+  "left": 3,
+  "top": 507,
+  "width": 300,
+  "height": 234,
+  "out": [
+   900,
+   702
+  ]
+ },
+ {
+  "id": "objects-19",
+  "left": 1234,
+  "top": 750,
+  "width": 299,
+  "height": 271,
+  "out": [
+   897,
+   813
+  ]
+ },
+ {
+  "id": "lamps-02",
+  "left": 609,
+  "top": 3,
+  "width": 319,
+  "height": 328,
+  "out": [
+   957,
+   984
+  ]
+ },
+ {
+  "id": "lamps-03",
+  "left": 938,
+  "top": 3,
+  "width": 292,
+  "height": 328,
+  "out": [
+   876,
+   984
+  ]
+ },
+ {
+  "id": "lamps-05",
+  "left": 3,
+  "top": 341,
+  "width": 295,
+  "height": 322,
+  "out": [
+   885,
+   966
+  ]
+ },
+ {
+  "id": "lamps-06",
+  "left": 308,
+  "top": 341,
+  "width": 289,
+  "height": 322,
+  "out": [
+   867,
+   966
+  ]
+ },
+ {
+  "id": "lamps-08",
+  "left": 938,
+  "top": 341,
+  "width": 292,
+  "height": 322,
+  "out": [
+   876,
+   966
+  ]
+ },
+ {
+  "id": "lamps-10",
+  "left": 3,
+  "top": 673,
+  "width": 295,
+  "height": 348,
+  "out": [
+   885,
+   1044
+  ]
+ },
+ {
+  "id": "lamps-11",
+  "left": 308,
+  "top": 673,
+  "width": 289,
+  "height": 348,
+  "out": [
+   867,
+   1044
+  ]
+ },
+ {
+  "id": "lamps-12",
+  "left": 609,
+  "top": 673,
+  "width": 318,
+  "height": 348,
+  "out": [
+   954,
+   1044
+  ]
+ },
+ {
+  "id": "lamps-13",
+  "left": 938,
+  "top": 673,
+  "width": 292,
+  "height": 348,
+  "out": [
+   876,
+   1044
+  ]
+ }
+]

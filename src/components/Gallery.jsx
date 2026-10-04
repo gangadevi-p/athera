@@ -104,6 +104,8 @@ export default function Gallery({ p, opening = false }) {
               key={`${p.id}-${s.view}`}
               className={cx('gal__layer', i === view && 'on')}
               src={s.url(1400)}
+              position={s.pos}
+              zoom={s.zoom}
               alt={i === view ? `${p.name}, ${s.view.toLowerCase()} view` : ''}
               ratio="1 / 1"
               priority={i === 0}
@@ -114,6 +116,7 @@ export default function Gallery({ p, opening = false }) {
               key={hiUrl}
               className={cx('gal__hi', hi === hiUrl && 'on')}
               src={hiUrl}
+              style={shots[view].pos ? { objectPosition: shots[view].pos, transform: shots[view].zoom > 1 ? `scale(${shots[view].zoom})` : undefined, transformOrigin: shots[view].pos } : undefined}
               alt=""
               decoding="async"
               onLoad={() => setHi(hiUrl)}
@@ -133,7 +136,7 @@ export default function Gallery({ p, opening = false }) {
               aria-pressed={i === view}
               aria-label={`Show ${s.view.toLowerCase()} view`}
             >
-              <Img src={s.url(360)} alt="" ratio="4 / 5" />
+              <Img src={s.url(360)} alt="" ratio="4 / 5" position={s.pos} zoom={s.zoom} />
             </button>
             <figcaption className="gal__cap">{s.view}</figcaption>
           </figure>

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { img, imgAt } from '../data/catalogue'
+import { img, imgAt, atOf, isLocal } from '../data/catalogue'
 import { cx } from '../lib/format'
 
 /**
@@ -7,7 +7,10 @@ import { cx } from '../lib/format'
  * and a graceful fallback if the asset never arrives — the layout never shifts
  * or collapses.
  *
- * `id` is an Unsplash photo id; pass `src` instead for anything else.
+ * `id` is an Unsplash photo id, or `local:<sheet>-<nn>` for a photograph cut
+ * from a contact sheet in /img; pass `src` instead for anything else. A local
+ * photograph is framed on its subject (`position` overrides), and `zoom` magnifies
+ * it about that point.
  *
  * Ratios come from the brief: 16:9 for the homepage hero, 4:5 for editorial,
  * 3:4 for product cards, 1:1 and 4:5 in the product gallery. Where a crop has
@@ -26,11 +29,14 @@ export default function Img({
   w = 1400,
   wSm = 900,
   className = '',
-  position = 'center',
+  position,
+  zoom,
   priority = false,
   ...rest
 }) {
   const [state, setState] = useState('loading')
+  const at = atOf(id)
+  const pos = position || (at ? `${at[0] * 100}% ${at[1] * 100}%` : 'center')
   const url = src || (ar ? imgAt(id, w, ar, fp) : img(id, w))
 
   const common = {
@@ -38,14 +44,14 @@ export default function Img({
     loading: priority ? 'eager' : 'lazy',
     decoding: 'async',
     fetchpriority: priority ? 'high' : 'auto',
-    style: { objectPosition: position },
+    style: zoom > 1 ? { objectPosition: pos, transform: `scale(${zoom})`, transformOrigin: pos } : { objectPosition: pos },
     onLoad: () => setState('loaded'),
     onError: () => setState('error'),
   }
 
   return (
     <div
-      className={cx('img', state === 'loaded' && 'img--on', className)}
+      className={cx('img', state === 'loaded' && 'img--on', (isLocal(id) || src?.includes('/photos/')) && 'img--own', className)}
       style={{ '--ar': ratio, '--ar-sm': ratioSm || ratio }}
       {...rest}
     >

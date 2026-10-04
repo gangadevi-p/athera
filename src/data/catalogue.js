@@ -10,11 +10,24 @@
  * block, so a missing asset never collapses a layout.
  */
 
+import { AT, DEFAULT_AT, PIECES } from './sheets.js'
+
+/** Photographs cut from the contact sheets in /img are ids of the form `local:<sheet>-<nn>`. */
+export const isLocal = id => typeof id === 'string' && id.startsWith('local:')
+const BASE = import.meta.env?.BASE_URL ?? '/'
+const localUrl = id => `${BASE}photos/${id.slice(6)}.webp`
+
+/** Where the subject sits in a local photograph, as [x, y] from 0 to 1. */
+export const atOf = id => (isLocal(id) ? AT[id.slice(6)] || DEFAULT_AT : null)
+
 export const img = (id, w = 1400) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`
+  isLocal(id)
+    ? localUrl(id)
+    : `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=85`
 
 /** A crop at a named ratio — used for the hero, which ships two crops. */
 export const imgAt = (id, w, ar, fp) => {
+  if (isLocal(id)) return localUrl(id)
   const [rw, rh] = ar.split(':').map(Number)
   // fp = [x, y] in 0–1: the point the crop stays centred on, so a tall phone crop keeps the subject
   const focal = fp ? `&crop=focalpoint&fp-x=${fp[0]}&fp-y=${fp[1]}${fp[2] ? `&fp-z=${fp[2]}` : ''}` : ''
@@ -32,7 +45,7 @@ export const CATEGORIES = [
     short: 'Sofas & lounge chairs',
     items: 'Sofas, lounge chairs, stools',
     tagline: 'Built around the way a room is actually used, not the way it photographs.',
-    image: 'photo-1578500494198-246f612d3b3d',
+    image: 'local:sofas-01',
   },
   {
     id: 'tables',
@@ -40,7 +53,7 @@ export const CATEGORIES = [
     short: 'Coffee & side tables',
     items: 'Coffee tables, side tables',
     tagline: 'Low surfaces in solid timber and honest stone, sized for the room around them.',
-    image: 'photo-1620812067822-899be8a6a9a7',
+    image: 'local:coffee-01',
   },
   {
     id: 'dining',
@@ -48,7 +61,7 @@ export const CATEGORIES = [
     short: 'Dining tables & chairs',
     items: 'Dining tables, dining chairs, desks',
     tagline: 'Tables sized for the meal that runs long, and chairs you can stay in.',
-    image: 'photo-1749476101600-90b2eb7efa89',
+    image: 'local:dining-02',
   },
   {
     id: 'beds',
@@ -56,7 +69,7 @@ export const CATEGORIES = [
     short: 'Beds & bedside tables',
     items: 'Beds, headboards, bedside tables',
     tagline: 'The least demanding pieces in the house, so the room can recede.',
-    image: 'photo-1688383454669-9f5cc5991778',
+    image: 'local:beds-07',
   },
   {
     id: 'storage',
@@ -64,7 +77,7 @@ export const CATEGORIES = [
     short: 'Shelves & storage',
     items: 'Shelving, sideboards, cabinets',
     tagline: 'Pieces that hold the everyday without announcing it.',
-    image: 'photo-1650475496371-d7544a32563d',
+    image: 'local:storage-11',
   },
   {
     id: 'lighting',
@@ -72,7 +85,7 @@ export const CATEGORIES = [
     short: 'Floor & table lamps',
     items: 'Floor lamps, table lamps',
     tagline: 'Paper, linen and blown glass — light softened before it reaches the room.',
-    image: 'photo-1769255119650-f658d3dbc397',
+    image: 'local:lamps-02',
   },
   {
     id: 'objects',
@@ -80,7 +93,7 @@ export const CATEGORIES = [
     short: 'Rugs, cushions & objects',
     items: 'Rugs, cushions, ceramics',
     tagline: 'The last layer: the things that make a room read as lived in.',
-    image: 'photo-1719513709219-1d6e405ea017',
+    image: 'local:objects-03',
   },
 ]
 
@@ -129,7 +142,7 @@ export const PRICE_BANDS = [
 
 /* ---------- pieces ---------- */
 
-export const PRODUCTS = [
+const BASE_PRODUCTS = [
   {
     id: 'linen-lounge-sofa',
     name: 'Linen Lounge Sofa',
@@ -2167,6 +2180,24 @@ export const PRODUCTS = [
   },
 ]
 
+/**
+ * Pieces with a photograph cut from a contact sheet (see sheets.js) show it as
+ * their front; `alt` is what a card fades to and `detail` a genuine close-up.
+ * The rest keep the photographs above.
+ */
+const withSheets = p => {
+  const f = PIECES[p.id]
+  if (!f) return p
+  const id = k => (f[k] ? `local:${f[k]}` : null)
+  const images = [{ id: id('front'), view: 'Front' }]
+  if (f.alt) images.push({ id: id('alt'), view: 'Three-quarter' })
+  if (f.detail) images.push({ id: id('detail'), view: 'Detail' })
+  const { focus, detailAt, ...rest } = p
+  return { ...rest, images }
+}
+
+export const PRODUCTS = BASE_PRODUCTS.map(withSheets)
+
 /* ---------- spaces ---------- */
 /* each space carries a curated `pieces` list of 15–20 ids; its page lists those, with the shop's material, colour and size filters */
 
@@ -2435,8 +2466,27 @@ const clamp = n => Math.min(1, Math.max(0, +n.toFixed(3)))
  * piece sits in that photograph, as `[x, y]` from 0 to 1, and `detailAt` where
  * a re-framed close-up should land.
  */
+/** The same views for a local photograph, framed in CSS (zoom about the subject) rather than by a CDN. */
+const LOCAL_REFRAME = {
+  Front: { z: 1, dx: 0, dy: 0 },
+  Side: { z: 1.22, dx: -0.07, dy: 0 },
+  'Three-quarter': { z: 1.1, dx: 0.05, dy: 0 },
+  Back: { z: 1.4, dx: 0.09, dy: -0.03 },
+  Detail: { z: 1.8, dx: 0, dy: 0.04 },
+}
+
 export const gallery = p => {
   const lead = p.images.find(i => i.view === 'Front') || p.images[0]
+  if (isLocal(lead.id)) {
+    return VIEWS.map(view => {
+      const own = view === 'Detail' && p.images.find(i => i.view === 'Detail')
+      const id = own ? own.id : lead.id
+      const [ax, ay] = atOf(id)
+      const r = own ? { z: 1, dx: 0, dy: 0 } : LOCAL_REFRAME[view]
+      const pos = `${(clamp(ax + r.dx) * 100).toFixed(1)}% ${(clamp(ay + r.dy) * 100).toFixed(1)}%`
+      return { view, id, url: () => localUrl(id), zoom: r.z, pos }
+    })
+  }
   const [fx, fy] = p.focus || [0.5, 0.55]
   const [dx, dy] = p.detailAt || [fx, fy]
   return VIEWS.map(view => {
