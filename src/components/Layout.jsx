@@ -19,21 +19,24 @@ function homeClick(pathname) {
  * Minimal navigation. It floats over the hero with no ground of its own for as
  * long as the hero is beneath it, and settles onto paper only once the
  * hero has scrolled out from under it — no blur, no glass. On the landing page
- * it steps out of the way while you scroll down and comes back as soon as you
- * scroll up.
+ * and on a room's page it steps out of the way while you scroll down and comes
+ * back as soon as you scroll up.
  */
 function Nav({ onMenu }) {
   const { count, wish, account } = useShop()
   const { pathname } = useLocation()
   const [overHero, setOverHero] = useState(true)
   const [away, setAway] = useState(false)
+  const [up, setUp] = useState(false) // the last scroll was upward
 
   useEffect(() => {
     let lastY = window.scrollY
-    setAway(false) // a new page always arrives with its navigation showing
+    setAway(false) // a new page always arrives with its navigation showing...
+    setUp(false)   // ...except a room's page, which keeps it away until the first scroll up
     const onScroll = () => {
       const y = window.scrollY
-      const hero = document.querySelector('.hero')
+      if (Math.abs(y - lastY) >= 6) setUp(y < lastY)
+      const hero = document.querySelector('.hero, .sroom') // the landing hero, or a room's full-screen photo
       const navH = document.querySelector('.nav')?.offsetHeight || 0
       setOverHero(hero ? hero.getBoundingClientRect().bottom > navH : y < 40)
       // direction, read over a few pixels so a trackpad's small steps still count
@@ -51,12 +54,15 @@ function Nav({ onMenu }) {
     }
   }, [pathname])
 
-  // only the landing page has a hero for the nav to float over
+  // the landing page and each room's page open on a full-screen photograph for the nav to float over.
+  // The landing page shows it on arrival, hides it while scrolling down and brings it back on the way up;
+  // a room's page does not show it on arrival at all — it comes in only on a scroll up, and goes on a scroll down
   const home = pathname === '/'
-  const float = overHero && home
+  const room = pathname.startsWith('/spaces/')
+  const float = overHero && (home || room)
 
   return (
-    <header className={cx('nav', float && 'nav--float', away && home && 'nav--away')}>
+    <header className={cx('nav', float && 'nav--float', (room ? !up : away && home) && 'nav--away')}>
       <div className="nav__in">
         <Link
           className="mark"
@@ -172,7 +178,7 @@ export default function Layout() {
       <Nav onMenu={() => setMenu(true)} />
       <Menu open={menu} onClose={() => setMenu(false)} />
       {/* the landing page's hero runs under the fixed nav; every other page clears it */}
-      <main key={pathname} data-home={pathname === '/' ? '' : undefined}>
+      <main key={pathname} data-home={pathname === '/' || pathname.startsWith('/spaces/') ? '' : undefined}>
         <Outlet />
       </main>
       <Footer />

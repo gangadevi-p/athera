@@ -29,17 +29,17 @@ import { cx } from '../lib/format'
    once you have chosen, and names the chosen sort beside its own name. */
 
 /* No "Featured" option: with nothing chosen the pieces keep the order they are curated in. */
-const SORTS = [
+export const SORTS = [
   { id: 'low', name: 'Price, low to high', short: 'Low to high' },
   { id: 'high', name: 'Price, high to low', short: 'High to low' },
   { id: 'new', name: 'Newest first', short: 'Newest' },
 ]
 
 /** Multi-value params travel as a comma list. */
-const list = v => (v ? v.split(',').filter(Boolean) : [])
+export const list = v => (v ? v.split(',').filter(Boolean) : [])
 
 /** Filter groups, in the order they are listed. `test` says whether a piece belongs to an option. */
-const FACETS = [
+export const FACETS = [
   { key: 'm', title: 'Material', options: MATERIAL_FILTERS, test: hasMaterial },
   { key: 'clr', title: 'Colour', options: COLOURS, test: (p, id) => coloursOf(p).includes(id), swatch: true },
   { key: 's', title: 'Size', options: SIZES, test: (p, id) => p.size === id },
@@ -50,7 +50,7 @@ const TABS = ['Sofas', 'Tables', 'Dining', 'Beds', 'Storage', 'Lighting', 'Objec
 
 /** A filter that starts folded, as the product page folds its dimensions, care and delivery: its name and a
     plus; open, the options come out in place. The page decides which one is open, so only one is. */
-function FilterMenu({ title, count = 0, note, swatch, open, onToggle, className, children }) {
+export function FilterMenu({ title, count = 0, note, swatch, open, onToggle, className, children }) {
   const tag = note || (count > 0 ? count : null)
   return (
     <details className={cx('disc fdisc', className)} open={open}>
@@ -62,7 +62,7 @@ function FilterMenu({ title, count = 0, note, swatch, open, onToggle, className,
   )
 }
 
-function Check({ on, off = false, swatch = false, onChange, children }) {
+export function Check({ on, off = false, swatch = false, onChange, children }) {
   return (
     <label className={cx('check', swatch && 'check--sw', on && 'on', off && 'off')}>
       <input type="checkbox" checked={on} disabled={off} onChange={onChange} />

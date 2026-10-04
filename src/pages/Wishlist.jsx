@@ -32,7 +32,7 @@ export default function Wishlist() {
     <section className="sec">
       <div className="wrap">
         <div className="phead phead--short">
-          <span className="eyebrow">Wishlist · {pieces.length} {pieces.length === 1 ? 'piece' : 'pieces'}</span>
+          <span className="eyebrow">Wishlist</span>
           <h1 className="disp d1">Saved</h1>
         </div>
 

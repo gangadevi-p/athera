@@ -28,7 +28,7 @@ function Line({ item, at }) {
 }
 
 export default function Cart() {
-  const { cart, subtotal, count } = useShop()
+  const { cart, subtotal } = useShop()
 
   if (!cart.length) {
     return (
@@ -47,7 +47,7 @@ export default function Cart() {
     <section className="sec">
       <div className="wrap">
         <div className="phead phead--short">
-          <span className="eyebrow">Your cart · {count} {count === 1 ? 'piece' : 'pieces'}</span>
+          <span className="eyebrow">Your cart</span>
           <h1 className="disp d1">Cart</h1>
         </div>
 

@@ -9,8 +9,7 @@
 .phead .lead { max-width: none } /* a page's subheading stays on one line; the titles break where they are told to */
 .phead--wide { gap: 16px; margin-bottom: 28px } /* the shop title stays on one line so the category list rises into the first screen */
 .sec--shop { padding-top: clamp(32px, 6svh, 64px) }
-.plp__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 36px }
-.phead--short { margin-bottom: 52px; gap: 20px }
+.plp__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 36px }.phead--short { margin-bottom: 52px; gap: 20px }
 
 .empty { display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; padding: 80px 0 }
 .empty .lead { max-width: 90ch }
@@ -33,6 +32,10 @@
    (.disc): the name, a plus at the end, and when it is open the options come out in place, pushing what is
    below down. Material, Colour, Size in a column; no rules. */
 .rail.rail--menus { gap: 0; display: flex; flex-direction: column }
+/* a room's page: the heading and sort stay pinned at the top, the filters pin beneath them, and only the pieces scroll.
+   The top padding keeps the heading clear of the navigation when it returns on the way up. */
+.head--pin { position: sticky; top: 0; z-index: 8; background: var(--bone); padding-top: calc(var(--nav-h) + 8px) }
+.spacelist .rail { top: calc(var(--pin-h, 180px) + 24px) }
 .fdisc { padding: 15px 0 }
 .disc.fdisc summary { font-size: 1.03rem } /* the product page's size; two classes to beat .disc summary below */
 /* the sort, at the top right of the listing: its name with a chevron close beside it (not a plus), opening as a popup
@@ -267,21 +270,46 @@
 .spread__t { display: flex; flex-direction: column; gap: 24px; align-items: flex-start }
 
 .sroom { position: relative }
-.sroom > .img { width: 100% }
+/* fills the whole screen on any device, like the landing hero: the photo covers the frame (cropped, never
+   stretched) and drifts in a slow zoom on a loop — 14s each way, eased slow at both ends so neither turn jolts */
+.sroom { height: 100svh; min-height: 520px; overflow: hidden }
+.sroom > .img { width: 100%; aspect-ratio: auto; height: 100% }
+.sroom > .img img { animation: hero-settle 14s cubic-bezier(.45, 0, .55, 1) infinite alternate both }
+@media (prefers-reduced-motion: reduce) { .sroom > .img img { animation: none } }
 .sroom::after {
-  content: ""; position: absolute; inset: auto 0 0 0; height: 62%;
-  background: linear-gradient(180deg, rgba(36, 26, 20, 0), rgba(36, 26, 20, .62));
-  pointer-events: none;
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: /* a little weight under the navigation, and more under the name */
+    linear-gradient(180deg, rgba(36, 26, 20, .4) 0%, rgba(36, 26, 20, 0) 24%),
+    linear-gradient(0deg, rgba(36, 26, 20, .62) 0%, rgba(36, 26, 20, 0) 45%);
 }
-.sroom__t { position: absolute; left: 0; right: 0; bottom: 56px; z-index: 2; display: flex; flex-direction: column; gap: 16px }
-.sroom__t .eyebrow { color: rgba(246, 244, 239, .78) }
-.sroom__t .disp { color: var(--paper) }
+/* the room's name is set in the middle, at the bottom of the photo, at the landing hero's foot margin, and a
+   smaller size than a page title */
+.sroom__t { position: absolute; left: 0; right: 0; bottom: clamp(28px, 8svh, 88px); z-index: 2; text-align: center }
+/* glass in the lettering alone, no panel: the letters are translucent warm white, brighter along the top edge and
+   clearer toward the foot so the room shows through them, with a fine light outline and a soft shadow */
+.sroom__t .disp {
+  display: inline-block; font-size: clamp(1.7rem, 3.2vw, 3rem);
+  color: rgba(246, 244, 239, .5); /* fallback where the gradient clip is unsupported */
+  background: linear-gradient(180deg, rgba(255, 255, 255, .95) 0%, rgba(246, 244, 239, .55) 55%, rgba(246, 244, 239, .28) 100%);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, .7);
+  filter: drop-shadow(0 4px 14px rgba(20, 14, 10, .35));
+}
 
-.sroom__intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 80px; align-items: start }
-.sroom__intro .disp { max-width: 18ch }
+/* a tight join between the intro and the pieces: little padding under the intro, none above the list (its pinned
+   heading carries its own top space, kept clear of the navigation) */
+.sec.sec--intro { padding-bottom: 32px }
+.sec.sec--list { padding-top: 0 }
+/* the tagline and the description are two rows on every screen: the tagline across the page width, the
+   description beneath it, both sized to the width so they fit without stacking tall */
+.sroom__intro { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(14px, 2.4vw, 28px); align-items: start }
+.sroom__intro .disp { max-width: none; font-size: clamp(1.35rem, 2.6vw, 2.6rem); overflow-wrap: break-word }
+.sroom__intro .lead { max-width: 64ch; font-size: clamp(.95rem, .5vw + .75rem, 1.1rem); line-height: 1.6 }
 
-.srooms__next { display: flex; justify-content: space-between; align-items: flex-end; gap: 56px; padding-top: 36px; border-top: 1px solid var(--rule) }
-.srooms__links { display: flex; flex-wrap: wrap; gap: 44px; margin-top: 18px }
+/* the other rooms: centred, the label above the links, no rule */
+.srooms__next { display: flex; justify-content: center; text-align: center }
+.srooms__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 44px; margin-top: 18px }
 .srooms__links a { color: var(--ink); transition: color var(--t-hover) var(--ease) }
 .srooms__links a:hover { color: var(--accent) }
 
@@ -486,13 +514,12 @@
   .pdp__side { position: static }
   .pdp__panel { max-width: none }
 
-  .spread, .sroom__intro, .cart, .co, .conf__in, .read, .track, .track__head, .acct__grid {
+  .spread, .cart, .co, .conf__in, .read, .track, .track__head, .acct__grid {
     grid-template-columns: minmax(0, 1fr);
   }
   .spread--flip .img { order: 0 }
   .co__form { max-width: none }
   .sum { position: static }
-  .srooms__next { flex-direction: column; align-items: flex-start; gap: 28px }
 
   .wline { grid-template-columns: 96px minmax(0, 1fr) auto; gap: 28px }
   .wline__a { grid-column: 2 / -1; flex-direction: row; align-items: center; gap: 22px }
@@ -500,8 +527,6 @@
   .rooms { grid-template-columns: repeat(2, minmax(0, 1fr)) }
 
   /* the space banner is a thin strip at this width */
-  .sroom > .img { aspect-ratio: 16 / 9 !important }
-  .sroom__t { bottom: 36px }
 }
 
 @media (max-width: 640px) {
@@ -562,8 +587,6 @@
   .foot__logo { padding-bottom: 26px }
   .foot__base { margin-top: 28px; flex-direction: column; gap: 10px }
 
-  .sroom > .img { aspect-ratio: 4 / 3 !important }
-  .sroom__t { bottom: 26px }
   .spreads { gap: 80px }
 }
 

@@ -2168,10 +2168,31 @@ export const PRODUCTS = [
 ]
 
 /* ---------- spaces ---------- */
+/* each space carries a curated `pieces` list of 15–20 ids; its page lists those, with the shop's material, colour and size filters */
 
 export const SPACES = [
   {
     id: 'living-room',
+    pieces: [
+      'linen-lounge-sofa',
+      'modular-corner-sofa',
+      'boucle-loveseat',
+      'boucle-lounge-chair',
+      'walnut-reading-chair',
+      'leather-sling-chair',
+      'curved-shell-armchair',
+      'cane-back-armchair',
+      'oak-frame-coffee-table',
+      'travertine-round-coffee-table',
+      'walnut-side-table',
+      'stone-lamp-table',
+      'fluted-oak-sideboard',
+      'walnut-bookcase',
+      'fluted-oak-media-console',
+      'washi-floor-lamp',
+      'arc-floor-lamp',
+      'wool-flatweave-rug',
+    ],
     name: 'Living room',
     tagline: 'A room that holds people for longer than planned.',
     description:
@@ -2181,6 +2202,26 @@ export const SPACES = [
   },
   {
     id: 'bedroom',
+    pieces: [
+      'linen-platform-bed',
+      'oak-slat-bed',
+      'walnut-panel-bed',
+      'upholstered-bed',
+      'cane-headboard-bed',
+      'oak-bedside-table',
+      'ash-bedside-table',
+      'walnut-nightstand',
+      'linen-bed-bench',
+      'ash-chest-of-drawers',
+      'walnut-chest-of-drawers',
+      'boucle-lounge-chair',
+      'linen-daybed',
+      'ceramic-table-lamp',
+      'brass-table-lamp',
+      'linen-shade-floor-lamp',
+      'wool-flatweave-rug',
+      'merino-wool-throw',
+    ],
     name: 'Bedroom',
     tagline: 'The room you return to rather than perform in.',
     description:
@@ -2190,6 +2231,24 @@ export const SPACES = [
   },
   {
     id: 'workspace',
+    pieces: [
+      'ash-writing-desk',
+      'oak-dining-chair',
+      'cane-dining-chair',
+      'leather-dining-chair',
+      'linen-dining-chair',
+      'ash-shelving-system',
+      'walnut-bookcase',
+      'oak-wall-shelf',
+      'cane-front-cabinet',
+      'brass-table-lamp',
+      'oak-tripod-floor-lamp',
+      'slim-column-floor-lamp',
+      'ceramic-vessel-set',
+      'wool-flatweave-rug',
+      'leather-sling-chair',
+      'walnut-side-table',
+    ],
     name: 'Workspace',
     tagline: 'A focused environment that supports creativity and clarity.',
     description:
@@ -2340,7 +2399,8 @@ export const collectionById = id => COLLECTIONS.find(c => c.id === id)
 export const byId = id => PRODUCTS.find(p => p.id === id)
 export const catById = id => CATEGORIES.find(c => c.id === id)
 export const spaceById = id => SPACES.find(s => s.id === id)
-export const inSpace = id => PRODUCTS.filter(p => p.spaces.includes(id))
+/** A space's own short list (SPACES[].pieces), in the order it is curated — not every piece that could stand in the room. */
+export const inSpace = id => (spaceById(id)?.pieces ?? []).map(byId).filter(Boolean)
 export const inCat = id => PRODUCTS.filter(p => p.cat === id)
 export const arrivals = () => PRODUCTS.filter(p => p.arrival)
 export const bestsellers = () => PRODUCTS.filter(p => p.bestseller)

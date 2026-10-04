@@ -10,7 +10,7 @@ import { useShop } from '../lib/shop'
  * and the three ways on: cart, checkout, or back to browsing.
  */
 export default function CartDrawer() {
-  const { drawer, closeDrawer, subtotal, count } = useShop()
+  const { drawer, closeDrawer, subtotal } = useShop()
   const { pathname } = useLocation()
   const open = Boolean(drawer)
 
@@ -45,7 +45,7 @@ export default function CartDrawer() {
           <>
             <header className="drawer__top">
               <span className="eyebrow">
-                {drawer.n > 1 ? `${drawer.n} pieces added` : 'Added to cart'}
+                Added to cart
               </span>
               <button className="drawer__x" type="button" onClick={closeDrawer} aria-label="Close">
                 &times;
@@ -62,7 +62,7 @@ export default function CartDrawer() {
             </div>
 
             <div className="drawer__sum">
-              <span>Subtotal · {count} {count === 1 ? 'piece' : 'pieces'}</span>
+              <span>Subtotal</span>
               <span>{money(subtotal)}</span>
             </div>
 

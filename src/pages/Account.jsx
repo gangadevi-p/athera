@@ -120,7 +120,7 @@ export default function Account() {
             <h2 className="eyebrow">Wishlist</h2>
             <p className="fine">
               {wish.length
-                ? <>{wish.length} {wish.length === 1 ? 'piece' : 'pieces'} saved — <Link className="ulink" to="/wishlist">view the list</Link>.</>
+                ? <>Pieces saved — <Link className="ulink" to="/wishlist">view the list</Link>.</>
                 : <>Nothing saved yet. <Link className="ulink" to="/shop">Start browsing</Link>.</>}
             </p>
 

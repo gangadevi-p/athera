@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import BackButton from '../components/BackButton'
 import Img from '../components/Img'
-import { SPACES, inSpace } from '../data/catalogue'
+import { SPACES } from '../data/catalogue'
 import { cx } from '../lib/format'
 
 export default function Spaces() {
@@ -25,7 +25,7 @@ export default function Spaces() {
             <article className={cx('spread', i % 2 === 1 && 'spread--flip')} key={s.id}>
               <Img id={s.cover} alt={s.name} ratio="5 / 4" w={1200} />
               <div className="spread__t">
-                <span className="eyebrow">0{i + 1} · {inSpace(s.id).length} pieces</span>
+                <span className="eyebrow">0{i + 1}</span>
                 <h2 className="disp d2">{s.name}</h2>
                 <p className="lead">{s.description}</p>
                 <Link className="tlink" to={`/spaces/${s.id}`}>View the room</Link>

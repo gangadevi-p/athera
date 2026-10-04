@@ -103,7 +103,7 @@ export default function Assistant() {
               <div className="head">
                 <div className="head__t">
                   <span className="eyebrow">The shortlist</span>
-                  <h2 className="disp d2">Three pieces for this room</h2>
+                  <h2 className="disp d2">Pieces for this room</h2>
                 </div>
                 <button className="tlink" type="button" onClick={addAll}>Add all three</button>
               </div>
