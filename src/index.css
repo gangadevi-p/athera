@@ -779,7 +779,7 @@ html { scroll-snap-type: y proximity }
 
 @media (max-width: 980px) {
   .ph--a { grid-template-columns: minmax(0, 1fr); height: auto; padding-inline: 0 }
-  .ph--a .ph__img { height: 60svh; order: -1 }
+  .ph--a .ph__img { height: 60svh; aspect-ratio: auto; order: -1 } /* a fixed ratio plus a height would set the width from the height and push the page wider than the screen */
   .ph__body { padding: 40px var(--gutter) 56px }
   .ph--b, .ph--c { height: auto; display: block; padding: var(--sec-tight) 0 }
   .ph--b .ph__wrap { grid-template-rows: none; display: flex; flex-direction: column }
