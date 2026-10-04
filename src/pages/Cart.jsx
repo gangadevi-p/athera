@@ -32,7 +32,7 @@ export default function Cart() {
 
   if (!cart.length) {
     return (
-      <section className="sec">
+      <section className="sec sec--page">
         <div className="wrap empty">
           <span className="eyebrow">Your cart</span>
           <h1 className="disp d2">Nothing here yet</h1>
@@ -44,11 +44,11 @@ export default function Cart() {
   }
 
   return (
-    <section className="sec">
+    <section className="sec sec--page">
       <div className="wrap">
-        <div className="phead phead--short">
+        <div className="phead">
           <span className="eyebrow">Your cart</span>
-          <h1 className="disp d1">Cart</h1>
+          <h1 className="disp d2">Cart</h1>
         </div>
 
         <div className="cart">

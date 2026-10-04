@@ -8,11 +8,11 @@ import { SHIP, money } from '../lib/format'
  */
 export default function Help() {
   return (
-    <section className="sec sec--tight">
+    <section className="sec sec--page">
       <div className="wrap">
-        <div className="phead phead--short">
+        <div className="phead">
           <span className="eyebrow">Help</span>
-          <h1 className="disp d1">Good to know</h1>
+          <h1 className="disp d2">Good to know</h1>
         </div>
 
         <div className="help">

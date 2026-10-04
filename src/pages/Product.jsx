@@ -50,7 +50,7 @@ function Availability({ p }) {
             onChange={e => { setCode(e.target.value); setResult(null); setMiss(false) }}
           />
         </div>
-        <button className="btn btn--quiet" type="submit">Check</button>
+        <button className="btn btn--quiet btn--sm" type="submit">Check</button>
       </form>
       {result && (
         <p className="fine" role="status">
@@ -144,7 +144,7 @@ function Detail({ p }) {
             <span className="pname">{p.name}</span>
             <span className="price">{money(p.price)} · {finish.label}</span>
           </div>
-          <button className="btn btn--solid" type="button" onClick={() => add(p.id, fi)}>
+          <button className="btn btn--solid btn--sm" type="button" onClick={() => add(p.id, fi)}>
             Add to cart
           </button>
         </div>
@@ -187,7 +187,7 @@ function Detail({ p }) {
               </div>
               <Link className="tlink" to={`/shop?c=${cat.id}`}>View all</Link>
             </div>
-            <div className="grid-3">
+            <div className="grid-3 related">
               {related.map(x => <ProductCard key={x.id} p={x} />)}
             </div>
           </div>

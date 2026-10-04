@@ -1,8 +1,14 @@
 # Aethera — project context
 
-Desktop-only storefront for **Aethera**, a luxury furniture brand: seventy-three
-pieces across seven categories, three spaces, and a room assistant. React 18 +
-Vite + React Router. No backend.
+Responsive storefront for **Aethera**, a luxury furniture brand: seventy-three
+pieces across seven categories, three spaces, and a room assistant. Designed
+desktop-first (a 1280–1680 canvas) and verified from 360px phones to 2560px
+monitors. React 18 + Vite + React Router. No backend.
+
+**The design system lives in two files: `src/tokens.css` (every colour, size,
+gap, duration — the only place values are defined) and `DESIGN.md` (the
+written rules). `/design-system` is the live version, drawn from the tokens.
+Read DESIGN.md before touching a style; use a token before inventing a value.**
 
 Three briefs govern this build:
 
@@ -59,10 +65,11 @@ names (`--paper`, `--bone`, `--linen`, `--mute`) are aliases onto them.
 | `--beige` | `#E4DED3` | third ground, image placeholder (`--linen`) |
 | `--taupe` | `#7C766C` | eyebrows, captions (`--mute`) |
 | `--sage` | `#7E8A73` | `--accent`: focus rings, link hovers, the live tracking step |
-| `--walnut` | `#241A14` | the one dark section (philosophy), solid-button hover |
-| `--charcoal` | `#2B2A27` | accent ink |
+| `--walnut` | `#2A1B14` | solid-button hover |
+| `--charcoal` | `#2E1E16` | ink |
 
-Plus `--graphite` `#4A463E` for body copy and `--rule` `#D9D2C6` for hairlines.
+Plus `--graphite` `#4A382D` for body copy and `--rule` `#D3C9B6` for hairlines.
+Translucent layers are `rgb(var(--shade-rgb) / .5)` — never a raw `rgba()`.
 `--ink` is an alias onto `--charcoal`: the concept asks for **charcoal text,
 never pure black**, so there is no near-black left in the palette.
 
@@ -73,17 +80,28 @@ never pure black**, so there is no near-black left in the palette.
 compositions are set on.
 
 Type: **Georgia** (display — see Decisions; uppercase, `.disp` + `.d1/.d2/.d3`) and **Jost**
-(300/400 body, `.eyebrow` for tracked small caps). No Tailwind classes are
-used; Tailwind is installed but its directives were removed.
+(300/400 body, `.eyebrow` for tracked small caps). Text has **five sizes**
+(`--fs-caption/label/small/body/price`) and titles a fluid ramp (`--fs-d1/d2/d3`);
+every role has one size. **Every page title is `.d2`**; `.d1` is a statement (the
+landing hero, the order confirmation). No Tailwind classes are used; Tailwind is
+installed but its directives were removed.
 
-**Desktop first, responsive below it.** Design against a 1280–1680 canvas.
-The responsive layer is three steps (1200 / 980 / 640) at the end of
-`pages.css`; keep new layout rules with it rather than scattering media
-queries through the file.
+**Desktop first, responsive below it.** Design against a 1280–1680 canvas, then
+check 360, 768, 1024, 1366, 1920 and 844 × 390. There are three breakpoints —
+**1280, 980, 640** — and the tokens (`--gutter`, `--sec`, `--nav-h`, `--col-gap`)
+change at each in `tokens.css`, so a rule needs a media query only where a layout
+itself changes. Those rules are in the "Responsive" block at the end of
+`pages.css`; keep new ones there. Two blocks keep thresholds tuned to their own
+layout: the landing page's one-screen sections (`index.css`) and the compact
+listing pages. On touch screens (`pointer: coarse`) every small control gets a
+44px hit area through an invisible `::before` (one selector list, in the
+responsive block) — add new small controls to that list. Hover-only reveals are
+gated behind `hover: hover`.
 
-Stylesheets: `src/index.css` holds tokens, primitives (buttons, links, image,
-nav, footer, cards, save control, forms) and the homepage; `src/pages.css`
-holds the other screens. Both are imported from `src/main.jsx`.
+Stylesheets: `src/tokens.css` holds the tokens; `src/index.css` the base,
+primitives (buttons, links, image, nav, footer, cards, save control, forms) and
+the homepage; `src/pages.css` the other screens and the responsive layer. All
+three are imported, in that order, from `src/main.jsx`.
 
 ### Image ratios
 
@@ -190,6 +208,8 @@ Two named sets come straight from the brief:
 
 ```
 src/
+  tokens.css          every token: colour, type, space, layout, motion, and the
+                      values that change at each breakpoint
   data/catalogue.js   CATEGORIES, VIEWS, COLOURS, SIZES, PRICE_BANDS,
                       MATERIAL_FILTERS, PRODUCTS, SPACES, MATERIALS, CRAFT,
                       EDITORIAL, ROOMS + lookups
@@ -202,14 +222,16 @@ src/
   components/         Layout (nav, footer, scroll), CartDrawer, Img, Gallery,
                       ProductCard, SaveButton, Newsletter
   pages/              Home, Shop, Product, Spaces, Space, Assistant, Wishlist,
-                      Account, Cart, Checkout, Done, Track, NotFound
-  index.css           tokens, primitives, cart drawer, landing
+                      Account, Cart, Checkout, Done, Track, Help, DesignSystem,
+                      NotFound
+  index.css           base, primitives, cart drawer, landing
   pages.css           listing, detail, wishlist, cart, checkout, tracking,
-                      account, assistant, responsive
+                      account, assistant, responsive layer, design-system page
 ```
 
-Routes: `/`, `/shop`, `/categories`, `/p/:id`, `/spaces`, `/spaces/:id`, `/assistant`,
-`/wishlist`, `/account`, `/cart`, `/checkout`, `/done`, `/track`.
+Routes: `/`, `/shop`, `/categories`, `/p/:id`, `/spaces`, `/spaces/:id`,
+`/wishlist`, `/account`, `/cart`, `/checkout`, `/done`, `/track`, `/help`, and
+`/design-system` (not linked from anywhere). `Assistant.jsx` exists but is not routed.
 
 > **The router is a data router.** `App.jsx` exports a `routes` array and
 > `main.jsx` builds it with `createBrowserRouter` (or `createHashRouter` under
@@ -254,9 +276,9 @@ Use it rather than reaching into `p.images[0]`.
   There are no best-seller or newsletter sections on it (`Newsletter.jsx` is
   unused). Featured collections and the spaces row each fit one screen; the
   category carousel is taller than one.
-- **Heading and subheading scale.** Section titles and the shop/category page
-  titles are `.d2` (`clamp(1.8rem, 2.9vw, 3rem)`); the subheading under any of
-  them is `.lead` (1.1rem) and stays on one line — `.head__t`, `.phead`
+- **Heading and subheading scale.** Section titles and every page title are `.d2`
+  (`--fs-d2`, `clamp(1.8rem, 2.9vw, 3rem)`); the subheading under any of them is
+  `.lead` (`--fs-body`, 1.15rem) and stays on one line — `.head__t`, `.phead`
   and `.empty` all give it the width to do so. (The featured-collection and
   category pages are the exception: see the next point.) Copy longer than
   about 100 characters (the Account page's intro) wraps naturally. On the
@@ -357,8 +379,12 @@ Use it rather than reaching into `p.images[0]`.
   than the wall behind it — set for 67 of the 73, tune it if a piece is added or
   its photo swapped. A piece's remaining entries in `images` are not shown in its
   gallery (only `images[1]` is used, as the card's hover frame). The large frame
-  opens `Gallery`'s zoom overlay: click to magnify 2.2×, move the pointer to
-  pan, arrow keys to step, Escape to close.
+  magnifies **in place** (no overlay, no sub-page): click or tap to enlarge 2.6×
+  where you clicked, and it holds there; drag to move around it; click again or
+  Escape to return; arrow keys step through the views. When the pointer arrives a
+  2400px file is fetched for the view on show and fades in over the 1400px one, so
+  the magnified detail is sharp (side / three-quarter / back are crops of the front
+  photograph, capped at 1400px). A "Zoom" chip is always visible where there is no hover.
 - **The availability check is a prototype.** `checkPostcode()` maps a postcode
   to one of three service areas and adds 0/1/2 weeks to the piece's own lead
   time. Nothing is looked up.

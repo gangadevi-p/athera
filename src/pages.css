@@ -1,32 +1,25 @@
 /* =========================================================================
    Aethera — screens
    Listing, detail, spaces, wishlist, cart, checkout, tracking, account and the
-   room assistant, then the responsive layer. Tokens and shared primitives live
-   in index.css.
+   room assistant, then the responsive layer. Tokens live in tokens.css; shared
+   primitives and the landing page in index.css.
    ========================================================================= */
 
-.phead { display: flex; flex-direction: column; gap: 24px; margin-bottom: 80px }
+.phead { display: flex; flex-direction: column; gap: var(--s20); margin-bottom: var(--s64) }
 .phead .lead { max-width: none } /* a page's subheading stays on one line; the titles break where they are told to */
-.phead--wide { gap: 16px; margin-bottom: 28px } /* the shop title stays on one line so the category list rises into the first screen */
-.sec--shop { padding-top: clamp(32px, 6svh, 64px) }
-.plp__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 36px }.phead--short { margin-bottom: 52px; gap: 20px }
+.sec--page .phead .lead { max-width: 80ch } /* ...except on a working page, where a long explanation keeps a readable measure */
+.phead--wide { gap: var(--s16); margin-bottom: 28px } /* the shop title stays on one line so the category list rises into the first screen */
+.sec--page, .sec--shop { padding-top: var(--page-top) } /* a page's first section sits the same distance beneath the navigation */
+.plp__top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s24); margin-bottom: 36px }
 
-.empty { display: flex; flex-direction: column; align-items: center; gap: 26px; text-align: center; padding: 80px 0 }
+.empty { display: flex; flex-direction: column; align-items: center; gap: var(--s24); text-align: center; padding: var(--s80) 0 }
 .empty .lead { max-width: 90ch }
 
 /* ---------- listing: rail + results ----------------------------------- */
 
-.plp__in { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 80px; align-items: start }
+.plp__in { display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: var(--s80); align-items: start }
 
 .rail { position: sticky; top: calc(var(--nav-h) + 36px); display: flex; flex-direction: column; gap: 34px }
-.rail__head {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
-  padding-bottom: 14px; border-bottom: 1px solid var(--ink);
-}
-.rail__g { display: flex; flex-direction: column; gap: 14px }
-.rail__g > .eyebrow { padding-bottom: 12px; border-bottom: 1px solid var(--rule) }
-.rail__l { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px }
-.rail__cols { display: flex; flex-direction: column; gap: 14px }
 
 /* a featured collection's filters fold away exactly like the product page's dimensions, care and delivery
    (.disc): the name, a plus at the end, and when it is open the options come out in place, pushing what is
@@ -34,13 +27,13 @@
 .rail.rail--menus { gap: 0; display: flex; flex-direction: column }
 /* a room's page: the heading and sort stay pinned at the top, the filters pin beneath them, and only the pieces scroll.
    The top padding keeps the heading clear of the navigation when it returns on the way up. */
-.head--pin { position: sticky; top: 0; z-index: 8; background: var(--bone); padding-top: calc(var(--nav-h) + 8px) }
+.head--pin { position: sticky; top: 0; z-index: var(--z-pin); background: var(--bone); padding-top: calc(var(--nav-h) + 8px) }
 .spacelist .rail { top: calc(var(--pin-h, 180px) + 24px) }
 .fdisc { padding: 15px 0 }
-.disc.fdisc summary { font-size: 1.03rem } /* the product page's size; two classes to beat .disc summary below */
+.disc.fdisc summary { font-size: var(--fs-small) } /* the product page's size; two classes to beat .disc summary below */
 /* the sort, at the top right of the listing: its name with a chevron close beside it (not a plus), opening as a popup
    over the page — the row keeps its size, so nothing below it (the pills, the pieces) moves */
-.fsort { position: relative; z-index: 7; flex: none }
+.fsort { position: relative; z-index: var(--z-sort); flex: none }
 .disc.fsort summary { justify-content: flex-start; gap: 12px }
 .disc.fsort summary::after {
   content: ""; flex: none; width: 7px; height: 7px; margin-top: -4px;
@@ -64,14 +57,14 @@
 
 .filter {
   background: none; border: 0; padding: 0; cursor: pointer; text-align: left;
-  font-size: 1.03rem; letter-spacing: .03em; color: var(--mute);
+  font-size: var(--fs-small); letter-spacing: .03em; color: var(--mute);
   border-bottom: 1px solid transparent;
   transition: color var(--t-hover) var(--ease), border-color var(--t-hover) var(--ease);
 }
 .filter:hover, .filter.on { color: var(--ink) }
 .filter.on { border-color: var(--ink) }
 
-.check { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: 1.07rem; color: var(--mute) }
+.check { display: flex; align-items: center; gap: 12px; cursor: pointer; font-size: var(--fs-small); color: var(--mute) }
 .check input { position: absolute; opacity: 0; width: 0; height: 0 }
 .check__b {
   width: 13px; height: 13px; flex: none;
@@ -91,21 +84,21 @@
 .check.on .check__b { background: var(--ink); border-color: var(--ink) }
 .check input:focus-visible + .check__b { outline: 1px solid var(--accent); outline-offset: 3px }
 .check__t { display: flex; align-items: center; gap: 9px; min-width: 0 }
-.check__t em { font-style: normal; font-size: .97rem; color: var(--mute) }
+.check__t em { font-style: normal; font-size: var(--fs-label); color: var(--mute) }
 
 
 .plp__active { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 48px }
 .pill {
   display: inline-flex; align-items: baseline; gap: .6em;
   border: 0; padding: 0 0 4px; cursor: pointer;
-  font-size: .97rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
+  font-size: var(--fs-label); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--ink);
   background:
     linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat,
     linear-gradient(var(--rule), var(--rule)) 0 100% / 100% 1px no-repeat;
   transition: background-size var(--t-hover) var(--ease);
 }
 .pill:hover { background-size: 100% 1px, 100% 1px }
-.pill span { color: var(--mute); font-size: 1.15rem; line-height: 1 }
+.pill span { color: var(--mute); font-size: var(--fs-body); line-height: 1 }
 
 .plp { row-gap: 84px }
 .plp__main .empty { padding: 56px 0 }
@@ -127,24 +120,27 @@
   display: grid; grid-template-columns: minmax(0, calc(min(56%, var(--galw)) * 1.14 + 14px)) minmax(0, 1fr);
   /* the panel is centred against the gallery, across and down, so the two
      columns share one middle line */
-  gap: 88px; align-items: center;
+  gap: var(--col-gap); align-items: center;
 }
 .pdp__side { position: sticky; top: calc(var(--nav-h) + 36px) }
 .pdp__panel { display: flex; flex-direction: column; gap: 32px; max-width: 46ch; margin: 0 auto }
 
-.crumb { display: flex; gap: 10px; font-size: .93rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; color: var(--mute) } /* labels on the product page share the eyebrow's size, weight and tracking */
+.crumb { display: flex; gap: 10px; font-size: var(--fs-label); font-weight: var(--fw-regular); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--mute) } /* a row of small-caps links */
 .crumb a:hover { color: var(--ink) }
 
-.pdp__price { margin: -20px 0 0; font-size: 1.35rem; color: var(--ink); font-variant-numeric: tabular-nums }
-.pdp__excerpt { margin: 0; font-size: 1.23rem; line-height: 1.75; color: var(--graphite) }
+.pdp__price { margin: -20px 0 0; font-size: var(--fs-price); color: var(--ink); font-variant-numeric: tabular-nums }
+.pdp__excerpt { margin: 0; font-size: var(--fs-body); line-height: var(--lh-loose); color: var(--graphite) }
 .pdp__opt { display: flex; flex-direction: column; gap: 16px }
 .pdp__optHead { display: flex; justify-content: space-between; align-items: baseline; gap: 16px }
-.pdp__optVal { font-size: 1.15rem; color: var(--ink) }
-.avail__f input { font-size: 1.15rem } /* values and the postcode entry read at one body size */
-.pdp__save { font-weight: 400 } /* same weight as Add to cart beside it */
+.pdp__optVal { font-size: var(--fs-body); color: var(--ink); white-space: nowrap } /* "Made to order" never breaks, even in a narrow panel on a large screen */
+.pdp__save { font-weight: var(--fw-regular) } /* same weight as Add to cart beside it */
 
 .pdp__acts { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: stretch }
 .pdp__save { justify-content: center }
+
+/* the panel answers to its own width, not the window's: on a tablet held sideways, or a tall screen where the photograph
+   takes most of the row, it is a narrow column, and the buttons and the postcode field stack rather than squeeze */
+.pdp__panel { container-type: inline-size }
 
 /* gallery — one 1:1 frame, the five views as 4:5 close-ups in a column to its left */
 .gal {
@@ -173,7 +169,7 @@
   position: absolute; right: 18px; bottom: 18px;
   padding: 9px 15px;
   background: var(--paper);
-  font-size: .87rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink);
+  font-size: var(--fs-caption); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--ink);
   opacity: 0; transition: opacity var(--t-hover) var(--ease);
 }
 .gal__stage:hover .gal__zoom, .gal__stage:focus-visible .gal__zoom { opacity: 1 }
@@ -193,7 +189,7 @@
 .gal__t.on::after { transform: scaleX(1) }
 .gal__cap {
   display: none; padding-top: 13px;
-  font-size: .83rem; letter-spacing: .05em; text-transform: uppercase; color: var(--mute);
+  font-size: var(--fs-caption); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--mute);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .gal__t.on + .gal__cap { color: var(--ink) }
@@ -201,49 +197,51 @@
 /* delivery and availability check */
 .avail { display: flex; flex-direction: column; gap: 14px }
 .avail__f { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end }
-.avail__f .btn { padding: 12px 22px }
 .avail .fine { margin: 0 }
+@container (max-width: 330px) { /* see .pdp__panel */
+  .pdp__acts, .avail__f { grid-template-columns: minmax(0, 1fr) }
+  .avail__f { gap: 14px }
+  .pdp__optHead { flex-wrap: wrap; row-gap: var(--s4) } /* the value drops under its label rather than squeezing it */
+}
 
 /* disclosures */
 .disc { padding-top: 14px }
 .disc summary {
   cursor: pointer; list-style: none;
   display: flex; justify-content: space-between; align-items: center; gap: 16px;
-  font-size: .97rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink);
+  font-size: var(--fs-label); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--ink);
 }
 .disc summary::-webkit-details-marker { display: none }
-.disc summary::after { content: "+"; color: var(--mute); font-size: 1.25rem; line-height: 1 }
+.disc summary::after { content: "+"; color: var(--mute); font-size: var(--fs-icon); line-height: 1 }
 .disc[open] summary::after { content: "–" }
-.disc p { margin: 14px 0 4px; font-size: 1.13rem; line-height: 1.75; color: var(--mute) }
+.disc p { margin: 14px 0 4px; font-size: var(--fs-body); line-height: var(--lh-loose); color: var(--mute) }
 
 .spec { margin: 0; display: flex; flex-direction: column; border-top: 1px solid var(--rule) }
 .spec > div { display: grid; grid-template-columns: 124px minmax(0, 1fr); gap: 20px; padding: 8px 0; border-bottom: 1px solid var(--rule) }
-.spec dt { font-size: .93rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute) }
-.spec dd { margin: 0; font-size: 1.15rem }
+.spec dt { font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--mute) }
+.spec dd { margin: 0; font-size: var(--fs-body) }
 .spec dd span { display: block }
 
 /* the one action that matters, following the reader down a narrow screen */
 .stickybuy {
   display: none;
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 45;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-bar);
   align-items: center; justify-content: space-between; gap: 20px;
   padding: 14px var(--gutter);
   background: var(--paper); border-top: 1px solid var(--rule);
 }
 .stickybuy__t { display: flex; flex-direction: column; gap: 3px; min-width: 0 }
-.stickybuy__t .pname { font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
-.stickybuy__t .price { font-size: 1.03rem; color: var(--mute) }
-.stickybuy .btn { padding: 14px 24px; white-space: nowrap }
+.stickybuy__t .pname { font-size: var(--fs-small); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.stickybuy__t .price { font-size: var(--fs-small); color: var(--mute) }
+.stickybuy .btn { white-space: nowrap }
 
 /* product details — dimensions, care, delivery, folded behind a plus, no rules */
 .pdetail { padding: 88px 0 }
 .pdetail__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; align-items: start }
 .pdetail .disc { padding: 0 }
-.pdetail .disc summary { font-size: 1.03rem; justify-content: center; gap: 12px } /* the name and its plus sit together, centred in the column */
+.pdetail .disc summary { font-size: var(--fs-small); justify-content: center; gap: 12px } /* the name and its plus sit together, centred in the column */
 .pdetail .disc { text-align: center }
-.pdetail .disc p { font-size: 1.15rem }
 .pdetail .spec { margin-top: 16px }
-.pdetail .spec dt { font-weight: 400; letter-spacing: .14em }
 .pdetail .disc p { color: var(--graphite) } /* body copy in the one colour the spec values use */
 .pdetail .spec, .pdetail .spec > div { border: 0 }
 /* a column is too narrow for label beside value, so each label sits above its value */
@@ -252,7 +250,7 @@
 /* ---------- spaces ---------------------------------------------------- */
 
 .spreads { display: flex; flex-direction: column; gap: 140px }
-.spread { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 88px; align-items: center }
+.spread { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--col-gap); align-items: center }
 .spread--flip .img { order: 2 }
 .spread__t { display: flex; flex-direction: column; gap: 24px; align-items: flex-start }
 
@@ -266,8 +264,8 @@
 .sroom::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: /* a little weight under the navigation, and more under the name */
-    linear-gradient(180deg, rgba(36, 26, 20, .4) 0%, rgba(36, 26, 20, 0) 24%),
-    linear-gradient(0deg, rgba(36, 26, 20, .62) 0%, rgba(36, 26, 20, 0) 45%);
+    linear-gradient(180deg, rgb(var(--shade-rgb) / .4) 0%, rgb(var(--shade-rgb) / 0) 24%),
+    linear-gradient(0deg, rgb(var(--shade-rgb) / .62) 0%, rgb(var(--shade-rgb) / 0) 45%);
 }
 /* the room's name is set in the middle, at the bottom of the photo, at the landing hero's foot margin, and a
    smaller size than a page title */
@@ -276,12 +274,12 @@
    clearer toward the foot so the room shows through them, with a fine light outline and a soft shadow */
 .sroom__t .disp {
   display: inline-block; font-size: clamp(1.7rem, 3.2vw, 3rem);
-  color: rgba(246, 244, 239, .5); /* fallback where the gradient clip is unsupported */
-  background: linear-gradient(180deg, rgba(255, 255, 255, .95) 0%, rgba(246, 244, 239, .55) 55%, rgba(246, 244, 239, .28) 100%);
+  color: rgb(var(--light-rgb) / .5); /* fallback where the gradient clip is unsupported */
+  background: linear-gradient(180deg, rgb(var(--white-rgb) / .95) 0%, rgb(var(--light-rgb) / .55) 55%, rgb(var(--light-rgb) / .28) 100%);
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, .7);
-  filter: drop-shadow(0 4px 14px rgba(20, 14, 10, .35));
+  -webkit-text-stroke: 1px rgb(var(--white-rgb) / .7);
+  filter: drop-shadow(0 4px 14px rgb(var(--deep-rgb) / .35));
 }
 
 /* a tight join between the intro and the pieces: little padding under the intro, none above the list (its pinned
@@ -300,68 +298,70 @@
 .srooms__links a { color: var(--ink); transition: color var(--t-hover) var(--ease) }
 .srooms__links a:hover { color: var(--accent) }
 
-/* ---------- wishlist -------------------------------------------------- */
+/* ---------- list rows: the wishlist and the cart -----------------------
+   One row for both: a photograph, the piece, then its figures and actions. */
 
-.wlist { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule) }
-.wline {
-  display: grid; grid-template-columns: 104px minmax(0, 1fr) auto auto; gap: 40px;
-  align-items: center; padding: 30px 0; border-bottom: 1px solid var(--rule);
+.wlist, .clines { list-style: none; margin: 0; padding: 0; border-top: var(--hair) }
+.wline, .cline {
+  display: grid; grid-template-columns: 104px minmax(0, 1fr) auto auto; gap: var(--s32);
+  align-items: center; padding: 30px 0; border-bottom: var(--hair);
 }
-.wline__t { display: flex; flex-direction: column; gap: 6px; align-items: flex-start }
+.wline__t, .cline__t { display: flex; flex-direction: column; gap: 6px; align-items: flex-start }
 .wline__t .fine { margin: 0; max-width: 52ch }
-.wline .price { min-width: 92px; text-align: right; font-size: 1.25rem }
-.wline__a { display: flex; flex-direction: column; gap: 10px; align-items: center }
-.wline__a .btn { padding: 12px 22px; white-space: nowrap }
-
-/* ---------- cart ------------------------------------------------------ */
-
-.cart { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); gap: 88px; align-items: start }
-.clines { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule) }
-.cline { display: grid; grid-template-columns: 104px minmax(0, 1fr) auto auto; gap: 36px; align-items: center; padding: 30px 0; border-bottom: 1px solid var(--rule) }
-.cline__t { display: flex; flex-direction: column; gap: 6px; align-items: flex-start }
 .cline__t .fine { margin: 0 }
-.cline__amt { min-width: 96px; text-align: right; font-size: 1.25rem; color: var(--ink); font-variant-numeric: tabular-nums }
+.wline .price, .cline__amt { min-width: 96px; text-align: right; font-size: var(--fs-body); color: var(--ink); font-variant-numeric: tabular-nums }
+.wline__a { display: flex; flex-direction: column; gap: 10px; align-items: center }
+.wline__a .btn { white-space: nowrap }
+.qty { justify-self: start }
 
-.sum { position: sticky; top: calc(var(--nav-h) + 36px); display: flex; flex-direction: column; gap: 20px; padding: 40px; background: var(--bone); border: 1px solid var(--rule) }
-.sum__row { display: flex; justify-content: space-between; gap: 16px; font-size: 1.17rem }
-.sum__total { padding-top: 18px; border-top: 1px solid var(--rule); font-size: 1.3rem; color: var(--ink) }
-.sum__total b { font-weight: 400; font-variant-numeric: tabular-nums }
-.sum .fine { margin: 0 }
+/* ---------- the main column beside its aside: cart, checkout, account --
+   Same proportion on all three, so the summary does not change width between the cart and checkout. */
+
+.cart, .co, .acct__grid {
+  display: grid; grid-template-columns: minmax(0, var(--cols-main)) minmax(0, var(--cols-aside));
+  gap: var(--col-gap); align-items: start;
+}
+
+/* the aside: a quiet panel — order summary, account side */
+.sum, .acct__side { display: flex; flex-direction: column; gap: var(--s20); padding: var(--s40); background: var(--bone); border: var(--hair) }
+.sum { position: sticky; top: calc(var(--nav-h) + 36px) }
+.sum__row { display: flex; justify-content: space-between; gap: var(--s16); font-size: var(--fs-body) }
+.sum__total { padding-top: 18px; border-top: var(--hair); font-size: var(--fs-price); color: var(--ink) }
+.sum__total b { font-weight: var(--fw-regular); font-variant-numeric: tabular-nums }
+.sum .fine, .acct__side .fine { margin: 0 }
 .sum .linkbtn { align-self: flex-start }
 
 /* ---------- checkout -------------------------------------------------- */
 
-.co { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 88px; align-items: start }
-.co__form { display: flex; flex-direction: column; gap: 60px; max-width: 620px }
-.co__rest { display: flex; flex-direction: column; gap: 60px }
+.co__form { display: flex; flex-direction: column; gap: var(--s64); max-width: 620px }
+.co__rest { display: flex; flex-direction: column; gap: var(--s64) }
 .co__form .fine { margin: 0 }
-.co__choice { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 22px }
-.co__choice .btn { padding: 13px 24px }
+.co__choice { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s16) 22px }
 .co__acct { display: flex; flex-direction: column; gap: 10px; align-items: flex-start }
-.co__signin { display: flex; flex-direction: column; gap: 24px }
+.co__signin { display: flex; flex-direction: column; gap: var(--s24) }
 
-.step { padding-top: 26px; border-top: 1px solid var(--rule) }
-.step legend { display: flex; align-items: baseline; gap: 14px; font-size: .97rem; letter-spacing: .12em; color: var(--ink) }
+.step { padding-top: 26px; border-top: var(--hair) }
+.step legend { display: flex; align-items: baseline; gap: 14px; font-size: var(--fs-label); letter-spacing: var(--ls-label); color: var(--ink) }
 .step__n { color: var(--mute) }
 
 .ship { display: flex; flex-direction: column; gap: 10px }
 .ship label {
   display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 2px 14px; align-items: center;
-  padding: 15px 17px; border: 1px solid var(--rule); cursor: pointer;
+  padding: 15px 17px; border: var(--hair); cursor: pointer;
   transition: border-color var(--t-hover) var(--ease);
 }
 .ship label.on { border-color: var(--ink) }
 .ship input { grid-row: span 2; accent-color: var(--ink) }
-.ship b { font-weight: 400; font-size: 1.13rem; color: var(--ink) }
-.ship small { grid-column: 2; font-size: .99rem; color: var(--mute) }
-.ship em { grid-row: span 2; font-style: normal; font-size: 1.11rem }
+.ship b { font-weight: var(--fw-regular); font-size: var(--fs-body); color: var(--ink) }
+.ship small { grid-column: 2; font-size: var(--fs-small); color: var(--mute) }
+.ship em { grid-row: span 2; font-style: normal; font-size: var(--fs-body) }
 
-.colines { list-style: none; margin: 0; padding: 0 0 22px; display: flex; flex-direction: column; gap: 18px; border-bottom: 1px solid var(--rule) }
-.colines li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 16px; align-items: center }
+.colines { list-style: none; margin: 0; padding: 0 0 22px; display: flex; flex-direction: column; gap: 18px; border-bottom: var(--hair) }
+.colines li { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: var(--s16); align-items: center }
 .colines .fine { margin: 2px 0 0 }
-.colines li > span { font-size: 1.15rem; font-variant-numeric: tabular-nums }
+.colines li > span { font-size: var(--fs-body); font-variant-numeric: tabular-nums }
 
-.conf { padding: 72px 0 var(--sec) }
+.conf { padding: var(--page-top) 0 var(--sec) }
 .conf__in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .9fr); gap: 96px; align-items: start }
 .conf__t { display: flex; flex-direction: column; gap: 28px; align-items: flex-start }
 .conf__t .spec { width: 100% }
@@ -369,25 +369,25 @@
 
 /* ---------- order tracking -------------------------------------------- */
 
-.track { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 88px; align-items: start }
-.track__f { display: flex; flex-direction: column; gap: 24px; align-items: flex-start }
+.track { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: var(--col-gap); align-items: start }
+.track__f { display: flex; flex-direction: column; gap: var(--s24); align-items: flex-start }
 .track__f .field { width: 100% }
 .track__f .fine { margin: 0 }
-.track__recent { width: 100%; padding-top: 22px; border-top: 1px solid var(--rule) }
+.track__recent { width: 100%; padding-top: 22px; border-top: var(--hair) }
 .track__recent ul { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px }
 
-.track__empty { display: flex; flex-direction: column; gap: 26px; align-items: flex-start; padding-top: 8px }
+.track__empty { display: flex; flex-direction: column; gap: var(--s24); align-items: flex-start; padding-top: 8px }
 .track__empty .lead { max-width: 48ch }
 
 .track__out { display: flex; flex-direction: column; gap: 52px }
 .track__head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px; align-items: start }
-.track__head > div { display: flex; flex-direction: column; gap: 16px }
+.track__head > div { display: flex; flex-direction: column; gap: var(--s16) }
 
-.track__steps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule) }
+.track__steps { list-style: none; margin: 0; padding: 0; border-top: var(--hair) }
 .track__steps li {
   position: relative;
   display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 22px; align-items: baseline;
-  padding: 20px 0; border-bottom: 1px solid var(--rule);
+  padding: 20px 0; border-bottom: var(--hair);
   color: var(--mute);
 }
 .track__steps li > div { display: flex; flex-direction: column; gap: 5px }
@@ -398,28 +398,26 @@
   border: 1px solid var(--rule); background: var(--paper);
 }
 .track__steps li.done .track__dot { background: var(--ink); border-color: var(--ink) }
-.track__steps li.now .track__dot { box-shadow: 0 0 0 4px rgba(126, 138, 115, .3) }
-.track__when { font-size: 1.03rem; font-variant-numeric: tabular-nums }
+.track__steps li.now .track__dot { box-shadow: 0 0 0 4px rgb(var(--sage-rgb) / .3) }
+.track__when { font-size: var(--fs-small); font-variant-numeric: tabular-nums }
 .track__items { display: flex; flex-direction: column; gap: 20px }
 
 /* ---------- account --------------------------------------------------- */
 
 .acct { display: flex; flex-direction: column }
-.acct__grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 88px; align-items: start }
 .acct__f { display: flex; flex-direction: column; gap: 26px; align-items: flex-start; max-width: 520px }
 .acct__f .field { width: 100% }
 .acct__f .row { width: 100% }
 .acct__f .fine { margin: 0 }
-.acct__side { display: flex; flex-direction: column; gap: 16px; padding: 36px; background: var(--bone); border: 1px solid var(--rule) }
+.acct__side { gap: var(--s16) }
 .acct__side .eyebrow:not(:first-child) { margin-top: 18px }
-.acct__side .fine { margin: 0 }
 .acct__orders { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px }
-.acct__orders li { display: flex; justify-content: space-between; gap: 16px; font-size: 1.11rem }
+.acct__orders li { display: flex; justify-content: space-between; gap: var(--s16); font-size: var(--fs-body) }
 .acct__side .linkbtn { align-self: flex-start; margin-top: 12px }
 
 /* ---------- room assistant -------------------------------------------- */
 
-.rooms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px }
+.rooms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s40) }
 .room { display: flex; flex-direction: column; gap: 18px; padding: 0; border: 0; background: none; text-align: left; cursor: pointer }
 .room .img { outline: 1px solid transparent; outline-offset: 7px; transition: outline-color var(--t-hover) var(--ease) }
 .room:hover .img { outline-color: var(--rule) }
@@ -428,64 +426,59 @@
 .room__t .fine { margin: 0 }
 .rooms__hint { margin: 52px 0 0; max-width: 62ch }
 
-.read { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 88px; align-items: start }
+.read { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: var(--col-gap); align-items: start }
 .read__t { display: flex; flex-direction: column; gap: 26px }
-.read__list { margin: 0; display: flex; flex-direction: column; border-top: 1px solid var(--rule) }
-.read__list > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; padding: 18px 0; border-bottom: 1px solid var(--rule) }
-.read__list dt { font-size: .93rem; letter-spacing: .1em; text-transform: uppercase; color: var(--mute) }
-.read__list dd { margin: 0; font-size: 1.17rem }
-.read__note { margin: 0; font-family: var(--display); font-size: 1.32rem; line-height: 1.5; color: var(--ink); max-width: 40ch }
+.read__list { margin: 0; display: flex; flex-direction: column; border-top: var(--hair) }
+.read__list > div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--s20); padding: 18px 0; border-bottom: var(--hair) }
+.read__list dt { font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; color: var(--mute) }
+.read__list dd { margin: 0; font-size: var(--fs-body) }
+.read__note { margin: 0; font-family: var(--display); font-size: var(--fs-price); line-height: 1.5; color: var(--ink); max-width: 40ch }
 
 .picks { align-items: stretch }
 .pick { display: flex; flex-direction: column; gap: 18px }
-.pick__t { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: baseline }
+.pick__t { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px var(--s16); align-items: baseline }
 .pick__t .fine { grid-column: 1 / -1; margin: 8px 0 0 }
 .pick .btn { margin-top: auto }
 
 /* =========================================================================
    Responsive
-   Desktop is the design canvas. Below it the page keeps its large imagery and
-   stacks in a single asymmetric column; animation and parallax reduce.
+   Desktop is the design canvas. The tokens (tokens.css) already tighten the
+   margins, the section rhythm, the navigation and the column gap at 1280, 980
+   and 640, so a rule below appears only where a layout itself has to change:
+   columns fold into one, the navigation collapses into the menu, product rows
+   stay horizontal on a phone. On a touch screen every control grows a finger-
+   sized hit area. The landing page and the compact listing keep the tuned
+   thresholds in their own blocks.
    ========================================================================= */
 
-/* the mobile hero is a separate 4:5 crop, served by <picture> */
+/* the hero and the editorial images are served a separate 4:5 crop on a phone */
 @media (max-width: 640px) {
   .img { aspect-ratio: var(--ar-sm, var(--ar, 4 / 5)) }
 }
 
+/* ---------- 1280 · small laptop ---------- */
 @media (max-width: 1280px) {
-  :root { --gutter: 64px; --sec: 140px; --sec-tight: 104px }
   .nav__util { gap: 22px }
-  .craft { gap: 56px }
-  .pdp__in, .cart, .co, .read, .news, .track, .acct__grid { gap: 60px }
   .plp__in { grid-template-columns: 210px minmax(0, 1fr); gap: 52px }
   .spreads { gap: 108px }
-  .spread { gap: 60px }
-  .hrow { grid-auto-columns: 320px }
 }
 
+/* ---------- 980 · tablet ---------- */
 @media (max-width: 980px) {
-  :root { --sec: 120px; --sec-tight: 96px; --nav-h: 76px }
-
   /* the compact navigation is one button, the wishlist and the cart */
   .nav__u--acct { display: none }
   .nav__menu { display: inline-flex; border: 0; background: none; cursor: pointer }
 
-
   .grid-4, .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-  .head { grid-template-columns: minmax(0, 1fr); gap: 24px }
+  .head { grid-template-columns: minmax(0, 1fr); gap: var(--s24); border-bottom: 0 } /* the link drops under the title and carries its own underline, so the section's rule would double it */
 
   .split { grid-template-columns: minmax(0, 1fr) }
   .split__pane { height: auto; aspect-ratio: 16 / 9 }
   .split__t { padding: 40px var(--gutter) 36px }
+  .split__t .fine { font-size: clamp(var(--fs-caption), 2.2vw, var(--fs-small)) } /* a pane is the full width here, so its line can be read at a normal size */
 
   .assure__in { grid-template-columns: minmax(0, 1fr); gap: 6px }
-  .assure__in p + p { border-left: 0 }
-
-  .band .img { aspect-ratio: 21 / 9 }
-
-  .craft { grid-template-columns: minmax(0, 1fr); gap: 40px }
-  .craft__img { max-width: 520px }
+  .assure__in p { padding-block: var(--s16) }
 
   .news { grid-template-columns: minmax(0, 1fr); gap: 40px }
 
@@ -500,90 +493,105 @@
   .pdp__in { grid-template-columns: minmax(0, 1fr); gap: 44px }
   .pdp__side { position: static }
   .pdp__panel { max-width: none }
+  /* three columns are too narrow for the names: the rows fold under each other, each still centred */
+  .pdetail__list { grid-template-columns: minmax(0, 1fr); gap: var(--s24) }
+  /* two to a row leaves the third alone beneath them */
+  .related > :nth-child(3) { display: none }
 
-  .spread, .cart, .co, .conf__in, .read, .track, .track__head, .acct__grid {
+  .spread, .cart, .co, .acct__grid, .conf__in, .read, .track, .track__head {
     grid-template-columns: minmax(0, 1fr);
   }
   .spread--flip .img { order: 0 }
   .co__form { max-width: none }
   .sum { position: static }
 
-  .wline { grid-template-columns: 96px minmax(0, 1fr) auto; gap: 28px }
-  .wline__a { grid-column: 2 / -1; flex-direction: row; align-items: center; gap: 22px }
+  .wline { grid-template-columns: 96px minmax(0, 1fr) auto; gap: var(--s24) }
+  .wline__a { grid-column: 2 / -1; flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--s12) var(--s24) }
 
   .rooms { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-
-  /* the space banner is a thin strip at this width */
 }
 
+/* ---------- 640 · phone ---------- */
 @media (max-width: 640px) {
-  :root { --gutter: 20px; --sec: 96px; --sec-tight: 72px; --nav-h: 68px }
-
-  .mark { font-size: 1.25rem; letter-spacing: .24em; margin-right: -.24em }
   .nav__util { gap: 12px }
-  /* on a phone the wishlist is a heart, so the mark, wishlist, cart and menu all fit */
+  /* the wishlist is a heart here, so the mark, wishlist, cart and menu all fit */
   .nav__long { display: none }
   .nav__short { display: inline }
 
   .grid-4, .grid-3, .rooms, .row { grid-template-columns: minmax(0, 1fr) }
+  .related > :nth-child(3) { display: block } /* one to a row: all three */
   .plp { row-gap: 64px }
   .rail { grid-template-columns: minmax(0, 1fr) }
 
-  /* product rows stay horizontal on a phone — that is the point of them */
-  .hrow { grid-auto-columns: 74vw }
-
-  .band .img { aspect-ratio: 16 / 9 }
-  .band__t p { font-size: 1.15rem }
-
-  .plp__top { flex-direction: column; align-items: flex-start; gap: 20px }
+  .plp__top { flex-direction: column; align-items: flex-start; gap: var(--s20) }
   .fsort .fdisc__o { left: 0; right: auto } /* the sort sits at the left under the tabs here, so its popup opens rightwards */
-  .plp__foot { flex-direction: column; align-items: flex-start; gap: 20px }
+  .plp__foot { flex-direction: column; align-items: flex-start; gap: var(--s20) }
 
   .pdp__acts { grid-template-columns: minmax(0, 1fr) }
   .pdetail { padding: 56px 0 }
-  .pdetail__list { grid-template-columns: minmax(0, 1fr); gap: 22px }
-  /* the close-ups become a strip that scrolls sideways, so their labels keep room */
+  /* the close-ups become a strip that scrolls sideways; a label may break at its hyphen rather than be cut */
   .gal { grid-template-columns: minmax(0, 1fr); grid-template-areas: "stage" "thumbs" }
   .gal__thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: 26%; gap: 12px; overflow-x: auto; padding-bottom: 8px }
-  .gal__cap { display: block }
+  .gal__cap { display: block; white-space: normal; overflow: visible; line-height: 1.3 }
   .avail__f { grid-template-columns: minmax(0, 1fr); gap: 14px }
 
   /* sticky add to cart on the product page only, so leave room for it */
   .stickybuy { display: flex }
   .pdp { padding-bottom: 96px }
 
-  .cline, .wline { grid-template-columns: 84px minmax(0, 1fr); gap: 20px }
+  .cline, .wline { grid-template-columns: 84px minmax(0, 1fr); gap: var(--s20) }
   .cline .qty { grid-column: 2 }
   .cline__amt { grid-column: 2; min-width: 0; text-align: left }
   .wline .price { grid-column: 2; min-width: 0; text-align: left }
   .wline__a { grid-column: 2 }
+  .colines li { grid-template-columns: 56px minmax(0, 1fr) } /* the figure drops under the name, so the name keeps its width */
+  .colines li > span { grid-column: 2 }
 
-  .spec > div, .craft__list > div, .read__list > div, .track__steps li {
+  .spec > div, .read__list > div, .track__steps li {
     grid-template-columns: minmax(0, 1fr); gap: 6px;
   }
-  .craft__thumb { display: none }
   .track__dot { display: none }
   .track__when { text-align: left }
 
   .sum, .acct__side { padding: 28px 24px }
   .drawer { width: 100%; padding: 26px 24px 32px }
   .foot { padding: 32px 0 20px }
+  body:has(.stickybuy) .foot { padding-bottom: 96px } /* the fixed bar must not sit on the copyright line */
   .foot__logo { padding-bottom: 26px }
   .foot__base { margin-top: 28px; flex-direction: column; gap: 10px }
 
   .spreads { gap: 80px }
 }
 
+/* ---------- touch screens ----------
+   The hit area of a small control grows to a finger's width and height; the control itself neither
+   moves nor changes size. A control that is already large is left alone (the expansion is zero). */
+@media (pointer: coarse) {
+  :is(.nav__u, .tlink, .linkbtn, .back, .pill, .foot ul a, .crumb a, .srooms__links a, .qty button,
+      .filter, .check, .disc summary, .cats__tabs button, .menu__x, .drawer__x) {
+    position: relative;
+  }
+  :is(.nav__u, .tlink, .linkbtn, .back, .pill, .foot ul a, .crumb a, .srooms__links a, .qty button,
+      .filter, .check, .disc summary, .pcard__save, .cats__tabs button, .menu__x, .drawer__x, .sw)::before {
+    content: ""; position: absolute;
+    inset: calc(max(0px, (var(--tap) - 100%) / 2) * -1);
+  }
+}
+
+/* no pointer to hover with: the zoom chip is always there to say the photograph can be enlarged */
+@media (hover: none) {
+  .gal__zoom { opacity: 1 }
+}
+
 /* category filters: sharp rectangles, text at full strength, the stroke softened */
-.cats__tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px }
+.cats__tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 0 }
 .cats__tabs button {
-  font: inherit; font-size: .97rem; letter-spacing: .08em; text-transform: uppercase;
+  font: inherit; font-size: var(--fs-label); letter-spacing: var(--ls-caps); text-transform: uppercase;
   padding: 13px 24px; border: 1px solid color-mix(in srgb, var(--ink) 35%, transparent); border-radius: 0;
   background: transparent; color: var(--ink); cursor: pointer;
 }
 .cats__tabs button:hover { border-color: color-mix(in srgb, var(--ink) 70%, transparent) }
 .cats__tabs button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--paper) }
-.cats__tabs { margin-top: 0 }
 .cgrid { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 48px 24px }
 .cgrid a { display: flex; flex-direction: column; gap: 6px }
 .cgrid__img { display: block; margin-bottom: 10px }
@@ -620,7 +628,7 @@
 .sec--col .price { font-size: calc(.97rem + var(--room) * .0129); line-height: 1.35 }
 
 /* the spaces page borrows the compact title block only; its rooms keep the site's own type */
-.sec--col .spread .eyebrow { font-size: .93rem; line-height: inherit }
+.sec--col .spread .eyebrow { font-size: var(--fs-label); line-height: inherit }
 
 /* the category overview: its grid sits straight under the tabs row, which carries the gap */
 .sec--col .cgrid { margin-top: 0 }
@@ -668,3 +676,38 @@
 .back:focus-visible { outline: 2px solid currentColor; outline-offset: 3px }
 .back--light { color: var(--paper) }
 .back svg { width: 20px; height: 20px }
+
+/* ---------- the design-system page (/design-system, not linked) ----------
+   Drawn only from tokens and the site's own classes; nothing here is a style of its own except the layout of the page. */
+.ds-vw { display: block; margin-top: var(--s8); color: var(--mute) }
+.ds-sec { padding-top: var(--s64) }
+.ds-sec .head { margin-bottom: var(--s32) }
+.ds-note { margin: 0 0 var(--s24); max-width: 62ch }
+.ds code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: var(--fs-caption); color: var(--mute) }
+.ds small { font-size: var(--fs-caption); color: var(--mute) }
+.ds-swatches { list-style: none; margin: 0 0 var(--s32); padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--s24) var(--s20) }
+.ds-sw { display: flex; flex-direction: column; gap: var(--s12) }
+.ds-sw__chip { display: block; height: 88px; border: var(--hair) }
+.ds-sw__t { display: flex; flex-direction: column; gap: 2px; font-size: var(--fs-small) }
+.ds-sw__t b { font-weight: var(--fw-regular); color: var(--ink) }
+.ds-types { display: flex; flex-direction: column; border-top: var(--hair) }
+.ds-type { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--s32); align-items: baseline; padding: var(--s24) 0; border-bottom: var(--hair) }
+.ds-type__meta { display: flex; flex-direction: column; gap: 2px }
+.ds-type > p { margin: 0 }
+.ds-price { font-size: var(--fs-price); color: var(--ink) }
+.ds-caption { font-size: var(--fs-caption); letter-spacing: var(--ls-caps); text-transform: uppercase; color: var(--ink) }
+.ds-space { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s8) }
+.ds-space li { display: grid; grid-template-columns: 72px minmax(0, 1fr) 56px; gap: var(--s16); align-items: center }
+.ds-space__bar { display: block; height: 12px; max-width: 100%; background: var(--ink) }
+.ds-bp, .ds-motion { margin: 0; padding: 0; list-style: none; border-top: var(--hair) }
+.ds-bp > div, .ds-motion li { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--s32); padding: var(--s16) 0; border-bottom: var(--hair) }
+.ds-bp dt, .ds-bp dd { margin: 0 }
+.ds-motion li { grid-template-columns: 160px 80px minmax(0, 1fr) }
+.ds-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s24); margin-bottom: var(--s32) }
+.ds-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s48); max-width: 760px }
+.ds-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--grid-gap); align-items: start }
+.ds-spec { width: 100% }
+@media (max-width: 980px) {
+  .ds-type, .ds-bp > div, .ds-motion li { grid-template-columns: minmax(0, 1fr); gap: var(--s4) }
+  .ds-form, .ds-cards { grid-template-columns: minmax(0, 1fr) }
+}

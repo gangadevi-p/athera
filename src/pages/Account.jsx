@@ -29,11 +29,11 @@ export default function Account() {
 
   if (!account) {
     return (
-      <section className="sec">
+      <section className="sec sec--page">
         <div className="wrap acct">
           <div className="phead">
             <span className="eyebrow">Account</span>
-            <h1 className="disp d1">Sign in</h1>
+            <h1 className="disp d2">Sign in</h1>
             <p className="lead">
               An account saves your address so checkout is three steps instead of four, and keeps
               your orders in one place. You can also check out as a guest — nothing here is
@@ -65,11 +65,11 @@ export default function Account() {
   const a = account.address
 
   return (
-    <section className="sec">
+    <section className="sec sec--page">
       <div className="wrap acct">
-        <div className="phead phead--short">
+        <div className="phead">
           <span className="eyebrow">Account</span>
-          <h1 className="disp d1">{account.name || 'Your account'}</h1>
+          <h1 className="disp d2">{account.name || 'Your account'}</h1>
           <p className="lead">{account.email}</p>
         </div>
 

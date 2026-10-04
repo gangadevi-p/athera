@@ -14,7 +14,7 @@ export default function Wishlist() {
 
   if (!pieces.length) {
     return (
-      <section className="sec">
+      <section className="sec sec--page">
         <div className="wrap empty">
           <span className="eyebrow">Wishlist</span>
           <h1 className="disp d2">Nothing saved yet</h1>
@@ -29,14 +29,14 @@ export default function Wishlist() {
   }
 
   return (
-    <section className="sec">
+    <section className="sec sec--page">
       <div className="wrap">
-        <div className="phead phead--short">
+        <div className="phead">
           <span className="eyebrow">Wishlist</span>
-          <h1 className="disp d1">Saved</h1>
+          <h1 className="disp d2">Saved</h1>
         </div>
 
-        <div className="head">
+        <div className="head head--bare">
           <div className="head__t">
             <p className="lead">
               Kept in this browser. Add a piece to the cart when you are ready, or take it off the
@@ -65,7 +65,7 @@ export default function Wishlist() {
               </div>
               <span className="price">{money(p.price)}</span>
               <div className="wline__a">
-                <button className="btn btn--quiet" type="button" onClick={() => add(p.id, 0)}>
+                <button className="btn btn--quiet btn--sm" type="button" onClick={() => add(p.id, 0)}>
                   Add to cart
                 </button>
                 <button className="linkbtn" type="button" onClick={() => unsave(p.id)}>

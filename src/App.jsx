@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout'
 import Done from './pages/Done'
 import Track from './pages/Track'
 import Help from './pages/Help'
+import DesignSystem from './pages/DesignSystem'
 import NotFound from './pages/NotFound'
 
 /**
@@ -49,6 +50,7 @@ export const routes = [
       { path: '/done', element: <Done /> },
       { path: '/track', element: <Track /> },
       { path: '/help', element: <Help /> },
+      { path: '/design-system', element: <DesignSystem /> },
       { path: '*', element: <NotFound /> },
     ],
   },

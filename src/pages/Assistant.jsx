@@ -38,11 +38,11 @@ export default function Assistant() {
 
   return (
     <>
-      <section className="sec sec--tight">
+      <section className="sec sec--page">
         <div className="wrap">
           <div className="phead">
             <span className="eyebrow">Room assistant</span>
-            <h1 className="disp d1">Design your<br />space smarter</h1>
+            <h1 className="disp d2">Design your space smarter</h1>
             <p className="lead">
               Start from a room like yours. We read its light, its proportion and its palette,
               then suggest the few pieces that belong in it — and say why.

@@ -104,11 +104,11 @@ export default function Track() {
   }
 
   return (
-    <section className="sec">
+    <section className="sec sec--page">
       <div className="wrap">
         <div className="phead">
           <span className="eyebrow">Order tracking</span>
-          <h1 className="disp d1">Follow<br />your order</h1>
+          <h1 className="disp d2">Follow your order</h1>
           <p className="lead">
             Enter the order number from your confirmation. Orders are kept in this browser only,
             so this finds the ones you placed here.

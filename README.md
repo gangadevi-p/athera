@@ -1,7 +1,8 @@
 # Aethera
 
-A desktop storefront for **Aethera** — a furniture brand curating pieces and
-interiors for calm, intentional living.
+A responsive storefront for **Aethera** — a furniture brand curating pieces and
+interiors for calm, intentional living. Designed desktop-first and checked from
+360px phones to 2560px monitors.
 
 Built with React 18, Vite and React Router. Designed and built from a Figma
 wireframe, a core-flows brief (`coreflows.jpg`) and a visual concept: **a quiet
@@ -13,32 +14,48 @@ photography rather than by interface.
 
 Paper and ink. Warm off-white grounds, hairline rules, a single sage accent,
 charcoal text instead of pure black, and large photography doing the colour
-work. **Italiana** for display type against **Jost** for everything else;
+work. **Georgia** capitals for titles against **Jost** for everything else;
 generous vertical rhythm and very few controls on any screen.
 
-The page is laid out on a 12-column grid: 1440px maximum, 1280px of content,
-80px desktop margins, and 120–180px between sections.
+**The design system is written down in [`DESIGN.md`](DESIGN.md)** and lives in
+one file, [`src/tokens.css`](src/tokens.css): the palette, a five-size text
+scale and a fluid ramp for titles, a 4/8 spacing scale, the layout box, the
+section rhythm, motion and the values that change at each breakpoint. Open
+`/design-system` (not linked from the site) to see every token drawn live — it
+reads the values back from the stylesheet, so it can't drift, and it can be
+resized to watch the tokens change.
 
-The palette is the brief's seven colours:
+The page is laid out in a 1440px box with 1280px of content, 80px desktop
+margins, and 120–160px between sections.
+
+The palette is the brief's seven colours (`--paper`, `--ink` and friends are the
+names the layout uses):
 
 | Token | Value | Use |
 | --- | --- | --- |
-| `warm-white` | `#F6F4EF` | page ground |
-| `sand` | `#EFE7DA` | alternating sections |
-| `beige` | `#E4DED3` | third ground, image placeholders |
-| `taupe` | `#7C766C` | eyebrows, captions |
+| `warm-white` | `#F6F4EF` | type and glass over photographs |
+| `sand` | `#EFE7DA` | a second ground |
+| `beige` | `#E4DED3` | a third ground |
+| `taupe` | `#7C766C` | placeholders |
 | `sage` | `#7E8A73` | the single accent |
-| `walnut` | `#241A14` | the one dark section |
-| `charcoal` | `#2B2A27` | accent ink |
+| `walnut` | `#2A1B14` | the solid button's hover |
+| `charcoal` | `#2E1E16` | ink |
 
 Image ratios are fixed by the brief: 16:9 for the homepage hero (with a
 separate 4:5 crop on mobile), 4:5 for editorial sections, 3:4 for product
 cards, and 1:1 plus 4:5 in the product gallery.
 
-The site is **designed desktop-first** against a 1280–1680 canvas, and adapts
-down through three breakpoints for the core flow. Below 980px the navigation
-becomes a full-screen editorial menu; below 640px the product page grows a
-sticky add-to-cart bar and product rows stay horizontally scrollable.
+## Responsive
+
+Three breakpoints — **1280, 980 and 640** — and the tokens (margins, section
+padding, navigation height, column gap) change at each, so most components need
+no media query of their own. Below 980px every pair of columns folds into one,
+grids go two-up, and the navigation becomes a full-screen **Menu**. Below 640px
+margins drop to 20px, grids go one-up, the product page grows a sticky
+add-to-cart bar, and the gallery's close-ups become a strip that scrolls
+sideways. On touch screens every small control has a 44px hit area and the
+gallery's *Zoom* chip is always visible; hover-only reveals are never the only
+way to see something.
 
 ## Rhythm and motion
 
@@ -58,9 +75,10 @@ these is disabled under `prefers-reduced-motion`.
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Landing — hero, shop by category, featured collection, lifestyle editorial, best-selling, shop by space, craftsmanship, philosophy, newsletter |
-| `/shop` | Listing, filtered by category, price, colour, material and size through the URL |
-| `/p/:id` | Product detail — gallery with zoom, finishes, availability check, specification, care |
+| `/` | Landing — hero, shop by category, featured collections, philosophy, shop by space |
+| `/shop` | Listing, filtered by category, colour, material and size through the URL; `?col=` is a featured collection |
+| `/categories` | Shop by category — the seven, and a chosen category's listing |
+| `/p/:id` | Product detail — gallery with in-place zoom, finishes, availability check, specification, care |
 | `/spaces` | Shop by space — living room, bedroom, workspace |
 | `/spaces/:id` | One space, with the pieces chosen for it |
 | `/assistant` | Room Assistant — pick a prepared room, read it, see three pieces |
@@ -70,17 +88,19 @@ these is disabled under `prefers-reduced-motion`.
 | `/checkout` | Account, delivery details, shipping method and payment, with a live summary |
 | `/done` | Order confirmation |
 | `/track` | Order tracking — enter an order number, see the delivery status |
+| `/help` | Delivery and returns, care, contact |
+| `/design-system` | The design system, drawn from the live tokens (not linked) |
 
 ## The collection
 
-Eighteen pieces across the brief's seven categories: sofas and lounge chairs,
+Seventy-three pieces across the brief's seven categories: sofas and lounge chairs,
 coffee and side tables, dining tables and chairs, beds and bedside tables,
 shelves and storage cabinets, floor and table lamps, and rugs, cushions and
 ceramic objects.
 
 Each piece is photographed in the views the brief asks for — front, side,
 three-quarter, back and detail — labelled under each frame in the gallery. Any
-frame opens a zoom view: click to magnify, move the pointer to pan.
+frame magnifies in place — click to enlarge, drag to move around, click again to return — and a sharper file loads as you arrive.
 
 ## The Room Assistant
 

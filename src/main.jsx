@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider, createBrowserRouter, createHashRouter } from 'react-router-dom'
 import { routes } from './App'
+import './tokens.css'
 import './index.css'
 import './pages.css'
 

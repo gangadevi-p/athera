@@ -1,0 +1,174 @@
+/* =========================================================================
+   Aethera — design tokens
+   Every value the stylesheets share is named here, once. Components read
+   these tokens; they do not invent colours, sizes or gaps of their own.
+   `DESIGN.md` explains the thinking and shows each token in use.
+
+   Contents
+     1 · colour          palette, roles, translucent layers
+     2 · type            families, the size scale, tracking, leading
+     3 · space           the 4/8 spacing scale
+     4 · layout          container, gutter, section rhythm, grid gaps
+     5 · surface         hairline, stacking order, the touch target
+     6 · motion          durations and easing
+     7 · fit             sizes derived from the viewport height
+     8 · breakpoints     the one place the tokens change with the screen
+
+   Breakpoints (media queries cannot read custom properties, so the numbers are
+   written out wherever they are used — keep to these three):
+       1280   small laptop        — margins tighten to 64px, the rhythm closes up
+        980   tablet              — one column, the compact navigation, grids two-up
+        640   phone               — 20px margins, one-up grids, the sticky buy bar
+   Touch is not a width: `(pointer: coarse)` gives small controls a 44px hit area.
+   ========================================================================= */
+
+:root {
+  /* ----- 1 · colour ---------------------------------------------------- */
+
+  /* the brief's seven */
+  --warm-white: #F6F4EF;
+  --sand: #EFE7DA;
+  --beige: #E4DED3;
+  --taupe: #7C766C;
+  --sage: #7E8A73;
+  --walnut: #2A1B14;
+  --charcoal: #2E1E16;
+
+  /* the names the layout uses */
+  --paper: #FFFFFF;      /* page ground */
+  --bone: #FFFFFF;       /* alternating ground — one ground across the site for now */
+  --linen: #F2F0EB;      /* image placeholder, quiet fills */
+  --mute: #6B5A4D;       /* eyebrows, captions, secondary text */
+  --ink: var(--charcoal);/* headings and controls — charcoal, never pure black */
+  --graphite: #4A382D;   /* body copy */
+  --rule: #D3C9B6;       /* hairlines */
+  --accent: var(--sage); /* focus, link hover, the live tracking step */
+
+  /* translucent layers are written as `rgb(var(--x-rgb) / alpha)` */
+  --ink-rgb: 46 30 22;       /* = --charcoal: tints and hairlines over paper */
+  --shade-rgb: 36 26 20;     /* scrims and gradients over photographs */
+  --light-rgb: 246 244 239;  /* = --warm-white: type and glass over photographs */
+  --deep-rgb: 20 14 10;      /* the deepest shadow, under the hero piece */
+  --white-rgb: 255 255 255;  /* the lit edge of the glass controls */
+  --glow-rgb: 214 180 148;   /* the warm light on the hero's wall */
+  --sage-rgb: 126 138 115;   /* = --sage */
+  --taupe-rgb: 124 118 108;  /* = --taupe: placeholders */
+  --scrim: rgb(var(--shade-rgb) / .32);
+
+  /* image ratios from the brief */
+  --r-hero: 16 / 9;
+  --r-hero-sm: 4 / 5;
+  --r-edit: 4 / 5;
+  --r-card: 3 / 4;
+
+  /* ----- 2 · type ------------------------------------------------------ */
+
+  --display: Georgia, 'Times New Roman', serif;   /* hero, page and section titles only */
+  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;  /* everything functional */
+  --fw-light: 300;     /* running text */
+  --fw-regular: 400;   /* labels, names, buttons */
+
+  /* sizes — five for text, a fluid ramp for titles. Each role has ONE size. */
+  --fs-caption: .85rem;  /* 13.6px  small caps links, captions, the assurance strip */
+  --fs-label: .95rem;    /* 15.2px  eyebrows, labels, buttons, tabs, pills, summaries */
+  --fs-small: 1.03rem;   /* 16.5px  secondary text: notes, material lines, filters */
+  --fs-body: 1.15rem;    /* 18.4px  running text, names, values, form fields, prices in lists */
+  --fs-price: 1.35rem;   /* 21.6px  a piece's price, order totals, a serif note */
+  --fs-icon: 1.25rem;    /* 20px    the plus, the quantity signs */
+  --fs-glyph: 2rem;      /* 32px    close crosses */
+  --fs-mark: 1.5rem;     /* 24px    the logotype in the navigation */
+
+  --fs-d1: clamp(3.2rem, 5.6vw, 6rem);                    /* statement — the one very large size */
+  --fs-d2: clamp(1.8rem, 2.9vw, 3rem);                    /* page and section titles */
+  --fs-d3: clamp(1.6rem, 2.4vw, 2.6rem);                  /* sub-sections, room names */
+  --fs-title: clamp(1.75rem, 2.1vw + .25rem, 2.25rem);    /* a piece's name on its page (sans) */
+
+  /* tracking */
+  --ls-display: .015em;
+  --ls-caps: .1em;       /* buttons, links, tabs, nav — every small-caps control */
+  --ls-label: .14em;     /* eyebrows and field labels — the wide, quiet kind */
+  --ls-name: .05em;      /* product names */
+  --ls-title: .07em;     /* the product title */
+  --ls-mark: .38em;      /* the logotype */
+
+  /* leading */
+  --lh-display: .98;
+  --lh-body: 1.65;
+  --lh-loose: 1.75;
+
+  /* ----- 3 · space ----------------------------------------------------- */
+  /* a 4/8 scale; the name is the pixel value */
+  --s4: 4px;
+  --s8: 8px;
+  --s12: 12px;
+  --s16: 16px;
+  --s20: 20px;
+  --s24: 24px;
+  --s32: 32px;
+  --s40: 40px;
+  --s48: 48px;
+  --s64: 64px;
+  --s80: 80px;
+  --s96: 96px;
+  --s128: 128px;
+
+  /* ----- 4 · layout ---------------------------------------------------- */
+
+  --max: 1440px;         /* the page box; 1280px of it is content at the full margin */
+  --gutter: 80px;        /* margin either side of the content */
+  --nav-h: 88px;
+  --sec: 160px;          /* padding above and below a section */
+  --sec-tight: 120px;
+  --page-top: clamp(32px, 6svh, 64px);  /* a page's first section, beneath the navigation */
+  --col-gap: 88px;       /* between the two columns of a page */
+  --grid-gap: 48px;      /* between cards in a grid */
+  --cols-main: 1.5fr;    /* a main column beside its aside (cart, checkout, account) */
+  --cols-aside: 1fr;
+
+  /* ----- 5 · surface --------------------------------------------------- */
+
+  --hair: 1px solid var(--rule);
+  --tap: 44px;           /* the least a finger is asked to hit */
+
+  /* stacking */
+  --z-raise: 2;
+  --z-sort: 7;
+  --z-pin: 8;
+  --z-nav: 40;
+  --z-bar: 45;
+  --z-scrim: 50;
+  --z-drawer: 60;
+  --z-menu: 70;
+
+  /* ----- 6 · motion ---------------------------------------------------- */
+
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --t-hover: .3s;
+  --t-panel: .5s;
+  --t-reveal: .75s;
+  --t-image: .9s;
+
+  /* ----- 7 · fit ------------------------------------------------------- */
+  /* sections that must sit on one screen are sized from what is left of it */
+
+  --fit: calc(100svh - var(--nav-h));
+  --fit-body: clamp(300px, calc(100svh - var(--nav-h) - clamp(32px, 6svh, 80px) - clamp(96px, 17svh, 140px)), 620px);
+  --fc-head: clamp(84px, 12.5svh, 112px);
+  --fc-gap: clamp(16px, 3svh, 32px);
+}
+
+/* ----- 8 · breakpoints ------------------------------------------------- */
+/* the tokens that change with the screen — components follow them, so most
+   rules need no media query of their own */
+
+@media (max-width: 1280px) {
+  :root { --gutter: 64px; --sec: 140px; --sec-tight: 104px; --col-gap: 60px }
+}
+
+@media (max-width: 980px) {
+  :root { --sec: 120px; --sec-tight: 96px; --nav-h: 76px; --col-gap: 44px }
+}
+
+@media (max-width: 640px) {
+  :root { --gutter: 20px; --sec: 96px; --sec-tight: 72px; --nav-h: 68px; --fs-mark: 1.25rem; --ls-mark: .24em }
+}

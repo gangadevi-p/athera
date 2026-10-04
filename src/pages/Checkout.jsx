@@ -67,11 +67,11 @@ export default function Checkout() {
   }
 
   return (
-    <section className="sec">
+    <section className="sec sec--page">
       <div className="wrap">
-        <div className="phead phead--short">
+        <div className="phead">
           <span className="eyebrow">Checkout</span>
-          <h1 className="disp d1">Your order</h1>
+          <h1 className="disp d2">Your order</h1>
         </div>
 
         <div className="co">
@@ -104,10 +104,10 @@ export default function Checkout() {
                 </form>
               ) : (
                 <div className="co__choice">
-                  <button className="btn btn--quiet" type="button" onClick={() => setSigning(true)}>
+                  <button className="btn btn--quiet btn--sm" type="button" onClick={() => setSigning(true)}>
                     Sign in
                   </button>
-                  <button className="btn btn--quiet" type="button" onClick={() => setMode('guest')}>
+                  <button className="btn btn--quiet btn--sm" type="button" onClick={() => setMode('guest')}>
                     Continue as guest
                   </button>
                   {mode === 'guest' && <span className="fine">Checking out as a guest.</span>}
