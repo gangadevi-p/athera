@@ -17,8 +17,8 @@ import { reducedMotion } from '../lib/motion'
  * Photos are lazy: only the first two are fetched up front.
  */
 
-const HOLD = 4200   // ms each pair stays put
-const MOVE = 1600   // ms the drift takes; written to --cc-move so CSS follows
+const HOLD = 2800   // ms each pair stays put
+const MOVE = 1100   // ms the drift takes; written to --cc-move so CSS follows
 const N = CATEGORIES.length
 const SLIDES = [...CATEGORIES, CATEGORIES[0], CATEGORIES[1]]
 
