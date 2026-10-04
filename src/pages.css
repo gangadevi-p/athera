@@ -542,6 +542,9 @@
 
   .cline, .wline { grid-template-columns: 84px minmax(0, 1fr); gap: var(--s20) }
   .cline .qty { grid-column: 2 }
+  /* the cart is where a thumb works the most: the quantity buttons and Remove are 44px for real, not only in their hit area */
+  .cline .qty button { width: var(--tap); height: var(--tap) }
+  .cline .linkbtn { display: inline-flex; align-items: center; min-height: var(--tap) }
   .cline__amt { grid-column: 2; min-width: 0; text-align: left }
   .wline .price { grid-column: 2; min-width: 0; text-align: left }
   .wline__a { grid-column: 2 }
