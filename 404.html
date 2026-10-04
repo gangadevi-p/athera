@@ -7,7 +7,7 @@
       // Redirect deep links back through index.html for the SPA router.
       (function () {
         var base = '/athera';
-        var path = window.location.pathname.replace(base, '') || '/';
+        var path = (window.location.pathname.replace(base, '') || '/') + window.location.search;
         window.location.replace(
           base + '/?p=' + encodeURIComponent(path) + window.location.hash
         );
