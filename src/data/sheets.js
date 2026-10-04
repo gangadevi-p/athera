@@ -1,5 +1,5 @@
 /**
- * The photographs cut from the contact sheets in `/img` (and `dining.png`).
+ * The photographs cut from the contact sheets in `/img`. `sidetables1.png` (sheet `bedside`) holds both the bedside tables and the stone and brass side tables.
  *
  * Each sheet is one PNG holding many frames. `scripts/crop-sheets.mjs` finds the
  * frame boundaries from the white gutters, trims the gutter, upscales each frame
@@ -17,10 +17,11 @@ export const SHEETS = {
   coffee: 'img/coffee tables.png',
   dining: 'img/dining.png',
   beds: 'img/Beds.png',
-  bedside: 'img/sidetables.png',
+  bedside: 'img/sidetables1.png',
   storage: 'img/storage and shelves.png',
   objects: 'img/seramicobjects.png',
   lamps: 'img/lamps.png',
+  collection: 'img/Collection.png',
 }
 
 /**
@@ -66,13 +67,13 @@ export const PIECES = {
 
   // coffee and side tables
   'oak-frame-coffee-table': { front: 'coffee-01' },
-  'stone-lamp-table': { front: 'coffee-07' },
+  'stone-lamp-table': { front: 'bedside-12' },
   'walnut-side-table': { front: 'coffee-08' },
   'oak-nesting-tables': { front: 'coffee-06' },
   'travertine-round-coffee-table': { front: 'coffee-00' },
   'oak-and-steel-coffee-table': { front: 'coffee-04' },
-  'brass-nesting-side-tables': { front: 'coffee-09' },
-  'ash-tripod-side-table': { front: 'coffee-16' },
+  'brass-nesting-side-tables': { front: 'bedside-14' },
+  'ash-tripod-side-table': { front: 'bedside-04' },
   'limestone-coffee-table': { front: 'coffee-02', alt: 'coffee-12' },
   'glass-and-steel-coffee-table': { front: 'coffee-14' },
 
@@ -129,7 +130,7 @@ export const PIECES = {
 /** The photograph each category is represented by. */
 export const CATEGORY_FRAMES = {
   sofas: 'sofas-01',
-  tables: 'coffee-01',
+  tables: 'bedside-14',
   dining: 'dining-02',
   beds: 'beds-07',
   storage: 'storage-11',
@@ -137,10 +138,14 @@ export const CATEGORY_FRAMES = {
   lighting: 'lamps-02',
 }
 
+/** The home carousel's photographs: Collection.png holds one per category, in the order of CATEGORIES. */
+export const COLLECTION_FRAMES = [0, 1, 2, 3, 4, 5, 6].map(n => `collection-0${n}`)
+
 /** Every frame the site uses. */
 export const USED = [
   ...new Set([
     ...Object.values(CATEGORY_FRAMES),
+    ...COLLECTION_FRAMES,
     ...Object.values(PIECES).flatMap(p => [p.front, p.alt, p.detail].filter(Boolean)),
   ]),
 ].sort()

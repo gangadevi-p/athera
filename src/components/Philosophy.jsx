@@ -19,9 +19,9 @@ import Img from './Img'
 const STATEMENT = 'Fewer things, made to last.'
 
 const PRINCIPLES = [
-  { n: '01', t: 'Quiet over loud.', d: 'A piece should settle into a room, not announce itself.' },
-  { n: '02', t: 'Fewer, and made for you.', d: 'Everything is made to order in small runs, so nothing is made twice by accident.' },
-  { n: '03', t: 'Kept, not replaced.', d: 'Seats are re-woven, covers replaced and timber re-oiled — a piece is looked after, not thrown out.' },
+  { t: 'Quiet over loud.', d: 'A piece should settle into a room, not announce itself.' },
+  { t: 'Fewer, and made for you.', d: 'Everything is made to order in small runs, so nothing is made twice by accident.' },
+  { t: 'Kept, not replaced.', d: 'Seats are re-woven, covers replaced and timber re-oiled — a piece is looked after, not thrown out.' },
 ]
 
 const IMG = {
@@ -38,11 +38,8 @@ function Photo({ k, w = 1800, ratio = '4 / 5', priority = false }) {
 function Principle({ p }) {
   return (
     <div className="pp">
-      <span className="pp__n">{p.n}</span>
-      <div className="pp__b">
-        <h3 className="disp pp__t">{p.t}</h3>
-        <p className="pp__d">{p.d}</p>
-      </div>
+      <h3 className="disp pp__t">{p.t}</h3>
+      <p className="pp__d">{p.d}</p>
     </div>
   )
 }
@@ -58,7 +55,7 @@ export default function Philosophy({ variant = 'a' }) {
           </div>
           <div className="ph__three">
             {PRINCIPLES.map((p, i) => (
-              <div key={p.n} data-reveal="" data-delay={i + 1}><Principle p={p} /></div>
+              <div key={p.t} data-reveal="" data-delay={i + 1}><Principle p={p} /></div>
             ))}
           </div>
           <div className="ph__strip" data-reveal="mask"><Photo k="shadow" w={2400} ratio="21 / 9" /></div>
@@ -78,7 +75,7 @@ export default function Philosophy({ variant = 'a' }) {
           </div>
           <div className="ph__three">
             {PRINCIPLES.map((p, i) => (
-              <div key={p.n} data-reveal="" data-delay={i + 1}><Principle p={p} /></div>
+              <div key={p.t} data-reveal="" data-delay={i + 1}><Principle p={p} /></div>
             ))}
           </div>
         </div>
@@ -92,7 +89,7 @@ export default function Philosophy({ variant = 'a' }) {
         <span className="eyebrow" data-reveal="">Our philosophy</span>
         <p className="disp ph__mid" data-reveal="" data-delay="1">{STATEMENT}</p>
         <div className="ph__list" data-reveal="" data-delay="2">
-          {PRINCIPLES.map(p => <Principle key={p.n} p={p} />)}
+          {PRINCIPLES.map(p => <Principle key={p.t} p={p} />)}
         </div>
       </div>
       <div className="ph__img" data-reveal="mask"><Photo k="vases" w={1800} ratio="2 / 3" priority /></div>

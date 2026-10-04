@@ -738,22 +738,20 @@ html { scroll-snap-type: y proximity }
 @media (max-width: 640px) { .hero__sofa { max-width: 100% } }
 
 /* ---------- brand philosophy: what we believe — a statement and three principles, each layout fits one screen ---------- */
-.ph { position: relative; margin-top: var(--sec); scroll-snap-align: start; scroll-margin-top: var(--nav-h) } /* margin, not padding: the section itself still fits one screen */
+.ph { position: relative; margin-block: var(--sec); scroll-snap-align: start; scroll-margin-top: var(--nav-h) } /* margin, not padding: the section itself still fits one screen */
 .ph .img { position: absolute; inset: 0; height: 100%; aspect-ratio: auto }
-.pp { display: grid; grid-template-columns: 3.2ch minmax(0, 1fr); gap: 14px; align-items: baseline }
-.pp__n { font-size: var(--fs-label); letter-spacing: var(--ls-caps); color: var(--mute); font-variant-numeric: tabular-nums }
-.pp__t { margin: 0 0 clamp(4px, .9svh, 8px); font-size: clamp(1.05rem, 2.7svh, 1.55rem); line-height: 1.15; color: var(--ink) }
-.pp__d { margin: 0; max-width: 40ch; font-size: clamp(1.05rem, 1.8svh + .25rem, 1.2rem); line-height: 1.55; color: var(--graphite) }
+.pp__t { margin: 0 0 clamp(2px, .6svh, 6px); font-size: clamp(1rem, 2.3svh, 1.3rem); line-height: 1.15; color: var(--ink) }
+.pp__d { margin: 0; max-width: 40ch; font-size: clamp(.95rem, 1.5svh + .2rem, 1.1rem); line-height: 1.55; color: var(--graphite) }
 
 /* A · manifesto: statement and principles on the left, one tall photograph bleeding off the right */
 /* inset to the same measure as the other sections: the .wrap content width (max width and gutter);
    no fixed height, so the photograph is only as tall as the statement and principles beside it */
 .ph--a { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); padding-inline: calc((100% - min(100%, var(--max))) / 2 + var(--gutter)) }
 .ph__body { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: clamp(14px, 3svh, 32px); padding: 0 clamp(32px, 5vw, 88px) 0 0 }
-.ph__mid { margin: 0; max-width: 20ch; font-size: clamp(1.7rem, min(5svh, 3.4vw), 3.1rem); line-height: 1.1; color: var(--ink) }
+.ph__mid { margin: 0; max-width: 20ch; font-size: clamp(1.4rem, min(3.8svh, 2.6vw), 2.2rem); line-height: 1.1; color: var(--ink) }
 .ph__list { width: 100%; max-width: 560px }
 .ph__list .pp { padding: clamp(8px, 1.7svh, 16px) 0 }
-.ph__img { position: relative }
+.ph__img { position: relative; aspect-ratio: 496 / 465 } /* the photo keeps its size whatever the type beside it does */
 
 /* B · principles: the statement across the page, three principles, a wide strip of light beneath */
 .ph--b { height: var(--fit); display: flex; align-items: center; padding: clamp(12px, 2.6svh, 32px) 0 }
@@ -771,7 +769,6 @@ html { scroll-snap-type: y proximity }
 .ph--c .ph__wrap { width: 100%; height: 100%; padding-block: clamp(20px, 6svh, 72px); display: flex; flex-direction: column; justify-content: space-between }
 .ph--c .ph__big { max-width: 24ch; color: var(--warm-white) }
 .ph--c .eyebrow { color: rgb(var(--light-rgb) / .78) }
-.ph--c .pp__n { color: rgb(var(--light-rgb) / .7) }
 .ph--c .pp__t { color: var(--warm-white) }
 .ph--c .pp__d { color: rgb(var(--light-rgb) / .85) }
 .ph--c .ph__three .pp { border-top-color: rgb(var(--light-rgb) / .34) }

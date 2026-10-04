@@ -25,12 +25,19 @@ import { fileURLToPath } from 'node:url'
 import { SHEETS, USED } from '../src/data/sheets.js'
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const out = resolve(root, 'public/photos')
+const argv = process.argv.slice(2)
+const flag = n => (argv.includes(n) ? argv[argv.indexOf(n) + 1] : null)
+const out = flag('--out') ? resolve(flag('--out')) : resolve(root, 'public/photos')
+const only = flag('--only') // cut one sheet only
 
 const TRIM = 3 // px cut inside every frame edge
 const GUTTER = 233 // mean of the darkest channel above which a row/column is gutter
 
 /** Frames the gutter detector gets wrong (a very bright frame bleeds into its gutter). */
+/** Sheets laid out on a black ground, with frames of different sizes that do not share rows. */
+const DARK = new Set(['bedside'])
+const DARK_LEVEL = 24 // mean of the brightest channel below which a row/column is gutter
+
 const FIX = { coffee: { 18: { width: 297 } } }
 
 const runs = flags => {
@@ -44,9 +51,32 @@ const runs = flags => {
   return r.filter(([a, b]) => b - a > 40)
 }
 
+/** Frames on a black ground: rows of frames split by black bands, then each frame trimmed to its own top and bottom. */
+function darkFrames(data, W, H) {
+  const lit = (x, y) => { const i = (y * W + x) * 3; return Math.max(data[i], data[i + 1], data[i + 2]) }
+  const rows = []
+  for (let y = 0; y < H; y++) { let t = 0; for (let x = 0; x < W; x += 2) t += lit(x, y); rows.push(t / (W / 2) < DARK_LEVEL) }
+  const list = []
+  for (const [y0, y1] of runs(rows)) {
+    const cols = []
+    for (let x = 0; x < W; x++) { let t = 0; for (let y = y0; y < y1; y += 2) t += lit(x, y); cols.push(t / ((y1 - y0) / 2) < DARK_LEVEL) }
+    for (const [x0, x1] of runs(cols)) {
+      let top = y0, bottom = y1
+      const rowLit = y => { let t = 0; for (let x = x0; x < x1; x += 2) t += lit(x, y); return t / ((x1 - x0) / 2) >= DARK_LEVEL }
+      while (top < bottom && !rowLit(top)) top++
+      while (bottom > top && !rowLit(bottom - 1)) bottom--
+      list.push({ left: x0, top, width: x1 - x0, height: bottom - top })
+    }
+  }
+  // number frames left to right, top to bottom by where each frame starts (rows are staggered)
+  list.sort((a, b) => Math.round(a.top / 150) - Math.round(b.top / 150) || a.left - b.left)
+  return list.map(f => ({ left: f.left + TRIM, top: f.top + TRIM, width: f.width - 2 * TRIM, height: f.height - 2 * TRIM }))
+}
+
 async function frames(key) {
   const { data, info } = await sharp(resolve(root, SHEETS[key])).removeAlpha().raw().toBuffer({ resolveWithObject: true })
   const { width: W, height: H } = info
+  if (DARK.has(key)) return darkFrames(data, W, H)
   const dark = (x, y) => { const i = (y * W + x) * 3; return Math.min(data[i], data[i + 1], data[i + 2]) }
   const rows = []
   for (let y = 0; y < H; y++) { let s = 0; for (let x = 0; x < W; x++) s += dark(x, y); rows.push(s / W >= GUTTER) }
@@ -104,6 +134,7 @@ mkdirSync(out, { recursive: true })
 // 1. every frame to write
 const jobs = []
 for (const key of Object.keys(SHEETS)) {
+  if (only && key !== only) continue
   const list = await frames(key)
   console.log(`${key}: ${list.length} frames`)
   list.forEach((rect, i) => {
@@ -169,7 +200,7 @@ for (const j of jobs) {
   await sharp(buf).webp({ quality: 92, effort: 6, smartSubsample: false }).toFile(resolve(out, `${j.id}.webp`))
   cut.push({ id: j.id, ...f, out: [w, h] })
 }
-writeFileSync(resolve(out, 'frames.json'), JSON.stringify(cut, null, 1))
+if (!only) writeFileSync(resolve(out, "frames.json"), JSON.stringify(cut, null, 1))
 console.log(`wrote ${cut.length} photographs to public/photos`)
 
 if (prev) {

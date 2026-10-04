@@ -46,6 +46,7 @@ export const CATEGORIES = [
     items: 'Sofas, lounge chairs, stools',
     tagline: 'Built around the way a room is actually used, not the way it photographs.',
     image: 'local:sofas-01',
+    carousel: 'local:collection-00',
   },
   {
     id: 'tables',
@@ -54,6 +55,7 @@ export const CATEGORIES = [
     items: 'Coffee tables, side tables',
     tagline: 'Low surfaces in solid timber and honest stone, sized for the room around them.',
     image: 'local:coffee-01',
+    carousel: 'local:collection-01',
   },
   {
     id: 'dining',
@@ -62,6 +64,7 @@ export const CATEGORIES = [
     items: 'Dining tables, dining chairs, desks',
     tagline: 'Tables sized for the meal that runs long, and chairs you can stay in.',
     image: 'local:dining-02',
+    carousel: 'local:collection-02',
   },
   {
     id: 'beds',
@@ -70,6 +73,7 @@ export const CATEGORIES = [
     items: 'Beds, headboards, bedside tables',
     tagline: 'The least demanding pieces in the house, so the room can recede.',
     image: 'local:beds-07',
+    carousel: 'local:collection-03',
   },
   {
     id: 'storage',
@@ -78,6 +82,7 @@ export const CATEGORIES = [
     items: 'Shelving, sideboards, cabinets',
     tagline: 'Pieces that hold the everyday without announcing it.',
     image: 'local:storage-11',
+    carousel: 'local:collection-04',
   },
   {
     id: 'lighting',
@@ -86,6 +91,7 @@ export const CATEGORIES = [
     items: 'Floor lamps, table lamps',
     tagline: 'Paper, linen and blown glass — light softened before it reaches the room.',
     image: 'local:lamps-02',
+    carousel: 'local:collection-05',
   },
   {
     id: 'objects',
@@ -94,6 +100,7 @@ export const CATEGORIES = [
     items: 'Rugs, cushions, ceramics',
     tagline: 'The last layer: the things that make a room read as lived in.',
     image: 'local:objects-03',
+    carousel: 'local:collection-06',
   },
 ]
 
@@ -2390,35 +2397,35 @@ export const COLLECTIONS = [
   {
     id: 'quiet-morning',
     name: 'The Quiet Morning Collection',
-    image: 'photo-1617325247661-675ab4b64ae2',
+    image: 'local:featured-04',
     note: 'A bed, a bedside, and the linen and wool that make a room slow to wake in.',
     pieces: ['linen-platform-bed', 'oak-bedside-table', 'linen-bed-bench', 'ash-bedside-table', 'linen-cushion-set', 'merino-wool-throw', 'wool-flatweave-rug'],
   },
   {
     id: 'living-in-oak',
     name: 'Living in Oak',
-    image: 'photo-1763279934323-edb3735f6a6e',
+    image: 'local:featured-00',
     note: 'One timber, from the dining table to the hall: pale, oiled, and left to darken.',
     pieces: ['oak-dining-table', 'oak-dining-chair', 'oak-dining-bench', 'oak-frame-coffee-table', 'oak-nesting-tables', 'oak-hall-bench', 'oak-wall-shelf', 'fluted-oak-sideboard'],
   },
   {
     id: 'slow-evenings',
     name: 'Objects for Slow Evenings',
-    image: 'photo-1667312939978-64cf31718a6e',
+    image: 'local:featured-01',
     note: 'Low light, soft surfaces and something to put a drink down on.',
     pieces: ['ceramic-table-lamp', 'brass-table-lamp', 'stone-lamp-table', 'washi-floor-lamp', 'brass-wall-sconce', 'ceramic-vessel-set', 'merino-wool-throw', 'boucle-pouf'],
   },
   {
     id: 'linen-walnut',
     name: 'The Linen & Walnut Collection',
-    image: 'photo-1694721025063-08eff99ba558',
+    image: 'local:featured-02',
     note: 'Washed Belgian linen against dark, close-grained walnut.',
     pieces: ['linen-lounge-sofa', 'linen-daybed', 'walnut-reading-chair', 'walnut-side-table', 'round-walnut-dining-table', 'walnut-panel-bed', 'walnut-nightstand', 'walnut-bookcase'],
   },
   {
     id: 'made-in-cane',
     name: 'Made in Cane',
-    image: 'photo-1758486561455-ebd0d3ba7423',
+    image: 'local:featured-03',
     note: 'Hand-woven by one family workshop, from chairs to cabinet fronts.',
     pieces: ['cane-back-armchair', 'cane-dining-chair', 'cane-headboard-bed', 'cane-front-cabinet', 'oak-cane-sideboard', 'woven-cylinder-pendant', 'rattan-cluster-pendant', 'seagrass-basket'],
   },

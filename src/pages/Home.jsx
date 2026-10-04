@@ -11,7 +11,7 @@ import { SPACES } from '../data/catalogue'
  * sections share a shape.
  *
  *   full-screen visual · assurances · category carousel · featured collections ·
- *   brand philosophy · three spaces
+ *   three spaces · brand philosophy
  *
  * Navigation and footer live in Layout.
  */
@@ -87,10 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------- 6 · brand philosophy — statement, close-ups, evidence ---------- */}
-      <Philosophy variant="a" />
-
-      {/* ---------- 7 · shop by space — three equal rooms ---------- */}
+      {/* ---------- 6 · shop by space — three equal rooms ---------- */}
       <section className="sec sec--fit" id="spaces">
         <div className="fit__col">
           <div className="wrap">
@@ -101,7 +98,6 @@ export default function Home() {
                   <Img id={s.cover} alt={s.name} ratio="4 / 5" w={1200} />
                   <div className="split__t">
                     <h3 className="disp d3">{s.name}</h3>
-                    <p className="fine">{s.tagline}</p>
                   </div>
                 </Link>
               ))}
@@ -109,6 +105,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ---------- 7 · brand philosophy — statement, close-ups, evidence ---------- */}
+      <Philosophy variant="a" />
     </>
   )
 }

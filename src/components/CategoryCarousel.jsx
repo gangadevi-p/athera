@@ -68,7 +68,7 @@ export default function CategoryCarousel({ variant = 'a' }) {
               tabIndex={i >= N ? -1 : undefined}
             >
               <span className="cc__frame">
-                <Img id={c.image} alt={i >= N ? '' : c.name} ratio="4 / 5" w={1400} priority={i < 2} />
+                <Img id={c.carousel || c.image} alt={i >= N ? '' : c.name} ratio="4 / 5" w={1400} priority={i < 2} />
               </span>
               <span className="cc__cap">
                 <span className="cc__name">{c.short}</span>
