@@ -587,7 +587,7 @@
    A featured collection's page and the category page are one design, set in smaller type than the rest of the shop —
    title, subheading, filters, pieces — and with tighter gaps between them, so the first row of photographs is on the
    first screen with no scrolling. Both carry `.sec--col`: Shop.jsx adds it for a collection (`col`) and for a chosen
-   category (`byCategory`), and Categories.jsx for its overview of the seven. Nothing else carries it.
+   category (`byCategory`), and Categories.jsx for its overview of the seven. Spaces.jsx carries it for its title block alone.
 
    Everything follows `--room`, how much the window has to spare: 0 on a 600px-tall window (the compact sizes, which keep
    the first row of photographs on screen), up to 350px on a window 950px tall and wide — a full-HD monitor — where the
@@ -611,6 +611,9 @@
 }
 .sec--col .pname { font-size: calc(1rem + var(--room) * .0137); line-height: 1.35 }
 .sec--col .price { font-size: calc(.97rem + var(--room) * .0129); line-height: 1.35 }
+
+/* the spaces page borrows the compact title block only; its rooms keep the site's own type */
+.sec--col .spread .eyebrow { font-size: .93rem; line-height: inherit }
 
 /* the category overview: its grid sits straight under the tabs row, which carries the gap */
 .sec--col .cgrid { margin-top: 0 }
@@ -648,15 +651,13 @@
 .back {
   flex: none; width: 30px; height: 30px; margin: -6px 0;
   display: inline-flex; align-items: center; justify-content: center;
-  border: 1px solid var(--rule); border-radius: 50%;
+  border: 0; padding: 0;
   background: none; color: var(--ink); cursor: pointer;
-  transition: background-color var(--t-hover) var(--ease), color var(--t-hover) var(--ease),
-    border-color var(--t-hover) var(--ease), transform var(--t-hover) var(--ease);
+  transition: opacity var(--t-hover) var(--ease);
 }
 .back svg { transition: transform var(--t-hover) var(--ease) }
-.back:hover { background: var(--ink); border-color: var(--ink); color: var(--paper) }
+.back:hover { opacity: .6 }
 .back:hover svg { transform: translateX(-2px) }
 .back:focus-visible { outline: 2px solid currentColor; outline-offset: 3px }
-.back--light { border-color: rgba(246, 244, 239, .55); color: var(--paper) }
-.back--light:hover { background: var(--paper); border-color: var(--paper); color: var(--ink) }
-.back svg { width: 16px; height: 16px }
+.back--light { color: var(--paper) }
+.back svg { width: 20px; height: 20px }

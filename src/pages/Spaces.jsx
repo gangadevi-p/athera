@@ -6,14 +6,14 @@ import { cx } from '../lib/format'
 
 export default function Spaces() {
   return (
-    <section className="sec">
+    <section className="sec sec--col">
       <div className="wrap">
         <div className="phead">
           <div className="phead__row">
             <BackButton to="/" />
             <span className="eyebrow">Shop by space</span>
           </div>
-          <h1 className="disp d1">Designed for<br />every room</h1>
+          <h1 className="disp d2">Designed for every room</h1>
           <p className="lead">
             Explore furniture and layouts tailored to the way you live. Each room is a short
             list rather than a catalogue — the pieces we would actually put in it.
