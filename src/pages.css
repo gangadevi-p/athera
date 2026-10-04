@@ -12,7 +12,7 @@
 .sec--page, .sec--shop { padding-top: var(--page-top) } /* a page's first section sits the same distance beneath the navigation */
 .plp__top { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s24); margin-bottom: 36px }
 
-.empty { display: flex; flex-direction: column; align-items: center; gap: var(--s24); text-align: center; padding: var(--s80) 0 }
+.empty { display: flex; flex-direction: column; align-items: center; gap: var(--s24); text-align: center; padding-block: var(--s80) }
 .empty .lead { max-width: 90ch }
 
 /* ---------- listing: rail + results ----------------------------------- */
@@ -101,7 +101,7 @@
 .pill span { color: var(--mute); font-size: var(--fs-body); line-height: 1 }
 
 .plp { row-gap: 84px }
-.plp__main .empty { padding: 56px 0 }
+.plp__main .empty { padding-block: 56px }
 .plp__foot {
   margin-top: 96px; padding-top: 28px; border-top: 1px solid var(--rule);
   display: flex; justify-content: space-between; align-items: center; gap: 40px;

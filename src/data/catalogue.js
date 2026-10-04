@@ -2510,10 +2510,19 @@ export const gallery = p => {
 /** Every colour family a piece is actually offered in. */
 export const coloursOf = p => [...new Set(p.finishes.map(f => f.colour))]
 
+/** `word` as a whole word in `text` — "ash" is in "Ash frame" but not in "Washed linen", "stone" not in "stoneware". */
+const hasWord = (text, word) => {
+  const letter = c => c !== undefined && c.toLowerCase() !== c.toUpperCase()
+  for (let i = text.indexOf(word); i >= 0; i = text.indexOf(word, i + 1)) {
+    if (!letter(text[i - 1]) && !letter(text[i + word.length])) return true
+  }
+  return false
+}
+
 /** Does a piece use any material in this family? Matched on its own list. */
 export const hasMaterial = (p, id) => {
   const f = MATERIAL_FILTERS.find(m => m.id === id)
   if (!f) return false
   const text = p.materials.join(' ').toLowerCase()
-  return f.match.some(m => text.includes(m))
+  return f.match.some(m => hasWord(text, m))
 }

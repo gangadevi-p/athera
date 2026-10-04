@@ -81,7 +81,6 @@ these is disabled under `prefers-reduced-motion`.
 | `/p/:id` | Product detail — gallery with in-place zoom, finishes, availability check, specification, care |
 | `/spaces` | Shop by space — living room, bedroom, workspace |
 | `/spaces/:id` | One space, with the pieces chosen for it |
-| `/assistant` | Room Assistant — pick a prepared room, read it, see three pieces |
 | `/wishlist` | Saved pieces, with add-to-cart and remove |
 | `/account` | Prototype sign-in and a saved address |
 | `/cart` | Cart with quantities and a running total |
@@ -102,17 +101,9 @@ Each piece is photographed in the views the brief asks for — front, side,
 three-quarter, back and detail — labelled under each frame in the gallery. Any
 frame magnifies in place — click to enlarge, drag to move around, click again to return — and a sharper file loads as you arrive.
 
-## The Room Assistant
-
-Three rooms are photographed and prepared in advance. Choosing one shows how
-that room reads — its light, proportion and palette — then three pieces chosen
-for it, each with the reason written out, and the option to add them to the
-cart. Nothing is uploaded and no model is called, so the walkthrough is the
-same every time.
-
 ## Imagery
 
-Photography is served from the Unsplash CDN. Every image goes through
+Photography is a mix of frames cut from contact sheets in `/img` (`scripts/crop-sheets.mjs`, `scripts/cut-featured.mjs`; served from `public/photos`) and the Unsplash CDN. Every image goes through
 `src/components/Img.jsx`, which reserves the aspect ratio, fades the photo in
 on load, and falls back to a tonal placeholder if an asset fails — so the
 layout never collapses or shifts. The hero ships two genuinely different CDN

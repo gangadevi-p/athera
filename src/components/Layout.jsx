@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom'
 import CartDrawer from './CartDrawer'
+import { byId, spaceById } from '../data/catalogue'
 import { cx } from '../lib/format'
 import { useReveals } from '../lib/motion'
 import { useShop } from '../lib/shop'
@@ -165,6 +166,39 @@ function ScrollTop() {
   return null
 }
 
+/** The tab and the screen reader name each page: "Cart — Aethera", a piece's own name on its page. */
+const TITLES = {
+  '/shop': 'Shop', '/categories': 'Shop by category', '/spaces': 'Shop by space', '/wishlist': 'Wishlist', '/account': 'Account',
+  '/cart': 'Cart', '/checkout': 'Checkout', '/done': 'Order confirmed', '/track': 'Track your order', '/help': 'Help',
+  '/design-system': 'Design system',
+}
+const HOME_TITLE = 'Aethera — Furniture for calm, intentional living'
+
+function titleFor(pathname) {
+  if (pathname === '/') return HOME_TITLE
+  const piece = pathname.startsWith('/p/') ? byId(pathname.slice(3))?.name : null
+  const room = pathname.startsWith('/spaces/') ? spaceById(pathname.slice(8))?.name : null
+  const t = TITLES[pathname] || piece || room || 'Page not found'
+  return t + ' — Aethera'
+}
+
+function PageTitle() {
+  const { pathname } = useLocation()
+  useEffect(() => { document.title = titleFor(pathname) }, [pathname])
+  return null
+}
+
+/** First stop for the keyboard: past the navigation, straight to the page. */
+function SkipLink() {
+  const go = e => {
+    e.preventDefault()
+    const m = document.getElementById('main')
+    m?.focus({ preventScroll: true })
+    m?.scrollIntoView({ behavior: 'instant', block: 'start' })
+  }
+  return <a className="skip" href="#main" onClick={go}>Skip to content</a>
+}
+
 export default function Layout() {
   const { pathname } = useLocation()
   const [menu, setMenu] = useState(false)
@@ -174,11 +208,13 @@ export default function Layout() {
 
   return (
     <>
+      <PageTitle />
+      <SkipLink />
       <ScrollTop />
       <Nav onMenu={() => setMenu(true)} />
       <Menu open={menu} onClose={() => setMenu(false)} />
       {/* the landing page's hero runs under the fixed nav; every other page clears it */}
-      <main key={pathname} data-home={pathname === '/' || pathname.startsWith('/spaces/') ? '' : undefined}>
+      <main id="main" tabIndex={-1} key={pathname} data-home={pathname === '/' || pathname.startsWith('/spaces/') ? '' : undefined}>
         <Outlet />
       </main>
       <Footer />
