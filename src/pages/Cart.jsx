@@ -14,7 +14,8 @@ function Line({ item, at }) {
       </Link>
       <div className="cline__t">
         <h2 className="pname"><Link to={`/p/${p.id}`}>{p.name}</Link></h2>
-        <p className="fine">{p.finishes[item.fi].label}</p>
+        <p className="fine cline__fin"><span className="dot dot--sm" style={{ background: p.finishes[item.fi].hex }} />{p.finishes[item.fi].label}</p>
+        <p className="fine">{money(p.price)} each</p>
         <button className="linkbtn" type="button" onClick={() => remove(at)}>Remove</button>
       </div>
       <div className="qty">

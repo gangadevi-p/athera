@@ -425,6 +425,10 @@ main[data-home] { padding-top: 0 }
 .drawer__item { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 22px; align-items: start }
 .drawer__item > div { display: flex; flex-direction: column; gap: 8px }
 .drawer__item .fine { margin: 0 }
+.drawer__facts { display: flex; flex-direction: column; gap: 6px; margin: 0; font-size: var(--fs-small) }
+.drawer__facts > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-bottom: 6px; border-bottom: var(--hair) }
+.drawer__facts dt { color: var(--mute) }
+.drawer__facts dd { margin: 0; display: flex; align-items: center; gap: 8px; color: var(--ink); font-variant-numeric: tabular-nums; text-align: right }
 .drawer__sum {
   display: flex; justify-content: space-between; gap: 16px;
   padding-top: 22px; border-top: 1px solid var(--rule);

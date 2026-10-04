@@ -309,6 +309,7 @@
 .wline__t, .cline__t { display: flex; flex-direction: column; gap: 6px; align-items: flex-start }
 .wline__t .fine { margin: 0; max-width: 52ch }
 .cline__t .fine { margin: 0 }
+.cline__fin { display: flex; align-items: center; gap: 8px }
 .wline .price, .cline__amt { min-width: 96px; text-align: right; font-size: var(--fs-body); color: var(--ink); font-variant-numeric: tabular-nums }
 .wline__a { display: flex; flex-direction: column; gap: 10px; align-items: center }
 .wline__a .btn { white-space: nowrap }

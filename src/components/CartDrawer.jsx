@@ -6,11 +6,12 @@ import { cx, money } from '../lib/format'
 import { useShop } from '../lib/shop'
 
 /**
- * Opens when a piece is added. Shows what was just added, the running subtotal
+ * Opens when a piece is added. Shows what was just added — its name, colour,
+ * how many are now in the cart and what they cost — then the running subtotal
  * and the three ways on: cart, checkout, or back to browsing.
  */
 export default function CartDrawer() {
-  const { drawer, closeDrawer, subtotal } = useShop()
+  const { drawer, closeDrawer, subtotal, cart } = useShop()
   const { pathname } = useLocation()
   const open = Boolean(drawer)
 
@@ -30,6 +31,8 @@ export default function CartDrawer() {
   useEffect(() => { closeDrawer() }, [pathname, closeDrawer])
 
   const p = drawer ? byId(drawer.pid) : null
+  const f = p?.finishes[drawer.fi]
+  const q = drawer ? cart.find(i => i.pid === drawer.pid && i.fi === drawer.fi)?.q ?? 1 : 1
 
   return (
     <>
@@ -56,10 +59,15 @@ export default function CartDrawer() {
               <Img id={cover(p)} alt={p.name} ratio="3 / 4" w={400} />
               <div>
                 <h2 className="pname">{p.name}</h2>
-                <p className="fine">{p.finishes[drawer.fi].label}</p>
-                <span className="price">{money(p.price)}</span>
+                <dl className="drawer__facts">
+                  <div><dt>Colour</dt><dd><span className="dot dot--sm" style={{ background: f.hex }} />{f.label}</dd></div>
+                  <div><dt>Quantity</dt><dd>{q}</dd></div>
+                  <div><dt>{q > 1 ? 'Price each' : 'Price'}</dt><dd>{money(p.price)}</dd></div>
+                  {q > 1 && <div><dt>Total</dt><dd>{money(p.price * q)}</dd></div>}
+                </dl>
               </div>
             </div>
+            {drawer.n > 1 && <p className="fine drawer__note">{drawer.n - 1} more {drawer.n - 1 === 1 ? 'piece' : 'pieces'} added with it. See them all in your cart.</p>}
 
             <div className="drawer__sum">
               <span>Subtotal</span>
